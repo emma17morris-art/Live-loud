@@ -93,7 +93,26 @@
     .tl { top: 0; left: 0; transform-origin: top left; }
     .tr { top: 0; right: 0; transform-origin: top right; }
 
-    /* Comedy Spotlight (fixed cone) */
+    /* Comedy Spotlight (with lamp, beam, halo) */
+    .comedy-spotlight-lamp {
+      position: absolute;
+      top: -2vmax;
+      left: 50%;
+      width: 6vmax;
+      height: 6vmax;
+      background: radial-gradient(circle, rgba(255,255,200,1) 0%, rgba(255,255,150,0.8) 40%, rgba(255,255,100,0.4) 70%, transparent 100%);
+      border-radius: 50%;
+      transform: translateX(-50%);
+      filter: blur(2px);
+      z-index: 2;
+      animation: lampGlow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes lampGlow {
+      0%   { opacity: 0.8; transform: translateX(-50%) scale(1); }
+      100% { opacity: 1; transform: translateX(-50%) scale(1.05); }
+    }
+
     .comedy-spotlight {
       position: absolute;
       top: 0;
@@ -306,6 +325,7 @@
 
   <!-- Comedy Hub -->
   <div id="hub-comedy" class="screen">
+    <div class="comedy-spotlight-lamp"></div>
     <div class="comedy-spotlight"></div>
     <div class="comedy-stage-glow"></div>
     <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
