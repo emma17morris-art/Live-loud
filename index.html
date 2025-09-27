@@ -93,27 +93,29 @@
     .tl { top: 0; left: 0; transform-origin: top left; }
     .tr { top: 0; right: 0; transform-origin: top right; }
 
-    /* Comedy Spotlight */
-    .comedy-spotlight {
-      position: absolute;
-      top: -20%;
-      left: 50%;
-      width: 60vmax;
-      height: 120vmax;
-      background: radial-gradient(ellipse at top, rgba(255,255,200,0.8) 0%, rgba(255,255,200,0.4) 30%, transparent 70%);
-      transform: translateX(-50%) rotate(0deg);
-      transform-origin: top center;
-      filter: blur(2px);
-      animation: comedyWiggle 5s ease-in-out infinite alternate;
-      pointer-events: none;
-      z-index: 1;
-    }
+/* Comedy Spotlight (cone shape) */
+.comedy-spotlight {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-left: 15vmax solid transparent;
+  border-right: 15vmax solid transparent;
+  border-top: 0 solid transparent;
+  border-bottom: 120vmax solid rgba(255,255,200,0.3);
+  transform: translateX(-50%);
+  filter: blur(4px);
+  pointer-events: none;
+  z-index: 1;
+  animation: comedyWiggle 4s ease-in-out infinite alternate;
+}
 
-    @keyframes comedyWiggle {
-      0%   { transform: translateX(-50%) rotate(-3deg); }
-      50%  { transform: translateX(-50%) rotate(3deg); }
-      100% { transform: translateX(-50%) rotate(-2deg); }
-    }
+@keyframes comedyWiggle {
+  0%   { transform: translateX(-50%) rotate(-2deg); }
+  50%  { transform: translateX(-50%) rotate(2deg); }
+  100% { transform: translateX(-50%) rotate(-1deg); }
+}
 
     /* Screens */
     .screen {
