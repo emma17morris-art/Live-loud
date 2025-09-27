@@ -298,24 +298,23 @@
       const container = document.getElementById("spotlights");
       container.innerHTML = "";
       const corners = [
-        {x: "0%", y: "100%", origin: "bottom left"},
-        {x: "100%", y: "100%", origin: "bottom right"},
-        {x: "0%", y: "0%", origin: "top left"},
-        {x: "100%", y: "0%", origin: "top right"}
+        {class: "bl", x: "0%", y: "100%", origin: "bottom left"},
+        {class: "br", x: "100%", y: "100%", origin: "bottom right"},
+        {class: "tl", x: "0%", y: "0%", origin: "top left"},
+        {class: "tr", x: "100%", y: "0%", origin: "top right"}
       ];
 
       corners.forEach((corner, cIndex) => {
         for (let i = 0; i < 6; i++) {
           const light = document.createElement("div");
-          light.classList.add("searchlight");
+          light.classList.add("searchlight", corner.class);
           light.style.left = corner.x;
           light.style.top = corner.y;
           light.style.transformOrigin = corner.origin;
 
-          // Angles aimed more inward
-          const baseAngle = (corner.origin.includes("left") ? 30 : -30) + (corner.origin.includes("top") ? 180 : 0);
-          const angle1 = baseAngle + (Math.random() * 30 - 15);
-          const angle2 = baseAngle + (Math.random() * 30 - 15);
+          // Random sweep between -60 and +60 degrees
+          const angle1 = Math.floor(Math.random() * 120) - 60;
+          const angle2 = Math.floor(Math.random() * 120) - 60;
 
           const duration = Math.floor(Math.random() * 3) + 2; // 2–5s
           const animName = `sweep${cIndex}-${i}`;
