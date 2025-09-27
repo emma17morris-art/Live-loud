@@ -52,7 +52,7 @@
       left: 50%;
       width: 150vmax;
       height: 150vmax;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.15) 0%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, transparent 70%);
       transform-origin: center center;
       mix-blend-mode: screen;
       pointer-events: none;
@@ -64,9 +64,9 @@
       position: absolute;
       top: 20%;
       left: 50%;
-      font-size: 120px;
+      font-size: 70px;
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
+      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 25px white);
       animation: floatNote 4s ease-in-out infinite;
     }
 
@@ -81,7 +81,7 @@
 
     @keyframes floatNote {
       0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      50% { transform: translate(-50%, -70%) scale(1.1); opacity: 0.8; }
+      50% { transform: translate(-50%, -70%) scale(1.1); opacity: 0.85; }
     }
 
     /* Screens */
@@ -297,7 +297,7 @@
         }
 
         setTimeout(typeWriter, 500);
-      }, 3000);
+      }, 5000); // Changed from 3000ms to 5000ms
     });
 
     // Navigation
