@@ -31,8 +31,23 @@
       overflow: hidden;
     }
 
-    /* Disco Lights in Flash */
-    .flash-lights {
+    #flash img {
+      max-width: 300px;
+      width: 80%;
+      height: auto;
+      filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
+      animation: pulse 2s infinite;
+      z-index: 10;
+      position: relative;
+    }
+
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white); }
+      50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
+    }
+
+    /* Disco Lights (Entertainment Hub) */
+    .entertainment-lights {
       position: absolute;
       top: 50%;
       left: 50%;
@@ -58,21 +73,6 @@
     @keyframes rotateLights {
       0% { transform: translate(-50%, -50%) rotate(0deg); }
       100% { transform: translate(-50%, -50%) rotate(360deg); }
-    }
-
-    #flash img {
-      max-width: 300px;
-      width: 80%;
-      height: auto;
-      filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
-      animation: pulse 2s infinite;
-      z-index: 10;
-      position: relative;
-    }
-
-    @keyframes pulse {
-      0%, 100% { filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white); }
-      50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
     }
 
     /* Spotlights */
@@ -238,7 +238,6 @@
 
   <!-- Flash Page -->
   <div id="flash">
-    <div class="flash-lights"></div>
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
@@ -258,7 +257,7 @@
     </div>
   </div>
 
-  <!-- Music Hub (with 6 spotlights per corner) -->
+  <!-- Music Hub (with spotlights) -->
   <div id="hub-music" class="screen">
     <div id="spotlights"></div>
     <div class="small-logo">
@@ -283,8 +282,9 @@
     <div class="hub-header">Comedy Shows</div>
   </div>
 
-  <!-- Entertainment Hub -->
+  <!-- Entertainment Hub (with disco lights) -->
   <div id="hub-entertainment" class="screen">
+    <div class="entertainment-lights"></div>
     <div class="small-logo">
       <img src="logo.png" alt="Live & Loud Small Logo">
     </div>
@@ -312,7 +312,6 @@
           light.style.top = corner.y;
           light.style.transformOrigin = corner.origin;
 
-          // Random sweep between -60 and +60 degrees
           const angle1 = Math.floor(Math.random() * 120) - 60;
           const angle2 = Math.floor(Math.random() * 120) - 60;
 
