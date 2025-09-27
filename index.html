@@ -43,13 +43,17 @@
       50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
     }
 
-    /* Home Page */
-    #home {
+    /* Screens (home + hubs) */
+    .screen {
       display: none;
       min-height: 100vh;
       background: var(--background);
       padding: 20px;
       box-sizing: border-box;
+    }
+
+    .screen.active {
+      display: block;
     }
 
     /* Small logo top left */
@@ -62,11 +66,6 @@
     .small-logo img {
       max-width: 100px;
       filter: drop-shadow(0 0 6px white) drop-shadow(0 0 15px white);
-      transition: 0.3s ease;
-    }
-
-    .small-logo img:hover {
-      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 25px white);
     }
 
     /* Welcome Title */
@@ -93,7 +92,7 @@
       opacity: 0.85;
       text-shadow: 0 0 6px white, 0 0 12px rgba(255,255,255,0.6);
       border-right: 2px solid white;
-      white-space: pre-wrap; /* allow wrapping */
+      white-space: pre-wrap;
       overflow: hidden;
       text-align: center;
       max-width: 90%;
@@ -102,7 +101,7 @@
     /* Tiles */
     .tile-container {
       display: flex;
-      flex-direction: column; /* stack by default for mobile */
+      flex-direction: column;
       align-items: center;
       gap: 20px;
       margin-top: 50px;
@@ -121,8 +120,8 @@
       text-align: center;
       text-transform: uppercase;
       filter: drop-shadow(0 0 6px white);
-      width: 80%; /* fit iPhone screen */
-      max-width: 320px; /* prevent oversized tiles */
+      width: 80%;
+      max-width: 320px;
     }
 
     .tile:hover {
@@ -131,14 +130,35 @@
       filter: drop-shadow(0 0 12px white);
     }
 
-    /* Larger screens - show tiles inline */
+    /* Header inside hubs */
+    .hub-header {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 80px;
+      text-shadow: 0 0 6px white, 0 0 12px white;
+    }
+
+    /* Smaller search tiles */
+    .search-tiles {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    .search-tiles .tile {
+      max-width: 250px;
+      font-size: 16px;
+      padding: 15px 30px;
+    }
+
+    /* Larger screens - main tiles inline */
     @media (min-width: 768px) {
       .tile-container {
         flex-direction: row;
         justify-content: center;
-      }
-      .tile {
-        width: auto;
       }
     }
   </style>
@@ -150,8 +170,8 @@
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
-  <!-- Home Page -->
-  <div id="home">
+  <!-- Home Screen -->
+  <div id="home" class="screen">
     <div class="small-logo">
       <img src="logo.png" alt="Live & Loud Small Logo">
     </div>
@@ -162,23 +182,65 @@
     </div>
 
     <div class="tile-container">
-      <div class="tile">🎸 Music</div>
-      <div class="tile">🎭 Comedy</div>
-      <div class="tile">🎶 Entertainment</div>
+      <div class="tile" onclick="goToHub('music')">🎸 Music</div>
+      <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
+      <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
+    </div>
+  </div>
+
+  <!-- Music Hub -->
+  <div id="hub-music" class="screen">
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
+    <div class="hub-header">Search By</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Band</div>
+      <div class="tile">Date</div>
+    </div>
+  </div>
+
+  <!-- Comedy Hub -->
+  <div id="hub-comedy" class="screen">
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
+    <div class="hub-header">Search By</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Band</div>
+      <div class="tile">Date</div>
+    </div>
+  </div>
+
+  <!-- Entertainment Hub -->
+  <div id="hub-entertainment" class="screen">
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
+    <div class="hub-header">Search By</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Band</div>
+      <div class="tile">Date</div>
     </div>
   </div>
 
   <script>
-    // Show flash for 3 seconds then go to home
+    // Flash screen transition
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
-        document.getElementById("home").style.display = "block";
+        document.getElementById("home").classList.add("active");
 
         // Start typing tagline
         const tagline = "Discover the best live entertainment\nin Essex and beyond";
         let i = 0;
-        const speed = 50; // typing speed in ms
+        const speed = 50;
         const taglineEl = document.getElementById("tagline");
 
         function typeWriter() {
@@ -187,13 +249,19 @@
             i++;
             setTimeout(typeWriter, speed);
           } else {
-            taglineEl.style.borderRight = "none"; // remove cursor when done
+            taglineEl.style.borderRight = "none";
           }
         }
 
-        setTimeout(typeWriter, 500); // delay typing slightly
+        setTimeout(typeWriter, 500);
       }, 3000);
     });
+
+    // Navigation
+    function goToHub(type) {
+      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+      document.getElementById("hub-" + type).classList.add("active");
+    }
   </script>
 
 </body>
