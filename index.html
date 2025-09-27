@@ -32,8 +32,8 @@
     }
 
     #flash img {
-      max-width: 500px;
-      width: 100%;
+      max-width: 300px; /* Smaller for iPhone */
+      width: 80%;
       height: auto;
       filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
       animation: pulse 2s infinite;
@@ -45,34 +45,66 @@
       50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
     }
 
-    /* Hollywood Searchlights */
+    /* Thin Hollywood Searchlights */
     .searchlight {
       position: absolute;
-      width: 40vmax;
-      height: 120vmax;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, transparent 70%);
+      width: 12vmax;
+      height: 100vmax;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.4) 0%, transparent 70%);
       mix-blend-mode: screen;
       pointer-events: none;
       z-index: 1;
-      filter: blur(3px);
-      opacity: 0.9;
+      filter: blur(2px);
+      opacity: 0.85;
     }
+
+    /* Corner Anchors */
+    .bl { bottom: 0; left: 0; transform-origin: bottom left; }
+    .br { bottom: 0; right: 0; transform-origin: bottom right; }
+    .tl { top: 0; left: 0; transform-origin: top left; }
+    .tr { top: 0; right: 0; transform-origin: top right; }
+
+    /* Sweep Animations for each beam */
+    @keyframes sweep-left1 { from { transform: rotate(-10deg); } to { transform: rotate(20deg); } }
+    @keyframes sweep-left2 { from { transform: rotate(0deg); } to { transform: rotate(30deg); } }
+    @keyframes sweep-left3 { from { transform: rotate(10deg); } to { transform: rotate(40deg); } }
+
+    @keyframes sweep-right1 { from { transform: rotate(10deg); } to { transform: rotate(-20deg); } }
+    @keyframes sweep-right2 { from { transform: rotate(0deg); } to { transform: rotate(-30deg); } }
+    @keyframes sweep-right3 { from { transform: rotate(-10deg); } to { transform: rotate(-40deg); } }
+
+    /* Assign animations */
+    .bl1 { animation: sweep-left1 8s ease-in-out infinite alternate; }
+    .bl2 { animation: sweep-left2 10s ease-in-out infinite alternate; }
+    .bl3 { animation: sweep-left3 12s ease-in-out infinite alternate; }
+
+    .br1 { animation: sweep-right1 9s ease-in-out infinite alternate; }
+    .br2 { animation: sweep-right2 11s ease-in-out infinite alternate; }
+    .br3 { animation: sweep-right3 13s ease-in-out infinite alternate; }
+
+    .tl1 { animation: sweep-left1 9s ease-in-out infinite alternate-reverse; }
+    .tl2 { animation: sweep-left2 11s ease-in-out infinite alternate-reverse; }
+    .tl3 { animation: sweep-left3 13s ease-in-out infinite alternate-reverse; }
+
+    .tr1 { animation: sweep-right1 8s ease-in-out infinite alternate-reverse; }
+    .tr2 { animation: sweep-right2 10s ease-in-out infinite alternate-reverse; }
+    .tr3 { animation: sweep-right3 12s ease-in-out infinite alternate-reverse; }
 
     /* Floating glowing music note in middle */
     .flash-note {
       position: absolute;
-      top: 40%;
+      top: 45%;
       left: 50%;
-      font-size: 50px; /* smaller */
+      font-size: 40px; /* small for iPhone */
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 20px white);
+      filter: drop-shadow(0 0 8px white) drop-shadow(0 0 18px white);
       animation: floatNote 4s ease-in-out infinite;
       z-index: 5;
     }
 
     @keyframes floatNote {
       0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      50% { transform: translate(-50%, -70%) scale(1.1); opacity: 0.8; }
+      50% { transform: translate(-50%, -60%) scale(1.1); opacity: 0.8; }
     }
 
     /* Screens */
@@ -227,8 +259,25 @@
 
   <!-- Flash Page -->
   <div id="flash">
-    <div id="spotlights"></div>
+    <!-- 3 beams per corner -->
+    <div class="searchlight bl bl1"></div>
+    <div class="searchlight bl bl2"></div>
+    <div class="searchlight bl bl3"></div>
+
+    <div class="searchlight br br1"></div>
+    <div class="searchlight br br2"></div>
+    <div class="searchlight br br3"></div>
+
+    <div class="searchlight tl tl1"></div>
+    <div class="searchlight tl tl2"></div>
+    <div class="searchlight tl tl3"></div>
+
+    <div class="searchlight tr tr1"></div>
+    <div class="searchlight tr tr2"></div>
+    <div class="searchlight tr tr3"></div>
+
     <div class="flash-note" id="flashNote">🎵</div>
+
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
@@ -264,47 +313,6 @@
   </div>
 
   <script>
-    // Generate random spotlights (3–6) from corners
-    function createSpotlights() {
-      const container = document.getElementById("spotlights");
-      const count = Math.floor(Math.random() * 4) + 3; // 3–6
-      const corners = [
-        {x: "0%", y: "100%", origin: "bottom left"},
-        {x: "100%", y: "100%", origin: "bottom right"},
-        {x: "0%", y: "0%", origin: "top left"},
-        {x: "100%", y: "0%", origin: "top right"}
-      ];
-
-      for (let i = 0; i < count; i++) {
-        const light = document.createElement("div");
-        light.classList.add("searchlight");
-
-        // Pick a random corner
-        const corner = corners[Math.floor(Math.random() * corners.length)];
-        light.style.left = corner.x;
-        light.style.top = corner.y;
-        light.style.transformOrigin = corner.origin;
-
-        // Random animation properties
-        const duration = Math.floor(Math.random() * 8) + 8; // 8–16s
-        const angle1 = Math.floor(Math.random() * 90) - 45; // -45 to 45
-        const angle2 = Math.floor(Math.random() * 90) - 45; // -45 to 45
-
-        light.style.animation = `sweep${i} ${duration}s ease-in-out infinite alternate`;
-
-        // Create unique keyframes per light
-        const styleSheet = document.styleSheets[0];
-        styleSheet.insertRule(`
-          @keyframes sweep${i} {
-            from { transform: rotate(${angle1}deg); }
-            to { transform: rotate(${angle2}deg); }
-          }
-        `, styleSheet.cssRules.length);
-
-        container.appendChild(light);
-      }
-    }
-
     // Pick a random music note
     function randomNote() {
       const notes = ["🎵","🎶","🎼"];
@@ -314,7 +322,6 @@
 
     // Flash screen transition
     window.addEventListener("load", () => {
-      createSpotlights();
       randomNote();
 
       setTimeout(() => {
