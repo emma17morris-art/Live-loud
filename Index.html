@@ -211,23 +211,29 @@ const EssexEntertainmentApp = () => {
         <header className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <img 
-              src="https://raw.githubusercontent.com/emma17morris-art/Live-loud-/main/Title%20logo.png"
+              src="https://raw.githubusercontent.com/emma17morris-art/Live-loud-/main/Title logo.png"
               alt="Live & Loud Logo"
               className="h-20 md:h-24 w-auto max-w-md"
               onError={(e) => {
-                // Try alternative GitHub raw URLs if the first one fails
+                // Try multiple URL encodings and sources
                 const alternatives = [
-                  "https://emma17morris-art.github.io/Live-loud-/Title%20logo.png",
-                  "https://raw.githubusercontent.com/emma17morris-art/Live-loud-/master/Title%20logo.png"
+                  "https://raw.githubusercontent.com/emma17morris-art/Live-loud-/main/Title%20logo.png",
+                  "https://raw.githubusercontent.com/emma17morris-art/Live-loud-/main/Title+logo.png",
+                  "https://github.com/emma17morris-art/Live-loud-/raw/main/Title%20logo.png",
+                  "https://github.com/emma17morris-art/Live-loud-/raw/main/Title logo.png",
+                  "https://emma17morris-art.github.io/Live-loud-/Title logo.png",
+                  "https://emma17morris-art.github.io/Live-loud-/Title%20logo.png"
                 ];
                 
                 const currentSrc = e.target.src;
-                const currentIndex = alternatives.findIndex(alt => alt === currentSrc);
+                let currentIndex = alternatives.findIndex(alt => alt === currentSrc);
                 
-                if (currentIndex === -1 && !currentSrc.includes('raw.githubusercontent')) {
-                  // First failure, try the first alternative
-                  e.target.src = alternatives[0];
-                } else if (currentIndex < alternatives.length - 1) {
+                // If not found in alternatives, start with first alternative
+                if (currentIndex === -1) {
+                  currentIndex = -1;
+                }
+                
+                if (currentIndex < alternatives.length - 1) {
                   // Try next alternative
                   e.target.src = alternatives[currentIndex + 1];
                 } else {
