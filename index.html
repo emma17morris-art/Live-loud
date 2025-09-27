@@ -66,9 +66,9 @@
       position: absolute;
       top: 40%;
       left: 50%;
-      font-size: 80px;
+      font-size: 50px; /* smaller */
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 12px white) drop-shadow(0 0 25px white);
+      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 20px white);
       animation: floatNote 4s ease-in-out infinite;
       z-index: 5;
     }
@@ -231,7 +231,7 @@
   <!-- Flash Page -->
   <div id="flash">
     <div id="spotlights"></div>
-    <div class="flash-note">🎵</div>
+    <div class="flash-note" id="flashNote">🎵</div>
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
@@ -295,9 +295,17 @@
       }
     }
 
+    // Pick a random music note
+    function randomNote() {
+      const notes = ["🎵","🎶","🎼"];
+      const chosen = notes[Math.floor(Math.random() * notes.length)];
+      document.getElementById("flashNote").textContent = chosen;
+    }
+
     // Flash screen transition
     window.addEventListener("load", () => {
       createSpotlights();
+      randomNote();
 
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
