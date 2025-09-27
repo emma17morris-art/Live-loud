@@ -78,6 +78,21 @@
       text-shadow: 0 0 8px white, 0 0 20px white;
     }
 
+    /* Tagline */
+    .tagline {
+      text-align: center;
+      margin-top: 15px;
+      font-size: 20px;
+      font-weight: 500;
+      opacity: 0.85;
+      text-shadow: 0 0 6px white, 0 0 12px rgba(255,255,255,0.6);
+      display: inline-block;
+      border-right: 2px solid white;
+      white-space: nowrap;
+      overflow: hidden;
+      width: 0; /* start hidden */
+    }
+
     /* Tiles */
     .tile-container {
       display: flex;
@@ -123,6 +138,7 @@
     </div>
 
     <div class="welcome">Welcome</div>
+    <div class="tagline" id="tagline"></div>
 
     <div class="tile-container">
       <div class="tile">🎸 Music</div>
@@ -137,6 +153,25 @@
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
         document.getElementById("home").style.display = "block";
+
+        // Start typing tagline
+        const tagline = "Discover the best live entertainment in Essex and beyond";
+        let i = 0;
+        const speed = 50; // typing speed in ms
+        const taglineEl = document.getElementById("tagline");
+
+        function typeWriter() {
+          if (i < tagline.length) {
+            taglineEl.textContent += tagline.charAt(i);
+            taglineEl.style.width = taglineEl.textContent.length + "ch";
+            i++;
+            setTimeout(typeWriter, speed);
+          } else {
+            taglineEl.style.borderRight = "none"; // remove cursor when done
+          }
+        }
+
+        setTimeout(typeWriter, 500); // delay typing slightly
       }, 3000);
     });
   </script>
