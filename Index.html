@@ -211,32 +211,38 @@ const EssexEntertainmentApp = () => {
         <header className="text-center mb-8">
           <div className="flex justify-center mb-4">
             <img 
-              src="https://emma17morris-art.github.io/Live-loud-/Title%20logo.png"
+              src="https://raw.githubusercontent.com/emma17morris-art/Live-loud-/main/Title%20logo.png"
               alt="Live & Loud Logo"
               className="h-20 md:h-24 w-auto max-w-md"
               onError={(e) => {
-                // Try alternative paths if the first one fails
+                // Try alternative GitHub raw URLs if the first one fails
                 const alternatives = [
-                  "https://raw.githubusercontent.com/emma17morris-art/Live-loud-/main/Title%20logo.png",
-                  "https://raw.githubusercontent.com/emma17morris-art/Live-loud-/master/Title%20logo.png",
-                  "https://emma17morris-art.github.io/Live-loud-/assets/Title%20logo.png"
+                  "https://emma17morris-art.github.io/Live-loud-/Title%20logo.png",
+                  "https://raw.githubusercontent.com/emma17morris-art/Live-loud-/master/Title%20logo.png"
                 ];
                 
                 const currentSrc = e.target.src;
                 const currentIndex = alternatives.findIndex(alt => alt === currentSrc);
                 
-                if (currentIndex < alternatives.length - 1) {
+                if (currentIndex === -1 && !currentSrc.includes('raw.githubusercontent')) {
+                  // First failure, try the first alternative
+                  e.target.src = alternatives[0];
+                } else if (currentIndex < alternatives.length - 1) {
+                  // Try next alternative
                   e.target.src = alternatives[currentIndex + 1];
                 } else {
                   // All alternatives failed, show text fallback
                   e.target.style.display = 'none';
-                  e.target.nextElementSibling.style.display = 'block';
+                  e.target.nextElementSibling.style.display = 'flex';
                 }
               }}
             />
-            <h1 className="text-4xl font-bold text-gray-900 mb-2 hidden">
-              LIVE & LOUD
-            </h1>
+            {/* Text fallback */}
+            <div className="hidden items-center text-6xl md:text-7xl font-black text-gray-900 tracking-wider">
+              <span>LIVE</span>
+              <span className="mx-2 text-5xl md:text-6xl">🎵</span>
+              <span>LOUD</span>
+            </div>
           </div>
           <h2 className="text-2xl font-semibold text-gray-800 mb-2">
             Essex Live Entertainment
