@@ -61,28 +61,6 @@
       opacity: 0.9;
     }
 
-    .light1 { animation: sweep1 10s linear infinite alternate; }
-    .light2 { animation: sweep2 12s linear infinite alternate; }
-    .light3 { animation: sweep3 14s linear infinite alternate; }
-    .light4 { animation: sweep4 16s linear infinite alternate; }
-
-    @keyframes sweep1 {
-      from { transform: rotate(-30deg); }
-      to { transform: rotate(30deg); }
-    }
-    @keyframes sweep2 {
-      from { transform: rotate(-50deg); }
-      to { transform: rotate(10deg); }
-    }
-    @keyframes sweep3 {
-      from { transform: rotate(20deg); }
-      to { transform: rotate(-40deg); }
-    }
-    @keyframes sweep4 {
-      from { transform: rotate(45deg); }
-      to { transform: rotate(-15deg); }
-    }
-
     /* Floating glowing music note in middle */
     .flash-note {
       position: absolute;
@@ -252,13 +230,8 @@
 
   <!-- Flash Page -->
   <div id="flash">
-    <div class="searchlight light1"></div>
-    <div class="searchlight light2"></div>
-    <div class="searchlight light3"></div>
-    <div class="searchlight light4"></div>
-
+    <div id="spotlights"></div>
     <div class="flash-note">🎵</div>
-
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
@@ -294,8 +267,38 @@
   </div>
 
   <script>
+    // Generate random spotlights (3–6)
+    function createSpotlights() {
+      const container = document.getElementById("spotlights");
+      const count = Math.floor(Math.random() * 4) + 3; // 3–6
+      for (let i = 0; i < count; i++) {
+        const light = document.createElement("div");
+        light.classList.add("searchlight");
+
+        // Random animation properties
+        const duration = Math.floor(Math.random() * 8) + 8; // 8–16s
+        const angle1 = Math.floor(Math.random() * 90) - 45; // -45 to 45
+        const angle2 = Math.floor(Math.random() * 90) - 45; // -45 to 45
+
+        light.style.animation = `sweep${i} ${duration}s ease-in-out infinite alternate`;
+
+        // Create unique keyframes per light
+        const styleSheet = document.styleSheets[0];
+        styleSheet.insertRule(`
+          @keyframes sweep${i} {
+            from { transform: rotate(${angle1}deg); }
+            to { transform: rotate(${angle2}deg); }
+          }
+        `, styleSheet.cssRules.length);
+
+        container.appendChild(light);
+      }
+    }
+
     // Flash screen transition
     window.addEventListener("load", () => {
+      createSpotlights();
+
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
         document.getElementById("home").classList.add("active");
