@@ -486,8 +486,19 @@
       });
     }
 
-    // Flash screen transition
+    // Flash screen transition (3 seconds)
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
-        document.getElementById("home").classList.add
+        document.getElementById("home").classList.add("active");
+
+        const tagline = "Discover the best live entertainment\nin Essex and beyond";
+        let i = 0;
+        const speed = 50;
+        const taglineEl = document.getElementById("tagline");
+
+        function typeWriter() {
+          if (i < tagline.length) {
+            taglineEl.textContent += tagline.charAt(i);
+            i++;
+           
