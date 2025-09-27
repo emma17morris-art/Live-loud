@@ -78,19 +78,24 @@
       text-shadow: 0 0 8px white, 0 0 20px white;
     }
 
-    /* Tagline */
+    /* Tagline Wrapper */
+    .tagline-wrapper {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    /* Tagline Typing */
     .tagline {
-      text-align: center;
-      margin-top: 15px;
-      font-size: 20px;
+      font-size: 22px;
       font-weight: 500;
+      line-height: 1.4;
       opacity: 0.85;
       text-shadow: 0 0 6px white, 0 0 12px rgba(255,255,255,0.6);
-      display: inline-block;
       border-right: 2px solid white;
-      white-space: nowrap;
+      white-space: pre-wrap; /* allow wrapping */
       overflow: hidden;
-      width: 0; /* start hidden */
+      text-align: center;
     }
 
     /* Tiles */
@@ -115,12 +120,27 @@
       text-align: center;
       text-transform: uppercase;
       filter: drop-shadow(0 0 6px white);
+      flex: 1 1 250px; /* allow responsive growth */
+      max-width: 300px;
     }
 
     .tile:hover {
       transform: translateY(-5px) scale(1.05);
       box-shadow: 0 0 25px rgba(255,255,255,0.9);
       filter: drop-shadow(0 0 15px white);
+    }
+
+    /* Responsive - stack tiles on mobile */
+    @media (max-width: 600px) {
+      .tile-container {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .tile {
+        width: 80%;
+        max-width: none;
+      }
     }
   </style>
 </head>
@@ -138,7 +158,9 @@
     </div>
 
     <div class="welcome">Welcome</div>
-    <div class="tagline" id="tagline"></div>
+    <div class="tagline-wrapper">
+      <div class="tagline" id="tagline"></div>
+    </div>
 
     <div class="tile-container">
       <div class="tile">🎸 Music</div>
@@ -155,7 +177,7 @@
         document.getElementById("home").style.display = "block";
 
         // Start typing tagline
-        const tagline = "Discover the best live entertainment in Essex and beyond";
+        const tagline = "Discover the best live entertainment\nin Essex and beyond";
         let i = 0;
         const speed = 50; // typing speed in ms
         const taglineEl = document.getElementById("tagline");
@@ -163,7 +185,6 @@
         function typeWriter() {
           if (i < tagline.length) {
             taglineEl.textContent += tagline.charAt(i);
-            taglineEl.style.width = taglineEl.textContent.length + "ch";
             i++;
             setTimeout(typeWriter, speed);
           } else {
