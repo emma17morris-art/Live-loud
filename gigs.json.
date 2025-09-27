@@ -1,0 +1,50 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+import time
+
+BASE_URL = "https://musiconmydoorstep.co.uk"
+START_URL = BASE_URL + "/?pg={}"
+
+def scrape_page(page_num):
+    url = START_URL.format(page_num)
+    print(f"Scraping {url} ...")
+    response = requests.get(url, headers={"User-Agent": "Mozilla/5.0"})
+    response.raise_for_status()
+
+    soup = BeautifulSoup(response.text, "html.parser")
+    gigs = []
+
+    # Each gig entry
+    for item in soup.select(".gig-list .gig-item"):
+        title = item.select_one(".gig-title").get_text(strip=True) if item.select_one(".gig-title") else None
+        date = item.select_one(".gig-date").get_text(strip=True) if item.select_one(".gig-date") else None
+        venue = item.select_one(".gig-venue").get_text(strip=True) if item.select_one(".gig-venue") else None
+        ticket_link = None
+
+        ticket_btn = item.select_one("a.ticket-link")
+        if ticket_btn and ticket_btn.has_attr("href"):
+            ticket_link = ticket_btn["href"]
+
+        gigs.append({
+            "title": title,
+            "date": date,
+            "venue": venue,
+            "ticket_link": ticket_link
+        })
+
+    return gigs
+
+def scrape_all(pages=12):
+    all_gigs = []
+    for page in range(1, pages + 1):
+        gigs = scrape_page(page)
+        all_gigs.extend(gigs)
+        time.sleep(1)  # be polite, avoid hammering the site
+    return all_gigs
+
+if __name__ == "__main__":
+    gigs = scrape_all(pages=12)  # 12 pages ~ 355 events
+    with open("gigs.json", "w", encoding="utf-8") as f:
+        json.dump(gigs, f, ensure_ascii=False, indent=2)
+    print(f"✅ Scraped {len(gigs)} gigs into gigs.json")
