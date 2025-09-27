@@ -18,25 +18,21 @@
       color: var(--primary);
     }
 
-    /* Topbar */
-    .topbar {
-      position: fixed;
-      top: 0; left: 0; right: 0;
-      background: #000;
-      padding: 10px 16px;
-      display: flex;
-      align-items: center;
+    /* Logo header */
+    .header {
+      text-align: center;
+      padding: 30px 20px 10px;
       border-bottom: 1px solid var(--border);
-      z-index: 1000;
     }
 
-    .logo img {
-      height: 40px;
+    .header img {
+      max-width: 300px; /* Make logo bigger */
+      height: auto;
     }
 
     /* Main Content */
     .main-container {
-      padding: 100px 20px 40px;
+      padding: 40px 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
@@ -67,6 +63,7 @@
       flex-wrap: wrap;
       gap: 10px;
       margin-bottom: 32px;
+      justify-content: center;
     }
 
     .filters select {
@@ -97,6 +94,9 @@
       padding: 16px;
       transition: all 0.3s ease;
       color: var(--primary);
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeIn 0.5s ease forwards;
     }
 
     .event-card:hover {
@@ -115,15 +115,19 @@
       font-size: 14px;
       color: var(--primary);
     }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Topbar with Logo -->
-  <div class="topbar">
-    <div class="logo">
-      <img src="logo.png" alt="Live & Loud Logo">
-    </div>
+  <!-- Header with Centered Logo -->
+  <div class="header">
+    <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
   <!-- Main Content -->
@@ -230,9 +234,10 @@
       if (filtered.length === 0) {
         eventList.innerHTML = "<p>No events match your filters.</p>";
       } else {
-        filtered.forEach(event => {
+        filtered.forEach((event, index) => {
           const card = document.createElement("div");
           card.className = "event-card";
+          card.style.animationDelay = `${index * 0.1}s`; // staggered fade-in
           card.innerHTML = `
             <div class="event-title">${event.title}</div>
             <div class="event-meta">📅 ${event.date} • 📍 ${event.venue} (${event.postcode}) • 🎭 ${event.style}</div>
