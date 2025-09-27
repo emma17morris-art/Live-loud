@@ -127,54 +127,122 @@
 
     <!-- Filters -->
     <div class="filters">
-      <select>
-        <option>Date</option>
-        <option>Tonight</option>
-        <option>This Weekend</option>
-        <option>This Month</option>
+      <select id="filter-date">
+        <option value="all">Date</option>
+        <option value="Tonight">Tonight</option>
+        <option value="This Weekend">This Weekend</option>
+        <option value="This Month">This Month</option>
       </select>
-      <select>
-        <option>Venue</option>
-        <option>The Crown Inn</option>
-        <option>George Hotel</option>
-        <option>Red Lion</option>
+      <select id="filter-venue">
+        <option value="all">Venue</option>
+        <option value="The Crown Inn">The Crown Inn</option>
+        <option value="George Hotel">George Hotel</option>
+        <option value="Red Lion">Red Lion</option>
       </select>
-      <select>
-        <option>Postcode</option>
-        <option>CM1</option>
-        <option>SS1</option>
-        <option>CO1</option>
+      <select id="filter-postcode">
+        <option value="all">Postcode</option>
+        <option value="CM1">CM1</option>
+        <option value="SS1">SS1</option>
+        <option value="CO1">CO1</option>
       </select>
-      <select>
-        <option>Region</option>
-        <option>Essex</option>
-        <option>London</option>
+      <select id="filter-region">
+        <option value="all">Region</option>
+        <option value="Essex">Essex</option>
+        <option value="London">London</option>
       </select>
-      <select>
-        <option>Entertainment Style</option>
-        <option>Live Music</option>
-        <option>Comedy</option>
-        <option>Quiz Night</option>
-        <option>Karaoke</option>
+      <select id="filter-style">
+        <option value="all">Entertainment Style</option>
+        <option value="Live Music">Live Music</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Quiz Night">Quiz Night</option>
+        <option value="Karaoke">Karaoke</option>
       </select>
     </div>
 
-    <!-- Example Events -->
-    <div class="event-grid">
-      <div class="event-card">
-        <div class="event-title">The Essex Rockers</div>
-        <div class="event-meta">📅 Tonight • 📍 The Crown Inn, Chelmsford • 🎸 Live Music</div>
-      </div>
-      <div class="event-card">
-        <div class="event-title">Comedy Night Special</div>
-        <div class="event-meta">📅 Tonight • 📍 George Hotel, Southend • 🎭 Comedy</div>
-      </div>
-      <div class="event-card">
-        <div class="event-title">Weekly Quiz Night</div>
-        <div class="event-meta">📅 Tonight • 📍 Red Lion, Colchester • 🧠 Quiz Night</div>
-      </div>
+    <!-- Events -->
+    <div class="event-grid" id="event-list">
+      <!-- Populated by JS -->
     </div>
   </div>
 
+  <script>
+    const events = [
+      {
+        title: "The Essex Rockers",
+        date: "Tonight",
+        venue: "The Crown Inn",
+        postcode: "CM1",
+        region: "Essex",
+        style: "Live Music"
+      },
+      {
+        title: "Comedy Night Special",
+        date: "Tonight",
+        venue: "George Hotel",
+        postcode: "SS1",
+        region: "Essex",
+        style: "Comedy"
+      },
+      {
+        title: "Weekly Quiz Night",
+        date: "Tonight",
+        venue: "Red Lion",
+        postcode: "CO1",
+        region: "Essex",
+        style: "Quiz Night"
+      },
+      {
+        title: "Karaoke Fridays",
+        date: "This Weekend",
+        venue: "The Crown Inn",
+        postcode: "CM1",
+        region: "Essex",
+        style: "Karaoke"
+      }
+    ];
+
+    const eventList = document.getElementById("event-list");
+
+    function renderEvents() {
+      eventList.innerHTML = "";
+      const dateFilter = document.getElementById("filter-date").value;
+      const venueFilter = document.getElementById("filter-venue").value;
+      const postcodeFilter = document.getElementById("filter-postcode").value;
+      const regionFilter = document.getElementById("filter-region").value;
+      const styleFilter = document.getElementById("filter-style").value;
+
+      const filtered = events.filter(event => {
+        return (
+          (dateFilter === "all" || event.date === dateFilter) &&
+          (venueFilter === "all" || event.venue === venueFilter) &&
+          (postcodeFilter === "all" || event.postcode === postcodeFilter) &&
+          (regionFilter === "all" || event.region === regionFilter) &&
+          (styleFilter === "all" || event.style === styleFilter)
+        );
+      });
+
+      if (filtered.length === 0) {
+        eventList.innerHTML = "<p>No events match your filters.</p>";
+      } else {
+        filtered.forEach(event => {
+          const card = document.createElement("div");
+          card.className = "event-card";
+          card.innerHTML = `
+            <div class="event-title">${event.title}</div>
+            <div class="event-meta">📅 ${event.date} • 📍 ${event.venue} (${event.postcode}) • 🎭 ${event.style}</div>
+          `;
+          eventList.appendChild(card);
+        });
+      }
+    }
+
+    // Initial render
+    renderEvents();
+
+    // Add event listeners to filters
+    document.querySelectorAll(".filters select").forEach(select => {
+      select.addEventListener("change", renderEvents);
+    });
+  </script>
 </body>
 </html>
