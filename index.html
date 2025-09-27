@@ -32,14 +32,14 @@
     }
 
     #flash img {
-  max-width: 500px; /* bigger logo */
-  width: 85%;       /* fills more of mobile too */
-  height: auto;
-  filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
-  animation: pulse 2s infinite;
-  z-index: 10;
-  position: relative;
-}
+      max-width: 500px;
+      width: 85%;
+      height: auto;
+      filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
+      animation: pulse 2s infinite;
+      z-index: 10;
+      position: relative;
+    }
 
     @keyframes pulse {
       0%, 100% { filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white); }
@@ -75,7 +75,7 @@
       100% { transform: translate(-50%, -50%) rotate(360deg); }
     }
 
-    /* Spotlights */
+    /* Spotlights (Music Hub) */
     .searchlight {
       position: absolute;
       width: 8vmax;
@@ -93,27 +93,26 @@
     .tl { top: 0; left: 0; transform-origin: top left; }
     .tr { top: 0; right: 0; transform-origin: top right; }
 
-    /* Comedy Curtains */
-    .curtain {
+    /* Comedy Spotlight */
+    .comedy-spotlight {
       position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 50%;
-      background: linear-gradient(to bottom, #8B0000, #B22222, #8B0000);
-      z-index: 20;
+      top: -20%;
+      left: 50%;
+      width: 60vmax;
+      height: 120vmax;
+      background: radial-gradient(ellipse at top, rgba(255,255,200,0.8) 0%, rgba(255,255,200,0.4) 30%, transparent 70%);
+      transform: translateX(-50%) rotate(0deg);
+      transform-origin: top center;
+      filter: blur(2px);
+      animation: comedyWiggle 5s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
     }
 
-    .curtain.left { left: 0; animation: curtainLeft 2s forwards; }
-    .curtain.right { right: 0; animation: curtainRight 2s forwards; }
-
-    @keyframes curtainLeft {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
-    }
-
-    @keyframes curtainRight {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(100%); }
+    @keyframes comedyWiggle {
+      0%   { transform: translateX(-50%) rotate(-3deg); }
+      50%  { transform: translateX(-50%) rotate(3deg); }
+      100% { transform: translateX(-50%) rotate(-2deg); }
     }
 
     /* Screens */
@@ -230,7 +229,7 @@
       text-transform: uppercase;
       cursor: pointer;
       border-radius: 8px;
-      z-index: 25;
+      z-index: 15;
       transition: all 0.3s ease;
     }
 
@@ -254,6 +253,84 @@
       max-width: 250px;
       font-size: 16px;
       padding: 15px 30px;
+    }
+
+    /* Gig listings */
+    .gig-listings {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+      z-index: 10;
+      position: relative;
+    }
+
+    .gig {
+      display: flex;
+      background: #111;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 12px rgba(255,255,255,0.2);
+    }
+
+    .gig-date {
+      background: #222;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+      min-width: 70px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .gig-date.cancelled {
+      background: #800;
+    }
+
+    .gig-date .day { font-size: 14px; opacity: 0.8; }
+    .gig-date .month { font-size: 16px; color: #ff4444; }
+    .gig-date .date { font-size: 24px; }
+    .gig-date .year { font-size: 12px; opacity: 0.7; }
+
+    .gig-img {
+      width: 120px;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .gig-info {
+      padding: 15px;
+      flex: 1;
+    }
+
+    .gig-info h3 {
+      font-size: 16px;
+      margin: 0 0 5px;
+      color: white;
+    }
+
+    .gig-info p {
+      margin: 3px 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .gig-info .free {
+      display: inline-block;
+      margin-top: 5px;
+      color: #0f0;
+      font-weight: bold;
+    }
+
+    .gig-info .cancelled {
+      display: inline-block;
+      margin-top: 5px;
+      color: #f00;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -288,12 +365,62 @@
       <div class="tile">Band</div>
       <div class="tile">Date</div>
     </div>
+
+    <!-- Gig Listings -->
+    <div class="gig-listings">
+      <div class="gig">
+        <div class="gig-date">
+          <div class="day">Sun</div>
+          <div class="month">Sep</div>
+          <div class="date">28</div>
+          <div class="year">2025</div>
+        </div>
+        <img src="gig1.jpg" alt="Nikki and the Switchblades" class="gig-img">
+        <div class="gig-info">
+          <h3>Nikki and the Switchblades (Rock & Roll / Rockabilly, 4 piece)</h3>
+          <p>@ Farm Fresh Summer Truck Meet, Rawreth</p>
+          <p><strong>10am – 4pm</strong></p>
+          <span class="free">FREE!</span>
+        </div>
+      </div>
+
+      <div class="gig">
+        <div class="gig-date">
+          <div class="day">Sun</div>
+          <div class="month">Oct</div>
+          <div class="date">19</div>
+          <div class="year">2025</div>
+        </div>
+        <img src="gig2.jpg" alt="Nikki and the Switchblades" class="gig-img">
+        <div class="gig-info">
+          <h3>Nikki and the Switchblades (Rock & Roll / Rockabilly, 4 piece)</h3>
+          <p>@ The Reindeer, Norwich</p>
+          <p><strong>4.30pm – 8pm</strong></p>
+          <span class="free">FREE!</span>
+        </div>
+      </div>
+
+      <div class="gig">
+        <div class="gig-date cancelled">
+          <div class="day">Sat</div>
+          <div class="month">May</div>
+          <div class="date">2</div>
+          <div class="year">2026</div>
+        </div>
+        <img src="gig3.jpg" alt="Nikki and the Switchblades" class="gig-img">
+        <div class="gig-info">
+          <h3>Nikki and the Switchblades (Rock & Roll / Rockabilly, 4 piece)</h3>
+          <p>@ AJ's Rock 'n' Roll Club, Wellingborough</p>
+          <p><strong>9pm – midnight</strong></p>
+          <span class="cancelled">CANCELLED</span>
+        </div>
+      </div>
+    </div>
   </div>
 
-  <!-- Comedy Hub (with curtains) -->
+  <!-- Comedy Hub -->
   <div id="hub-comedy" class="screen">
-    <div class="curtain left"></div>
-    <div class="curtain right"></div>
+    <div class="comedy-spotlight"></div>
     <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Comedy Shows</div>
@@ -363,43 +490,4 @@
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
-        document.getElementById("home").classList.add("active");
-
-        const tagline = "Discover the best live entertainment\nin Essex and beyond";
-        let i = 0;
-        const speed = 50;
-        const taglineEl = document.getElementById("tagline");
-
-        function typeWriter() {
-          if (i < tagline.length) {
-            taglineEl.textContent += tagline.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-          } else {
-            taglineEl.style.borderRight = "none";
-          }
-        }
-
-        setTimeout(typeWriter, 500);
-      }, 5000);
-    });
-
-    // Navigation
-    function goToHub(type) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      const hub = document.getElementById("hub-" + type);
-      hub.classList.add("active");
-
-      if (type === "music") {
-        createSpotlights();
-      }
-    }
-
-    function goHome() {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.getElementById("home").classList.add("active");
-    }
-  </script>
-
-</body>
-</html>
+        document.getElementById("home").classList.add
