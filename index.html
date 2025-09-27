@@ -77,6 +77,7 @@
       <div class="tile" onclick="goToHub('music')">🎸 Music</div>
       <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
       <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
+      <div class="tile" onclick="goToHub('requests')">📩 Submit a Request</div>
     </div>
   </div>
 
@@ -166,7 +167,7 @@
           <p>Venue: AJ's Rock 'n' Roll Club, Wellingborough</p>
           <p>Time: 9pm – midnight</p>
           <p>Price: £TBC</p>
-          <p style="color:red; font-weight:bold;">Cancelled (28 Jun 2025)</p>
+          <p>Cancelled (28 Jun 2025)</p>
         </div>
       </div>
 
@@ -218,10 +219,10 @@
       <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>8 Bars of Piano</h3><p>Venue: The United Brethren, Chelmsford</p></div></div>
       <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Afterlife Rock Covers Band UK</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
       <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Windsor</p><h3>AOB</h3><p>Venue: The Acre Club, Windsor</p></div></div>
-      <!-- ... (all other Sat 04 Oct gigs inserted here, same format) ... -->
+      <!-- ... Continue adding all other Sat 04 Oct gigs here ... -->
 
-    </div> <!-- end of gig-listings -->
-  </div> <!-- end of hub-music -->
+    </div> <!-- end gig-listings -->
+  </div> <!-- end hub-music -->
 
   <!-- Comedy Hub -->
   <div id="hub-comedy" class="screen">
@@ -253,26 +254,35 @@
     </div>
   </div>
 
+  <!-- Submit a Request Hub -->
+  <div id="hub-requests" class="screen">
+    <div class="small-logo"><img src="logo.png" alt="Logo"></div>
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+    <div class="hub-header">Submit a Request</div>
+    <div class="search-tiles" style="width:90%; max-width:600px; margin:auto;">
+      <input id="request-title" type="text" placeholder="Enter Title / Subject"
+             style="width:100%; padding:15px; border-radius:12px; border:2px solid white; background:black; color:white; font-size:16px; margin-bottom:15px;">
+      <textarea id="request-message" rows="6" placeholder="Enter your message here..."
+                style="width:100%; padding:15px; border-radius:12px; border:2px solid white; background:black; color:white; font-size:16px; margin-bottom:15px;"></textarea>
+      <div class="tile" style="background:#000; text-align:center;" onclick="submitRequest()">📩 Submit</div>
+    </div>
+  </div>
+
   <script>
-    // Splash transition
+    // Splash
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
         document.getElementById("home").classList.add("active");
 
         const tagline = "Discover the best live entertainment\nin Essex and beyond";
-        let i = 0;
-        const speed = 50;
+        let i = 0, speed = 50;
         const taglineEl = document.getElementById("tagline");
-
         function typeWriter() {
           if (i < tagline.length) {
-            taglineEl.textContent += tagline.charAt(i);
-            i++;
+            taglineEl.textContent += tagline.charAt(i); i++;
             setTimeout(typeWriter, speed);
-          } else {
-            taglineEl.style.borderRight = "none";
-          }
+          } else { taglineEl.style.borderRight = "none"; }
         }
         setTimeout(typeWriter, 500);
       }, 3000);
@@ -282,33 +292,29 @@
     function goToHub(type) {
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       document.getElementById("hub-" + type).classList.add("active");
-
-      // Spotlights only in music
-      if (type === "music") {
-        generateSpotlights();
-      }
+      if (type === "music") { generateSpotlights(); }
     }
     function goHome() {
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       document.getElementById("home").classList.add("active");
     }
 
-    // Generate moving spotlights
+    // Spotlights
     function generateSpotlights() {
       const container = document.getElementById("spotlights");
       container.innerHTML = "";
       const corners = ["bl","br","tl","tr"];
       corners.forEach(corner => {
-        for (let i=0; i<3; i++) {
-          const beam = document.createElement("div");
-          beam.classList.add("searchlight", corner);
-          const angle = Math.random() * 120 - 60;
-          beam.style.transform = `rotate(${angle}deg)`;
-          beam.style.animation = `swing${i}${corner} 3s ease-in-out infinite alternate`;
-          const style = document.createElement("style");
-          style.textContent = `@keyframes swing${i}${corner}{
+        for (let i=0;i<3;i++) {
+          const beam=document.createElement("div");
+          beam.classList.add("searchlight",corner);
+          const angle=Math.random()*120-60;
+          beam.style.transform=`rotate(${angle}deg)`;
+          beam.style.animation=`swing${i}${corner} 2s ease-in-out infinite alternate`;
+          const style=document.createElement("style");
+          style.textContent=`@keyframes swing${i}${corner}{
             0%{transform:rotate(${angle}deg);}
-            100%{transform:rotate(${angle + (Math.random()*60-30)}deg);}
+            100%{transform:rotate(${angle+(Math.random()*60-30)}deg);}
           }`;
           document.head.appendChild(style);
           container.appendChild(beam);
@@ -316,58 +322,69 @@
       });
     }
 
-    // Gig filtering
+    // Gig filter
     function filterGigs() {
-      const region = document.getElementById("filter-region").value.toLowerCase();
-      const venue = document.getElementById("filter-venue").value.toLowerCase();
-      const band = document.getElementById("filter-band").value.toLowerCase();
-      const date = document.getElementById("filter-date").value.toLowerCase();
-
-      document.querySelectorAll(".gig").forEach(gig => {
-        const gigRegion = (gig.querySelector(".region")?.textContent || "").toLowerCase();
-        const gigVenue = (gig.querySelector("p:nth-of-type(2)")?.textContent || "").toLowerCase();
-        const gigBand = (gig.querySelector("h3")?.textContent || "").toLowerCase();
-        const gigDate = (gig.querySelector(".gig-date")?.textContent || "").toLowerCase();
-
-        let visible = true;
-        if (region && !gigRegion.includes(region)) visible = false;
-        if (venue && !gigVenue.includes(venue)) visible = false;
-        if (band && !gigBand.includes(band)) visible = false;
-        if (date && !gigDate.includes(date)) visible = false;
-
-        gig.style.display = visible ? "flex" : "none";
+      const region=document.getElementById("filter-region").value.toLowerCase();
+      const venue=document.getElementById("filter-venue").value.toLowerCase();
+      const band=document.getElementById("filter-band").value.toLowerCase();
+      const date=document.getElementById("filter-date").value.toLowerCase();
+      document.querySelectorAll(".gig").forEach(gig=>{
+        const gigRegion=(gig.querySelector(".region")?.textContent||"").toLowerCase();
+        const gigVenue=(gig.querySelector("p:nth-of-type(2)")?.textContent||"").toLowerCase();
+        const gigBand=(gig.querySelector("h3")?.textContent||"").toLowerCase();
+        const gigDate=(gig.querySelector(".gig-date")?.textContent||"").toLowerCase();
+        let visible=true;
+        if(region&&!gigRegion.includes(region))visible=false;
+        if(venue&&!gigVenue.includes(venue))visible=false;
+        if(band&&!gigBand.includes(band))visible=false;
+        if(date&&!gigDate.includes(date))visible=false;
+        gig.style.display=visible?"flex":"none";
       });
     }
 
-    // Reset filters
+    // Reset
     function resetFilters() {
-      ["filter-region","filter-venue","filter-band","filter-date"].forEach(id => {
-        document.getElementById(id).value = "";
-      });
+      ["filter-region","filter-venue","filter-band","filter-date"].forEach(id=>document.getElementById(id).value="");
       filterGigs();
     }
 
-    // Populate filter dropdowns
-    window.addEventListener("DOMContentLoaded", () => {
-      const regions = new Set(), venues = new Set(), bands = new Set(), dates = new Set();
-      document.querySelectorAll(".gig").forEach(gig => {
+    // Auto-style cancelled gigs
+    function styleCancelledGigs() {
+      document.querySelectorAll(".gig").forEach(gig=>{
+        const info=gig.querySelector(".gig-info");
+        if(info && info.textContent.toLowerCase().includes("cancelled")){
+          gig.style.border="2px solid red";
+          gig.style.opacity="0.7";
+          info.style.color="red";
+          info.style.fontWeight="bold";
+        }
+      });
+    }
+
+    // Populate filters
+    window.addEventListener("DOMContentLoaded",()=>{
+      const regions=new Set(),venues=new Set(),bands=new Set(),dates=new Set();
+      document.querySelectorAll(".gig").forEach(gig=>{
         regions.add(gig.querySelector(".region")?.textContent);
-        venues.add((gig.querySelector("p:nth-of-type(2)")?.textContent || "").replace("Venue: ",""));
+        venues.add((gig.querySelector("p:nth-of-type(2)")?.textContent||"").replace("Venue: ",""));
         bands.add(gig.querySelector("h3")?.textContent);
         dates.add(gig.querySelector(".gig-date")?.textContent);
       });
-
-      const populate = (id,set) => {
-        const sel=document.getElementById(id);
-        Array.from(set).sort().forEach(val=>{
-          if(val){ const opt=document.createElement("option"); opt.value=val; opt.textContent=val; sel.appendChild(opt); }
-        });
-      };
-      populate("filter-region",regions);
-      populate("filter-venue",venues);
-      populate("filter-band",bands);
-      populate("filter-date",dates);
+      const populate=(id,set)=>{const sel=document.getElementById(id); Array.from(set).sort().forEach(val=>{if(val){const opt=document.createElement("option");opt.value=val;opt.textContent=val;sel.appendChild(opt);}});};
+      populate("filter-region",regions); populate("filter-venue",venues); populate("filter-band",bands); populate("filter-date",dates);
+      styleCancelledGigs();
     });
+
+    // Submit Request
+    function submitRequest() {
+      const title=document.getElementById("request-title").value.trim();
+      const message=document.getElementById("request-message").value.trim();
+      if(!title||!message){alert("Please enter both a title and a message.");return;}
+      const email="YOUREMAIL@domain.com"; // <-- replace with your address
+      const subject=encodeURIComponent(title);
+      const body=encodeURIComponent(message);
+      window.location.href=`mailto:${email}?subject=${subject}&body=${body}`;
+    }
   </script>
 </body>
 </html>
