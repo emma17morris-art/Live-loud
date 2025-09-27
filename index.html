@@ -61,7 +61,7 @@
     }
 
     #flash img {
-      max-width: 300px; /* Mobile friendly */
+      max-width: 300px;
       width: 80%;
       height: auto;
       filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
@@ -78,9 +78,9 @@
     /* Spotlights */
     .searchlight {
       position: absolute;
-      width: 10vmax;
-      height: 120vmax;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 30%, transparent 70%);
+      width: 8vmax;
+      height: 140vmax;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 30%, transparent 70%);
       mix-blend-mode: screen;
       pointer-events: none;
       z-index: 1;
@@ -258,7 +258,7 @@
     </div>
   </div>
 
-  <!-- Music Hub (with spotlights) -->
+  <!-- Music Hub (with 6 spotlights per corner) -->
   <div id="hub-music" class="screen">
     <div id="spotlights"></div>
     <div class="small-logo">
@@ -293,10 +293,10 @@
   </div>
 
   <script>
-    // Create 3 beams from each corner with random sweeps
+    // Create 6 beams from each corner with random sweeps inward
     function createSpotlights() {
       const container = document.getElementById("spotlights");
-      container.innerHTML = ""; // clear previous
+      container.innerHTML = "";
       const corners = [
         {x: "0%", y: "100%", origin: "bottom left"},
         {x: "100%", y: "100%", origin: "bottom right"},
@@ -305,17 +305,19 @@
       ];
 
       corners.forEach((corner, cIndex) => {
-        for (let i = 0; i < 3; i++) {
+        for (let i = 0; i < 6; i++) {
           const light = document.createElement("div");
           light.classList.add("searchlight");
           light.style.left = corner.x;
           light.style.top = corner.y;
           light.style.transformOrigin = corner.origin;
 
-          const angle1 = Math.floor(Math.random() * 120) - 60;
-          const angle2 = Math.floor(Math.random() * 120) - 60;
-          const duration = Math.floor(Math.random() * 3) + 2; // 2–5s
+          // Angles aimed more inward
+          const baseAngle = (corner.origin.includes("left") ? 30 : -30) + (corner.origin.includes("top") ? 180 : 0);
+          const angle1 = baseAngle + (Math.random() * 30 - 15);
+          const angle2 = baseAngle + (Math.random() * 30 - 15);
 
+          const duration = Math.floor(Math.random() * 3) + 2; // 2–5s
           const animName = `sweep${cIndex}-${i}`;
           light.style.animation = `${animName} ${duration}s ease-in-out infinite alternate`;
 
