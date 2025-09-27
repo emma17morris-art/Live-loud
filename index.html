@@ -93,6 +93,29 @@
     .tl { top: 0; left: 0; transform-origin: top left; }
     .tr { top: 0; right: 0; transform-origin: top right; }
 
+    /* Comedy Curtains */
+    .curtain {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 50%;
+      background: linear-gradient(to bottom, #8B0000, #B22222, #8B0000);
+      z-index: 20;
+    }
+
+    .curtain.left { left: 0; animation: curtainLeft 2s forwards; }
+    .curtain.right { right: 0; animation: curtainRight 2s forwards; }
+
+    @keyframes curtainLeft {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @keyframes curtainRight {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
     /* Screens */
     .screen {
       display: none;
@@ -207,7 +230,7 @@
       text-transform: uppercase;
       cursor: pointer;
       border-radius: 8px;
-      z-index: 15;
+      z-index: 25;
       transition: all 0.3s ease;
     }
 
@@ -243,13 +266,9 @@
 
   <!-- Home Screen -->
   <div id="home" class="screen">
-    <div class="small-logo">
-      <img src="logo.png" alt="Live & Loud Small Logo">
-    </div>
+    <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
     <div class="welcome">Welcome</div>
-    <div class="tagline-wrapper">
-      <div class="tagline" id="tagline"></div>
-    </div>
+    <div class="tagline-wrapper"><div class="tagline" id="tagline"></div></div>
     <div class="tile-container">
       <div class="tile" onclick="goToHub('music')">🎸 Music</div>
       <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
@@ -271,8 +290,10 @@
     </div>
   </div>
 
-  <!-- Comedy Hub -->
+  <!-- Comedy Hub (with curtains) -->
   <div id="hub-comedy" class="screen">
+    <div class="curtain left"></div>
+    <div class="curtain right"></div>
     <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Comedy Shows</div>
