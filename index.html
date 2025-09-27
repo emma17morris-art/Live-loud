@@ -29,7 +29,6 @@
       justify-content: center;
       z-index: 2000;
     }
-
     #flash img {
       max-width: 500px;
       width: 85%;
@@ -37,7 +36,6 @@
       filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
       animation: pulse 2s infinite;
     }
-
     @keyframes pulse {
       0%, 100% { filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white); }
       50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
@@ -46,11 +44,10 @@
     /* === Screens === */
     .screen { display: none; min-height: 100vh; background: var(--background); padding: 20px; box-sizing: border-box; position: relative; overflow: hidden; }
     .screen.active { display: block; }
-
     .small-logo { position: absolute; top: 20px; left: 20px; z-index: 10; }
     .small-logo img { max-width: 100px; filter: drop-shadow(0 0 6px white) drop-shadow(0 0 15px white); }
 
-    /* === Home Page === */
+    /* === Home === */
     .welcome { text-align: center; margin-top: 100px; font-size: 40px; font-weight: bold; text-shadow: 0 0 8px white, 0 0 20px white; }
     .tagline-wrapper { display: flex; justify-content: center; margin-top: 15px; }
     .tagline { font-size: 18px; font-weight: 500; line-height: 1.4; opacity: 0.85; text-shadow: 0 0 6px white, 0 0 12px rgba(255,255,255,0.6); border-right: 2px solid white; white-space: pre-wrap; overflow: hidden; text-align: center; max-width: 90%; }
@@ -109,14 +106,12 @@
     </div>
   </div>
 
-  <!-- === Music Hub with Dropdown Filters === -->
+  <!-- === Music Hub === -->
   <div id="hub-music" class="screen">
     <div id="spotlights"></div>
     <div class="small-logo"><img src="logo.png" alt="Logo"></div>
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Search By</div>
-
-    <!-- Dropdown Filters -->
     <div class="search-tiles">
       <select id="filter-region" onchange="filterGigs()"><option value="">All Regions</option></select>
       <select id="filter-venue" onchange="filterGigs()"><option value="">All Venues</option></select>
@@ -124,13 +119,41 @@
       <select id="filter-date" onchange="filterGigs()"><option value="">All Dates</option></select>
     </div>
 
-    <!-- 🎶 Live Gig Listings -->
     <div class="gig-listings" id="gig-listings">
-      <!-- (Insert the 30 gig <div class="gig"> blocks here — same as before) -->
-    </div>
-  </div>
-
-  <!-- === Comedy Hub === -->
+            <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Georgie Hume & the Pity Party</h3><p>Venue: The Green Bottle</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Grounds for Divorce</h3><p>Venue: Cow & Telescope</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Half Stoned</h3><p>Venue: Park Tavern</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Muse x Killers</h3><p>Venue: Chinnerys</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>New Again - The North Star EP Release Show</h3><p>Venue: St Marks Church</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Redonizm</h3><p>Venue: The Sarah Moore Pub</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Ted Beament Trio</h3><p>Venue: The Jazz Centre</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>The Revival Band</h3><p>Venue: Priory Park</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Junior Jump and the Bottom Line</h3><p>Venue: The Crooked Billet</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>The Plan</h3><p>Venue: Metal Culture - Chalkwell Hall</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Davey & The Jawbones</h3><p>Venue: The Plough</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>FM - Brotherhood Tour</h3><p>Venue: Chinnerys</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>One Touch Too Much</h3><p>Venue: The Crooked Billet</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Fishing For Robots</h3><p>Venue: Papillon</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Jackie Wilson Says</h3><p>Venue: Priory Park</p></div></div>
+      <div class="gig"><div class="gig-date">Tue 30 Sep 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Graham O’Callaghan + Any Good Thing</h3><p>Venue: Estuary Club</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Battle of the bands: Heat 5</h3><p>Venue: The Fickle Pickle Club</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Jazz825: Lily Dior</h3><p>Venue: Park Inn by Radisson Palace</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Martin McNeill & Cliff MacDonald</h3><p>Venue: The Green Bottle</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Singaround</h3><p>Venue: Estuary Club</p></div></div>
+      <div class="gig"><div class="gig-date">Thu 02 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>The Phil Burdett Ensemble</h3><p>Venue: Dixon Studio</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Beggar</h3><p>Venue: Cow & Telescope</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Chocolate Fire Guard Experience</h3><p>Venue: Railway Hotel</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Rounds / A Cause In Distress / Frances Murray / Details</h3><p>Venue: The Fickle Pickle Club</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Stern John / SOS Band / Elysium</h3><p>Venue: The Moonraker / Lamb & Lion</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>The Tumbling Dice</h3><p>Venue: Papillon</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Utah Saints / Bentley Rhythm Ace</h3><p>Venue: Chinnerys</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Afterlife</h3><p>Venue: Cow & Telescope</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Amy Winehouse Vs Adele Tribute Night</h3><p>Venue: Chinnerys</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend / Essex</p><h3>Basharan</h3><p>Venue: Railway Hotel</p></div></div>
+    </div> <!-- end gig-listings -->
+    
+  </div> <!-- end hub-music -->
+    <!-- === Comedy Hub === -->
   <div id="hub-comedy" class="screen">
     <div class="comedy-spotlight-lamp"></div>
     <div class="comedy-spotlight"></div>
@@ -139,7 +162,10 @@
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Comedy Shows</div>
     <div class="search-tiles">
-      <div class="tile">Region</div><div class="tile">Venue</div><div class="tile">Performer</div><div class="tile">Date</div>
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Performer</div>
+      <div class="tile">Date</div>
     </div>
   </div>
 
@@ -150,10 +176,14 @@
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Entertainment Events</div>
     <div class="search-tiles">
-      <div class="tile">Region</div><div class="tile">Venue</div><div class="tile">Show</div><div class="tile">Date</div>
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Show</div>
+      <div class="tile">Date</div>
     </div>
   </div>
 
+  <!-- === JavaScript === -->
   <script>
     // === Spotlight Generator for Music Hub ===
     function createSpotlights() {
@@ -169,17 +199,24 @@
         for (let i = 0; i < 6; i++) {
           const light = document.createElement("div");
           light.classList.add("searchlight", corner.class);
-          light.style.left = corner.x; light.style.top = corner.y;
+          light.style.left = corner.x;
+          light.style.top = corner.y;
           light.style.transformOrigin = corner.origin;
 
           const angle1 = Math.floor(Math.random() * 120) - 60;
           const angle2 = Math.floor(Math.random() * 120) - 60;
-          const duration = Math.floor(Math.random() * 3) + 2;
+          const duration = Math.floor(Math.random() * 3) + 2; // 2–5s
           const animName = `sweep${cIndex}-${i}`;
           light.style.animation = `${animName} ${duration}s ease-in-out infinite alternate`;
 
           const styleSheet = document.styleSheets[0];
-          styleSheet.insertRule(`@keyframes ${animName} { from { transform: rotate(${angle1}deg);} to { transform: rotate(${angle2}deg);} }`, styleSheet.cssRules.length);
+          styleSheet.insertRule(`
+            @keyframes ${animName} {
+              from { transform: rotate(${angle1}deg); }
+              to { transform: rotate(${angle2}deg); }
+            }
+          `, styleSheet.cssRules.length);
+
           container.appendChild(light);
         }
       });
@@ -192,13 +229,18 @@
         document.getElementById("home").classList.add("active");
 
         const tagline = "Discover the best live entertainment\nin Essex and beyond";
-        let i = 0, speed = 50;
+        let i = 0;
+        const speed = 50;
         const taglineEl = document.getElementById("tagline");
 
         function typeWriter() {
           if (i < tagline.length) {
-            taglineEl.textContent += tagline.charAt(i); i++; setTimeout(typeWriter, speed);
-          } else { taglineEl.style.borderRight = "none"; }
+            taglineEl.textContent += tagline.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+          } else {
+            taglineEl.style.borderRight = "none";
+          }
         }
         setTimeout(typeWriter, 500);
       }, 3000);
@@ -238,7 +280,8 @@
       const select = document.getElementById(selectId);
       [...items].sort().forEach(item => {
         const opt = document.createElement("option");
-        opt.value = item; opt.textContent = item;
+        opt.value = item;
+        opt.textContent = item;
         select.appendChild(opt);
       });
     }
@@ -253,7 +296,8 @@
         const gigVenue = gig.querySelector(".gig-info p:last-child").textContent.replace("Venue: ","").trim();
         const gigBand = gig.querySelector("h3").textContent.trim();
         const gigDate = gig.querySelector(".gig-date").textContent.trim();
-                let visible = true;
+
+        let visible = true;
         if (region && gigRegion !== region) visible = false;
         if (venue && gigVenue !== venue) visible = false;
         if (band && gigBand !== band) visible = false;
