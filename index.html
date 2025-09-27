@@ -48,12 +48,9 @@
     /* Hollywood Searchlights */
     .searchlight {
       position: absolute;
-      bottom: 0;
-      left: 50%;
       width: 40vmax;
       height: 120vmax;
-      background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.35) 0%, transparent 70%);
-      transform-origin: bottom center;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, transparent 70%);
       mix-blend-mode: screen;
       pointer-events: none;
       z-index: 1;
@@ -267,13 +264,26 @@
   </div>
 
   <script>
-    // Generate random spotlights (3–6)
+    // Generate random spotlights (3–6) from corners
     function createSpotlights() {
       const container = document.getElementById("spotlights");
       const count = Math.floor(Math.random() * 4) + 3; // 3–6
+      const corners = [
+        {x: "0%", y: "100%", origin: "bottom left"},
+        {x: "100%", y: "100%", origin: "bottom right"},
+        {x: "0%", y: "0%", origin: "top left"},
+        {x: "100%", y: "0%", origin: "top right"}
+      ];
+
       for (let i = 0; i < count; i++) {
         const light = document.createElement("div");
         light.classList.add("searchlight");
+
+        // Pick a random corner
+        const corner = corners[Math.floor(Math.random() * corners.length)];
+        light.style.left = corner.x;
+        light.style.top = corner.y;
+        light.style.transformOrigin = corner.origin;
 
         // Random animation properties
         const duration = Math.floor(Math.random() * 8) + 8; // 8–16s
