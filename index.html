@@ -31,6 +31,35 @@
       overflow: hidden;
     }
 
+    /* Disco Lights in Flash */
+    .flash-lights {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200vmax;
+      height: 200vmax;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      background: conic-gradient(
+        from 0deg,
+        rgba(255,0,0,0.25),
+        rgba(0,255,0,0.25),
+        rgba(0,0,255,0.25),
+        rgba(255,255,0,0.25),
+        rgba(255,0,255,0.25),
+        rgba(0,255,255,0.25),
+        rgba(255,0,0,0.25)
+      );
+      animation: rotateLights 12s linear infinite;
+      filter: blur(100px);
+    }
+
+    @keyframes rotateLights {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
     #flash img {
       max-width: 300px; /* Mobile friendly */
       width: 80%;
@@ -38,6 +67,7 @@
       filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
       animation: pulse 2s infinite;
       z-index: 10;
+      position: relative;
     }
 
     @keyframes pulse {
@@ -62,23 +92,6 @@
     .br { bottom: 0; right: 0; transform-origin: bottom right; }
     .tl { top: 0; left: 0; transform-origin: top left; }
     .tr { top: 0; right: 0; transform-origin: top right; }
-
-    /* Floating glowing music note in middle */
-    .flash-note {
-      position: absolute;
-      top: 45%;
-      left: 50%;
-      font-size: 40px;
-      transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 25px white);
-      animation: floatNote 4s ease-in-out infinite;
-      z-index: 5;
-    }
-
-    @keyframes floatNote {
-      0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      50% { transform: translate(-50%, -60%) scale(1.1); opacity: 0.8; }
-    }
 
     /* Screens */
     .screen {
@@ -225,6 +238,7 @@
 
   <!-- Flash Page -->
   <div id="flash">
+    <div class="flash-lights"></div>
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
@@ -244,7 +258,7 @@
     </div>
   </div>
 
-  <!-- Music Hub (with spotlights, no disco lights) -->
+  <!-- Music Hub (with spotlights) -->
   <div id="hub-music" class="screen">
     <div id="spotlights"></div>
     <div class="small-logo">
@@ -298,17 +312,13 @@
           light.style.top = corner.y;
           light.style.transformOrigin = corner.origin;
 
-          // Random sweep angles
           const angle1 = Math.floor(Math.random() * 120) - 60;
           const angle2 = Math.floor(Math.random() * 120) - 60;
-
-          // Fast duration
           const duration = Math.floor(Math.random() * 3) + 2; // 2–5s
 
           const animName = `sweep${cIndex}-${i}`;
           light.style.animation = `${animName} ${duration}s ease-in-out infinite alternate`;
 
-          // Add unique keyframes
           const styleSheet = document.styleSheets[0];
           styleSheet.insertRule(`
             @keyframes ${animName} {
@@ -328,7 +338,6 @@
         document.getElementById("flash").style.display = "none";
         document.getElementById("home").classList.add("active");
 
-        // Start typing tagline
         const tagline = "Discover the best live entertainment\nin Essex and beyond";
         let i = 0;
         const speed = 50;
@@ -354,7 +363,6 @@
       const hub = document.getElementById("hub-" + type);
       hub.classList.add("active");
 
-      // If music hub → spawn spotlights
       if (type === "music") {
         createSpotlights();
       }
