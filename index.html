@@ -50,11 +50,11 @@
       position: absolute;
       width: 10vmax;
       height: 120vmax;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 30%, transparent 70%);
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 30%, transparent 70%);
       mix-blend-mode: screen;
       pointer-events: none;
       z-index: 1;
-      filter: blur(1px); /* Sharper beams */
+      filter: blur(1px);
       opacity: 0.95;
     }
 
@@ -270,7 +270,7 @@
   </div>
 
   <script>
-    // Create multiple beams from each corner with random directions
+    // Create 3 beams from each corner with random fast sweeps
     function createSpotlights() {
       const container = document.getElementById("spotlights");
       const corners = [
@@ -289,11 +289,11 @@
           light.style.transformOrigin = corner.origin;
 
           // Random sweep angles
-          const angle1 = Math.floor(Math.random() * 100) - 50; // -50 to 50
-          const angle2 = Math.floor(Math.random() * 100) - 50;
+          const angle1 = Math.floor(Math.random() * 120) - 60; // -60 to 60
+          const angle2 = Math.floor(Math.random() * 120) - 60;
 
-          // Faster durations
-          const duration = Math.floor(Math.random() * 4) + 5; // 5–9s
+          // Much faster durations
+          const duration = Math.floor(Math.random() * 3) + 2; // 2–5s
 
           const animName = `sweep${cIndex}-${i}`;
           light.style.animation = `${animName} ${duration}s ease-in-out infinite alternate`;
