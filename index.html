@@ -45,43 +45,59 @@
       50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
     }
 
-    /* Stage Lights on Flash Screen */
-    .stage-light {
+    /* Hollywood Searchlights */
+    .searchlight {
       position: absolute;
-      top: 50%;
+      bottom: 0;
       left: 50%;
-      width: 150vmax;
-      height: 150vmax;
-      background: radial-gradient(ellipse at center, rgba(255,255,255,0.35) 0%, transparent 70%);
-      transform-origin: center center;
+      width: 40vmax;
+      height: 120vmax;
+      background: radial-gradient(ellipse at bottom, rgba(255,255,255,0.35) 0%, transparent 70%);
+      transform-origin: bottom center;
       mix-blend-mode: screen;
       pointer-events: none;
       z-index: 1;
+      filter: blur(3px);
+      opacity: 0.9;
     }
 
-    .stage-light::after {
-      content: "🎵";
+    .light1 { animation: sweep1 10s linear infinite alternate; }
+    .light2 { animation: sweep2 12s linear infinite alternate; }
+    .light3 { animation: sweep3 14s linear infinite alternate; }
+    .light4 { animation: sweep4 16s linear infinite alternate; }
+
+    @keyframes sweep1 {
+      from { transform: rotate(-30deg); }
+      to { transform: rotate(30deg); }
+    }
+    @keyframes sweep2 {
+      from { transform: rotate(-50deg); }
+      to { transform: rotate(10deg); }
+    }
+    @keyframes sweep3 {
+      from { transform: rotate(20deg); }
+      to { transform: rotate(-40deg); }
+    }
+    @keyframes sweep4 {
+      from { transform: rotate(45deg); }
+      to { transform: rotate(-15deg); }
+    }
+
+    /* Floating glowing music note in middle */
+    .flash-note {
       position: absolute;
-      top: 20%;
+      top: 40%;
       left: 50%;
-      font-size: 70px;
+      font-size: 80px;
       transform: translate(-50%, -50%);
-      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 25px white);
+      filter: drop-shadow(0 0 12px white) drop-shadow(0 0 25px white);
       animation: floatNote 4s ease-in-out infinite;
-    }
-
-    .light1 { animation: rotateLight 12s linear infinite; }
-    .light2 { animation: rotateLight 18s linear infinite reverse; }
-    .light3 { animation: rotateLight 25s linear infinite; }
-
-    @keyframes rotateLight {
-      from { transform: translate(-50%, -50%) rotate(0deg); }
-      to { transform: translate(-50%, -50%) rotate(360deg); }
+      z-index: 5;
     }
 
     @keyframes floatNote {
       0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-      50% { transform: translate(-50%, -70%) scale(1.1); opacity: 0.85; }
+      50% { transform: translate(-50%, -70%) scale(1.1); opacity: 0.8; }
     }
 
     /* Screens */
@@ -236,9 +252,13 @@
 
   <!-- Flash Page -->
   <div id="flash">
-    <div class="stage-light light1"></div>
-    <div class="stage-light light2"></div>
-    <div class="stage-light light3"></div>
+    <div class="searchlight light1"></div>
+    <div class="searchlight light2"></div>
+    <div class="searchlight light3"></div>
+    <div class="searchlight light4"></div>
+
+    <div class="flash-note">🎵</div>
+
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
@@ -297,7 +317,7 @@
         }
 
         setTimeout(typeWriter, 500);
-      }, 5000); // Changed from 3000ms to 5000ms
+      }, 5000); // Flash screen stays for 5s
     });
 
     // Navigation
