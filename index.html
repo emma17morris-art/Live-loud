@@ -51,6 +51,7 @@
       padding: 20px;
       box-sizing: border-box;
       position: relative;
+      overflow: hidden;
     }
 
     .screen.active {
@@ -143,26 +144,6 @@
       position: relative;
     }
 
-    /* Disco ball */
-    .disco-ball {
-      position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 30% 30%, #fff, #aaa, #666);
-      box-shadow: 0 0 20px white, 0 0 40px #fff;
-      z-index: 5;
-      animation: spinBall 6s linear infinite;
-    }
-
-    @keyframes spinBall {
-      0% { transform: translateX(-50%) rotate(0deg); }
-      100% { transform: translateX(-50%) rotate(360deg); }
-    }
-
     /* Full screen disco lights */
     .lights {
       position: absolute;
@@ -198,7 +179,7 @@
       flex-direction: column;
       align-items: center;
       gap: 15px;
-      margin-top: 250px;
+      margin-top: 200px;
       position: relative;
       z-index: 10;
     }
@@ -236,7 +217,6 @@
   <!-- Music Hub -->
   <div id="hub-music" class="screen">
     <div class="lights"></div>
-    <div class="disco-ball"></div>
     <div class="small-logo">
       <img src="logo.png" alt="Live & Loud Small Logo">
     </div>
