@@ -43,13 +43,14 @@
       50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
     }
 
-    /* Screens (home + hubs) */
+    /* Screens */
     .screen {
       display: none;
       min-height: 100vh;
       background: var(--background);
       padding: 20px;
       box-sizing: border-box;
+      position: relative;
     }
 
     .screen.active {
@@ -61,6 +62,7 @@
       position: absolute;
       top: 20px;
       left: 20px;
+      z-index: 10;
     }
 
     .small-logo img {
@@ -77,14 +79,13 @@
       text-shadow: 0 0 8px white, 0 0 20px white;
     }
 
-    /* Tagline Wrapper */
+    /* Tagline */
     .tagline-wrapper {
       display: flex;
       justify-content: center;
       margin-top: 15px;
     }
 
-    /* Tagline Typing */
     .tagline {
       font-size: 18px;
       font-weight: 500;
@@ -122,6 +123,7 @@
       filter: drop-shadow(0 0 6px white);
       width: 80%;
       max-width: 320px;
+      z-index: 10;
     }
 
     .tile:hover {
@@ -130,36 +132,76 @@
       filter: drop-shadow(0 0 12px white);
     }
 
-    /* Header inside hubs */
+    /* Hub header */
     .hub-header {
       text-align: center;
       font-size: 24px;
       font-weight: bold;
       margin-top: 80px;
       text-shadow: 0 0 6px white, 0 0 12px white;
+      z-index: 10;
+      position: relative;
     }
 
-    /* Smaller search tiles */
+    /* Disco ball background */
+    .disco-ball {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #fff, #aaa, #666);
+      box-shadow: 0 0 20px white, 0 0 40px #fff;
+      z-index: 5;
+      animation: spinBall 6s linear infinite;
+    }
+
+    @keyframes spinBall {
+      0% { transform: translateX(-50%) rotate(0deg); }
+      100% { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    .lights {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 1;
+      background: conic-gradient(
+        from 0deg,
+        rgba(255,0,0,0.2),
+        rgba(0,255,0,0.2),
+        rgba(0,0,255,0.2),
+        rgba(255,255,0,0.2),
+        rgba(255,0,255,0.2),
+        rgba(0,255,255,0.2),
+        rgba(255,0,0,0.2)
+      );
+      animation: rotateLights 8s linear infinite;
+    }
+
+    @keyframes rotateLights {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
     .search-tiles {
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 15px;
-      margin-top: 30px;
+      margin-top: 250px; /* push below disco ball */
+      position: relative;
+      z-index: 10;
     }
 
     .search-tiles .tile {
       max-width: 250px;
       font-size: 16px;
       padding: 15px 30px;
-    }
-
-    /* Larger screens - main tiles inline */
-    @media (min-width: 768px) {
-      .tile-container {
-        flex-direction: row;
-        justify-content: center;
-      }
     }
   </style>
 </head>
@@ -175,12 +217,10 @@
     <div class="small-logo">
       <img src="logo.png" alt="Live & Loud Small Logo">
     </div>
-
     <div class="welcome">Welcome</div>
     <div class="tagline-wrapper">
       <div class="tagline" id="tagline"></div>
     </div>
-
     <div class="tile-container">
       <div class="tile" onclick="goToHub('music')">🎸 Music</div>
       <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
@@ -190,6 +230,8 @@
 
   <!-- Music Hub -->
   <div id="hub-music" class="screen">
+    <div class="lights"></div>
+    <div class="disco-ball"></div>
     <div class="small-logo">
       <img src="logo.png" alt="Live & Loud Small Logo">
     </div>
