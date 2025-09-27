@@ -21,13 +21,21 @@
     /* Logo header */
     .header {
       text-align: center;
-      padding: 30px 20px 10px;
+      padding: 40px 20px 20px;
       border-bottom: 1px solid var(--border);
     }
 
     .header img {
-      max-width: 300px; /* Make logo bigger */
+      max-width: 500px; /* Bigger logo */
+      width: 100%;
       height: auto;
+      filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
+      transition: all 0.4s ease;
+    }
+
+    .header img:hover {
+      transform: scale(1.05);
+      filter: drop-shadow(0 0 25px white) drop-shadow(0 0 60px white);
     }
 
     /* Main Content */
@@ -125,7 +133,7 @@
 </head>
 <body>
 
-  <!-- Header with Centered Logo -->
+  <!-- Header with Centered Glowing Logo -->
   <div class="header">
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
@@ -133,7 +141,7 @@
   <!-- Main Content -->
   <div class="main-container">
     <div class="hero-banner">
-      <h1 class="hero-title">Welcome to Live & Loud</h1>
+      <h1 class="hero-title">Welcome</h1>
       <p>Discover the best live entertainment in Essex and beyond</p>
     </div>
 
