@@ -6,262 +6,140 @@
   <title>Live & Loud - Essex Live Entertainment</title>
   <style>
     :root {
-      --primary: #ffffff;   /* White text */
-      --background: #000000; /* Black background */
-      --border: #ffffff;     /* White borders */
+      --primary: #ffffff;
+      --background: #000000;
+      --border: #ffffff;
     }
 
     body {
       margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
       background: var(--background);
       color: var(--primary);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      overflow: hidden;
     }
 
-    /* Logo header */
-    .header {
-      text-align: center;
-      padding: 40px 20px 20px;
-      border-bottom: 1px solid var(--border);
+    /* Flash Page */
+    #flash {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: var(--background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
     }
 
-    .header img {
-      max-width: 500px; /* Bigger logo */
+    #flash img {
+      max-width: 500px;
       width: 100%;
       height: auto;
       filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
-      transition: all 0.4s ease;
+      animation: pulse 2s infinite;
     }
 
-    .header img:hover {
-      transform: scale(1.05);
-      filter: drop-shadow(0 0 25px white) drop-shadow(0 0 60px white);
+    @keyframes pulse {
+      0%, 100% { filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white); }
+      50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
     }
 
-    /* Main Content */
-    .main-container {
-      padding: 40px 20px;
-      max-width: 1200px;
-      margin: 0 auto;
+    /* Home Page */
+    #home {
+      display: none;
+      min-height: 100vh;
+      background: var(--background);
+      padding: 20px;
+      box-sizing: border-box;
     }
 
-    .hero-banner {
-      background: #000;
-      color: var(--primary);
-      border: 1px solid var(--border);
-      padding: 40px;
-      border-radius: 16px;
+    /* Small logo top left */
+    .small-logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+    }
+
+    .small-logo img {
+      max-width: 120px;
+      filter: drop-shadow(0 0 6px white) drop-shadow(0 0 15px white);
+      transition: 0.3s ease;
+    }
+
+    .small-logo img:hover {
+      filter: drop-shadow(0 0 10px white) drop-shadow(0 0 25px white);
+    }
+
+    /* Welcome Title */
+    .welcome {
       text-align: center;
-      margin-bottom: 32px;
-      transition: all 0.3s ease;
-    }
-
-    .hero-banner:hover {
-      box-shadow: 0 0 20px rgba(255,255,255,0.7);
-    }
-
-    .hero-title {
-      font-size: 40px;
+      margin-top: 100px;
+      font-size: 48px;
       font-weight: bold;
+      text-shadow: 0 0 8px white, 0 0 20px white;
     }
 
-    /* Filters */
-    .filters {
+    /* Tiles */
+    .tile-container {
       display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 32px;
       justify-content: center;
+      gap: 30px;
+      margin-top: 60px;
+      flex-wrap: wrap;
     }
 
-    .filters select {
+    .tile {
       background: #000;
+      border: 2px solid var(--border);
       color: var(--primary);
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      transition: all 0.3s ease;
-    }
-
-    .filters select:hover {
-      box-shadow: 0 0 12px rgba(255,255,255,0.6);
-    }
-
-    /* Events */
-    .event-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-    }
-
-    .event-card {
-      background: #000;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px;
-      transition: all 0.3s ease;
-      color: var(--primary);
-      opacity: 0;
-      transform: translateY(10px);
-      animation: fadeIn 0.5s ease forwards;
-    }
-
-    .event-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 0 20px rgba(255,255,255,0.7);
-    }
-
-    .event-title {
-      font-size: 18px;
+      font-size: 24px;
       font-weight: bold;
-      margin-bottom: 6px;
-      color: var(--primary);
+      padding: 40px 60px;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 6px white);
     }
 
-    .event-meta {
-      font-size: 14px;
-      color: var(--primary);
-    }
-
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .tile:hover {
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 0 25px rgba(255,255,255,0.9);
+      filter: drop-shadow(0 0 15px white);
     }
   </style>
 </head>
 <body>
 
-  <!-- Header with Centered Glowing Logo -->
-  <div class="header">
+  <!-- Flash Page -->
+  <div id="flash">
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
-  <!-- Main Content -->
-  <div class="main-container">
-    <div class="hero-banner">
-      <h1 class="hero-title">Welcome</h1>
-      <p>Discover the best live entertainment in Essex and beyond</p>
+  <!-- Home Page -->
+  <div id="home">
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
     </div>
 
-    <!-- Filters -->
-    <div class="filters">
-      <select id="filter-date">
-        <option value="all">Date</option>
-        <option value="Tonight">Tonight</option>
-        <option value="This Weekend">This Weekend</option>
-        <option value="This Month">This Month</option>
-      </select>
-      <select id="filter-venue">
-        <option value="all">Venue</option>
-        <option value="The Crown Inn">The Crown Inn</option>
-        <option value="George Hotel">George Hotel</option>
-        <option value="Red Lion">Red Lion</option>
-      </select>
-      <select id="filter-postcode">
-        <option value="all">Postcode</option>
-        <option value="CM1">CM1</option>
-        <option value="SS1">SS1</option>
-        <option value="CO1">CO1</option>
-      </select>
-      <select id="filter-region">
-        <option value="all">Region</option>
-        <option value="Essex">Essex</option>
-        <option value="London">London</option>
-      </select>
-      <select id="filter-style">
-        <option value="all">Entertainment Style</option>
-        <option value="Live Music">Live Music</option>
-        <option value="Comedy">Comedy</option>
-        <option value="Quiz Night">Quiz Night</option>
-        <option value="Karaoke">Karaoke</option>
-      </select>
-    </div>
+    <div class="welcome">Welcome</div>
 
-    <!-- Events -->
-    <div class="event-grid" id="event-list"></div>
+    <div class="tile-container">
+      <div class="tile">🎸 Music</div>
+      <div class="tile">🎭 Comedy</div>
+      <div class="tile">🎶 Entertainment</div>
+    </div>
   </div>
 
   <script>
-    const events = [
-      {
-        title: "The Essex Rockers",
-        date: "Tonight",
-        venue: "The Crown Inn",
-        postcode: "CM1",
-        region: "Essex",
-        style: "Live Music"
-      },
-      {
-        title: "Comedy Night Special",
-        date: "Tonight",
-        venue: "George Hotel",
-        postcode: "SS1",
-        region: "Essex",
-        style: "Comedy"
-      },
-      {
-        title: "Weekly Quiz Night",
-        date: "Tonight",
-        venue: "Red Lion",
-        postcode: "CO1",
-        region: "Essex",
-        style: "Quiz Night"
-      },
-      {
-        title: "Karaoke Fridays",
-        date: "This Weekend",
-        venue: "The Crown Inn",
-        postcode: "CM1",
-        region: "Essex",
-        style: "Karaoke"
-      }
-    ];
-
-    const eventList = document.getElementById("event-list");
-
-    function renderEvents() {
-      eventList.innerHTML = "";
-      const dateFilter = document.getElementById("filter-date").value;
-      const venueFilter = document.getElementById("filter-venue").value;
-      const postcodeFilter = document.getElementById("filter-postcode").value;
-      const regionFilter = document.getElementById("filter-region").value;
-      const styleFilter = document.getElementById("filter-style").value;
-
-      const filtered = events.filter(event => {
-        return (
-          (dateFilter === "all" || event.date === dateFilter) &&
-          (venueFilter === "all" || event.venue === venueFilter) &&
-          (postcodeFilter === "all" || event.postcode === postcodeFilter) &&
-          (regionFilter === "all" || event.region === regionFilter) &&
-          (styleFilter === "all" || event.style === styleFilter)
-        );
-      });
-
-      if (filtered.length === 0) {
-        eventList.innerHTML = "<p>No events match your filters.</p>";
-      } else {
-        filtered.forEach((event, index) => {
-          const card = document.createElement("div");
-          card.className = "event-card";
-          card.style.animationDelay = `${index * 0.1}s`; // staggered fade-in
-          card.innerHTML = `
-            <div class="event-title">${event.title}</div>
-            <div class="event-meta">📅 ${event.date} • 📍 ${event.venue} (${event.postcode}) • 🎭 ${event.style}</div>
-          `;
-          eventList.appendChild(card);
-        });
-      }
-    }
-
-    // Initial render
-    renderEvents();
-
-    // Add event listeners to filters
-    document.querySelectorAll(".filters select").forEach(select => {
-      select.addEventListener("change", renderEvents);
+    // Show flash for 3 seconds then go to home
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("flash").style.display = "none";
+        document.getElementById("home").style.display = "block";
+      }, 3000);
     });
   </script>
+
 </body>
 </html>
