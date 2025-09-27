@@ -46,6 +46,75 @@
       50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
     }
 
+    /* Disco Lights (Entertainment Hub) */
+    .entertainment-lights {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 200vmax;
+      height: 200vmax;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      z-index: 1;
+      background: conic-gradient(
+        from 0deg,
+        rgba(255,0,0,0.25),
+        rgba(0,255,0,0.25),
+        rgba(0,0,255,0.25),
+        rgba(255,255,0,0.25),
+        rgba(255,0,255,0.25),
+        rgba(0,255,255,0.25),
+        rgba(255,0,0,0.25)
+      );
+      animation: rotateLights 12s linear infinite;
+      filter: blur(100px);
+    }
+
+    @keyframes rotateLights {
+      0% { transform: translate(-50%, -50%) rotate(0deg); }
+      100% { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* Spotlights (Music Hub) */
+    .searchlight {
+      position: absolute;
+      width: 8vmax;
+      height: 140vmax;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 30%, transparent 70%);
+      mix-blend-mode: screen;
+      pointer-events: none;
+      z-index: 1;
+      filter: blur(1px);
+      opacity: 0.95;
+    }
+
+    .bl { bottom: 0; left: 0; transform-origin: bottom left; }
+    .br { bottom: 0; right: 0; transform-origin: bottom right; }
+    .tl { top: 0; left: 0; transform-origin: top left; }
+    .tr { top: 0; right: 0; transform-origin: top right; }
+
+    /* Comedy Spotlight */
+    .comedy-spotlight {
+      position: absolute;
+      top: -20%;
+      left: 50%;
+      width: 60vmax;
+      height: 120vmax;
+      background: radial-gradient(ellipse at top, rgba(255,255,200,0.8) 0%, rgba(255,255,200,0.4) 30%, transparent 70%);
+      transform: translateX(-50%) rotate(0deg);
+      transform-origin: top center;
+      filter: blur(2px);
+      animation: comedyWiggle 5s ease-in-out infinite alternate;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    @keyframes comedyWiggle {
+      0%   { transform: translateX(-50%) rotate(-3deg); }
+      50%  { transform: translateX(-50%) rotate(3deg); }
+      100% { transform: translateX(-50%) rotate(-2deg); }
+    }
+
     /* Screens */
     .screen {
       display: none;
@@ -135,6 +204,56 @@
       box-shadow: 0 0 20px rgba(255,255,255,0.9);
       filter: drop-shadow(0 0 12px white);
     }
+
+    /* Hub header */
+    .hub-header {
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 80px;
+      text-shadow: 0 0 6px white, 0 0 12px white;
+      z-index: 10;
+      position: relative;
+    }
+
+    /* Back button */
+    .back-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 20px;
+      border: 2px solid white;
+      background: transparent;
+      color: white;
+      font-weight: bold;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 8px;
+      z-index: 15;
+      transition: all 0.3s ease;
+    }
+
+    .back-btn:hover {
+      background: white;
+      color: black;
+    }
+
+    /* Search tiles */
+    .search-tiles {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      margin-top: 200px;
+      position: relative;
+      z-index: 10;
+    }
+
+    .search-tiles .tile {
+      max-width: 250px;
+      font-size: 16px;
+      padding: 15px 30px;
+    }
   </style>
 </head>
 <body>
@@ -156,19 +275,94 @@
     </div>
   </div>
 
-  <!-- Example Other Screens -->
-  <div id="hub-music" class="screen"><h2>Music Hub</h2></div>
-  <div id="hub-comedy" class="screen"><h2>Comedy Hub</h2></div>
-  <div id="hub-entertainment" class="screen"><h2>Entertainment Hub</h2></div>
+  <!-- Music Hub -->
+  <div id="hub-music" class="screen">
+    <div id="spotlights"></div>
+    <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+    <div class="hub-header">Search By</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Band</div>
+      <div class="tile">Date</div>
+    </div>
+  </div>
+
+  <!-- Comedy Hub -->
+  <div id="hub-comedy" class="screen">
+    <div class="comedy-spotlight"></div>
+    <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+    <div class="hub-header">Comedy Shows</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Performer</div>
+      <div class="tile">Date</div>
+    </div>
+  </div>
+
+  <!-- Entertainment Hub -->
+  <div id="hub-entertainment" class="screen">
+    <div class="entertainment-lights"></div>
+    <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+    <div class="hub-header">Entertainment Events</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Show</div>
+      <div class="tile">Date</div>
+    </div>
+  </div>
 
   <script>
+    // Create 6 beams from each corner with random sweeps inward
+    function createSpotlights() {
+      const container = document.getElementById("spotlights");
+      container.innerHTML = "";
+      const corners = [
+        {class: "bl", x: "0%", y: "100%", origin: "bottom left"},
+        {class: "br", x: "100%", y: "100%", origin: "bottom right"},
+        {class: "tl", x: "0%", y: "0%", origin: "top left"},
+        {class: "tr", x: "100%", y: "0%", origin: "top right"}
+      ];
+
+      corners.forEach((corner, cIndex) => {
+        for (let i = 0; i < 6; i++) {
+          const light = document.createElement("div");
+          light.classList.add("searchlight", corner.class);
+          light.style.left = corner.x;
+          light.style.top = corner.y;
+          light.style.transformOrigin = corner.origin;
+
+          const angle1 = Math.floor(Math.random() * 120) - 60;
+          const angle2 = Math.floor(Math.random() * 120) - 60;
+
+          const duration = Math.floor(Math.random() * 3) + 2; // 2–5s
+          const animName = `sweep${cIndex}-${i}`;
+          light.style.animation = `${animName} ${duration}s ease-in-out infinite alternate`;
+
+          const styleSheet = document.styleSheets[0];
+          styleSheet.insertRule(`
+            @keyframes ${animName} {
+              from { transform: rotate(${angle1}deg); }
+              to { transform: rotate(${angle2}deg); }
+            }
+          `, styleSheet.cssRules.length);
+
+          container.appendChild(light);
+        }
+      });
+    }
+
     // Flash screen transition (3 seconds)
     window.addEventListener("load", () => {
       setTimeout(() => {
         document.getElementById("flash").style.display = "none";
         document.getElementById("home").classList.add("active");
 
-        // Typewriter tagline
         const tagline = "Discover the best live entertainment\nin Essex and beyond";
         let i = 0;
         const speed = 50;
@@ -191,7 +385,9 @@
     // Navigation
     function goToHub(type) {
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.getElementById("hub-" + type).classList.add("active");
+      const hub = document.getElementById("hub-" + type);
+      hub.classList.add("active");
+      if (type === "music") createSpotlights();
     }
 
     function goHome() {
