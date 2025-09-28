@@ -1,20 +1,92 @@
 [
   {
+    "date": "2025-09-27",
+    "county": "Essex",
+    "city": "Chelmsford",
+    "town": "Felsted",
+    "venue": "The Royal British Legion, Felsted",
+    "band": "33RPM",
+    "tickets": false
+  },
+  {
+    "date": "2025-09-27",
+    "county": "Essex",
+    "city": "Basildon",
+    "town": "Basildon",
+    "venue": "The Castle Mayne",
+    "band": "East of Java",
+    "tickets": false
+  },
+  {
+    "date": "2025-09-28",
     "county": "Essex",
     "city": "Southend Council",
     "town": "Southend",
     "venue": "The Papillon",
     "band": "Fishing For Robots",
-    "date": "2025-09-28",
     "tickets": false
   },
   {
+    "date": "2025-09-29",
     "county": "Essex",
     "city": "Southend Council",
     "town": "Southend",
     "venue": "Chinnerys",
     "band": "Nikki and the Switchblades",
-    "date": "2025-09-29",
+    "tickets": true
+  },
+  {
+    "date": "2025-10-03",
+    "county": "Essex",
+    "city": "Southend Council",
+    "town": "Southend",
+    "venue": "The Papillon",
+    "band": "The Tumbling Dice",
+    "tickets": false
+  },
+  {
+    "date": "2025-10-04",
+    "county": "Essex",
+    "city": "Chelmsford",
+    "town": "Chelmsford",
+    "venue": "The United Brethren",
+    "band": "8 Bars of Piano",
+    "tickets": false
+  },
+  {
+    "date": "2025-10-04",
+    "county": "Essex",
+    "city": "Basildon",
+    "town": "Basildon",
+    "venue": "The Castle Mayne",
+    "band": "Hedgehog",
+    "tickets": false
+  },
+  {
+    "date": "2025-10-05",
+    "county": "Essex",
+    "city": "Southend Council",
+    "town": "Southend",
+    "venue": "The Papillon",
+    "band": "The Kopy Katz",
+    "tickets": false
+  },
+  {
+    "date": "2025-11-01",
+    "county": "Essex",
+    "city": "Southend Council",
+    "town": "Westcliff-on-Sea",
+    "venue": "The Trading Rooms",
+    "band": "Forever Mac",
+    "tickets": true
+  },
+  {
+    "date": "2025-12-31",
+    "county": "Essex",
+    "city": "Southend Council",
+    "town": "Southend",
+    "venue": "Cow and Telescope",
+    "band": "Mr Spankey and the Hipthrusters",
     "tickets": true
   }
 ]
