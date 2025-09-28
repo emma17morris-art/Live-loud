@@ -79,7 +79,7 @@
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Search By</div>
     <div class="search-tiles">
-      <select id="filter-county" onchange="updateTownDropdown(); filterGigs()"><option value="">All Counties</option></select>
+      <select id="filter-council" onchange="updateTownDropdown(); filterGigs()"><option value="">All Councils</option></select>
       <select id="filter-town" onchange="updateVenueDropdown(); filterGigs()"><option value="">All Towns</option></select>
       <select id="filter-venue" onchange="filterGigs()"><option value="">All Venues</option></select>
       <select id="filter-band" onchange="filterGigs()"><option value="">All Bands</option></select>
@@ -87,110 +87,111 @@
       <button onclick="resetFilters()" class="reset-btn">Reset Filters</button>
     </div>
     <div class="gig-listings" id="gig-listings">
-            <!-- Chinnerys (Southend) Gigs -->
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>FM (Brotherhood Tour)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Utah Saints / Bentley Rhythm Ace</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+           <!-- Chinnerys (Southend) Gigs -->
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>FM (Brotherhood Tour)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Amy Winehouse Vs Adele Tribute Night</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Utah Saints / Bentley Rhythm Ace</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 10 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ultimate Coldplay</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Amy Winehouse Vs Adele Tribute Night</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 11 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Fell Out Boy x The Black Charade x Dookie</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Fri 10 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ultimate Coldplay</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 17 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Special Kinda Madness</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 11 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Fell Out Boy x The Black Charade x Dookie</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 18 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Chris Stapleton Experience (Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Fri 17 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Special Kinda Madness</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Thu 23 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>L1nkn P4rk (Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 18 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Chris Stapleton Experience (Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Thu 30 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Chop Suey + SlipNOT + The Violent Inzident</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Thu 23 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>L1nkn P4rk (Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sun 02 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Anna Rey</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Thu 30 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Chop Suey + SlipNOT + The Violent Inzident</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Thu 06 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ferocious Dog</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sun 02 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Anna Rey</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 08 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ion Maiden (Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Thu 06 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ferocious Dog</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 15 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Ed Sheeran Experience</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 08 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ion Maiden (Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Thu 20 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Bywater Call / Dan Patlansky</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 15 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Ed Sheeran Experience</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 22 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>OKNotOK – Tribute To Radiohead</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Thu 20 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Bywater Call / Dan Patlansky</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Tue 25 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Warmduscher</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 22 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>OKNotOK – Tribute To Radiohead</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Thu 27 Nov 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Jared James Nichols</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Tue 25 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Warmduscher</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Wed 03 Dec 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Commoners</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Thu 27 Nov 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Jared James Nichols</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 05 Dec 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Sherlocks</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Wed 03 Dec 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Commoners</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Tue 09 Dec 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Wildhearts</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Fri 05 Dec 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Sherlocks</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 12 Dec 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Jilted Generation (Prodigy Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Tue 09 Dec 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>The Wildhearts</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 13 Dec 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>British Lion</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Fri 12 Dec 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Jilted Generation (Prodigy Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Wed 17 Dec 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Bad Manners (50th Anniversary Tour)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 13 Dec 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>British Lion</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 09 Jan 2026</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Absolute Bowie</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Wed 17 Dec 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Bad Manners (50th Anniversary Tour)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Sat 17 Jan 2026</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Sambroso All Stars – The Buena Vista Social Club</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Fri 09 Jan 2026</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Absolute Bowie</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Wed 18 Feb 2026</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ash</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Sat 17 Jan 2026</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Sambroso All Stars – The Buena Vista Social Club</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 27 Feb 2026</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Moving Pictures (Rush Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Wed 18 Feb 2026</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Ash</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
 
-      <div class="gig"><div class="gig-date">Fri 10 Apr 2026</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>One Night In Nashville ft. Maria Jordan</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+      <div class="gig"><div class="gig-date">Fri 27 Feb 2026</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>Moving Pictures (Rush Tribute)</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div>
+
+      <div class="gig"><div class="gig-date">Fri 10 Apr 2026</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Chinnerys</p><h3>One Night In Nashville ft. Maria Jordan</h3><span class="needs-ticket">🎟 Needs Tickets</span></div></div> 
 
             <!-- Saturday 27 September -->
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Felsted</p><p class="venue">The Royal British Legion</p><h3>33RPM</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Rainham</p><p class="venue">Rainham Working Mens Club</p><h3>Adrenalin</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Harlow</p><p class="venue">The Poplar Kitten</p><h3>Afterlife Rock Covers Band UK</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Wickford</p><p class="venue">Wickford Railway Social Club</p><h3>Beggar</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Gidea Park</p><p class="venue">The Archers</p><h3>Blue Mantis</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Suffolk</p><p class="town">Bury St Edmunds</p><p class="venue">The Grapes</p><h3>Cherry Bomb</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Colchester</p><p class="venue">The Bricklayers Arms</p><h3>Empty Threats</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Hitchin</p><p class="venue">The Anchor Inn</p><h3>Fishing For Robots</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Bishops Stortford</p><p class="venue">The Rose & Crown</p><h3>Goat Patrol</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Cow and Telescope</p><h3>Grounds for Divorce</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hullbridge</p><p class="venue">The Smugglers Den</p><h3>Handle With Care</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Basildon</p><p class="venue">Fryerns Social Club</p><h3>Headfirst</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><p class="venue">The Crown Inn</p><h3>Kinetic</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Braintree</p><p class="venue">The Boars Head</p><h3>Mr Spankey and the Hipthrusters</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><p class="venue">The Admiral Vernon</p><h3>Naked Apes</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Colchester</p><p class="venue">The Bull</p><h3>Primal Replay</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Wickford</p><p class="venue">Nevendon Centre</p><h3>Red Velvet</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Leigh-on-Sea</p><p class="venue">Sarah Moore</p><h3>Redonizm</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Suffolk</p><p class="town">Sudbury</p><p class="venue">The Prince of Wales</p><h3>Rekovered</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Uttlesford</p><p class="town">Felsted</p><p class="venue">The Royal British Legion</p><h3>33RPM</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Havering</p><p class="town">Rainham</p><p class="venue">Rainham Working Mens Club</p><h3>Adrenalin</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Harlow</p><p class="town">Harlow</p><p class="venue">The Poplar Kitten</p><h3>Afterlife Rock Covers Band UK</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Basildon</p><p class="town">Wickford</p><p class="venue">Wickford Railway Social Club</p><h3>Beggar</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Havering</p><p class="town">Gidea Park</p><p class="venue">The Archers</p><h3>Blue Mantis</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">West Suffolk</p><p class="town">Bury St Edmunds</p><p class="venue">The Grapes</p><h3>Cherry Bomb</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Colchester</p><p class="town">Colchester</p><p class="venue">The Bricklayers Arms</p><h3>Empty Threats</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">North Hertfordshire</p><p class="town">Hitchin</p><p class="venue">The Anchor Inn</p><h3>Fishing For Robots</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">East Herts</p><p class="town">Bishops Stortford</p><p class="venue">The Rose & Crown</p><h3>Goat Patrol</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Cow and Telescope</p><h3>Grounds for Divorce</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Rochford</p><p class="town">Hullbridge</p><p class="venue">The Smugglers Den</p><h3>Handle With Care</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Basildon</p><p class="town">Basildon</p><p class="venue">Fryerns Social Club</p><h3>Headfirst</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Havering</p><p class="town">Hornchurch</p><p class="venue">The Crown Inn</p><h3>Kinetic</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Braintree</p><p class="town">Braintree</p><p class="venue">The Boars Head</p><h3>Mr Spankey and the Hipthrusters</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Barking & Dagenham</p><p class="town">Dagenham</p><p class="venue">The Admiral Vernon</p><h3>Naked Apes</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Colchester</p><p class="town">Colchester</p><p class="venue">The Bull</p><h3>Primal Replay</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Basildon</p><p class="town">Wickford</p><p class="venue">Nevendon Centre</p><h3>Red Velvet</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Leigh-on-Sea</p><p class="venue">Sarah Moore</p><h3>Redonizm</h3></div></div>
 
       <!-- Sunday 28 September -->
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Cambridgeshire</p><p class="town">St Ives</p><p class="venue">Nelsons Head</p><h3>Bad Monkey Driver</h3></div></div>
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">The Papillon</p><h3>Fishing For Robots</h3></div></div>
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Sawbridgeworth</p><p class="venue">The Old Bell</p><h3>Repertoire Dogs</h3></div></div>
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><p class="venue">The Crown Inn</p><h3>The Soul Corporation</h3></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="council">Cambridgeshire</p><p class="town">St Ives</p><p class="venue">Nelsons Head</p><h3>Bad Monkey Driver</h3></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">The Papillon</p><h3>Fishing For Robots</h3></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="council">East Herts</p><p class="town">Sawbridgeworth</p><p class="venue">The Old Bell</p><h3>Repertoire Dogs</h3></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="council">Havering</p><p class="town">Hornchurch</p><p class="venue">The Crown Inn</p><h3>The Soul Corporation</h3></div></div>
 
       <!-- Wednesday 01 October -->
-      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><p class="venue">The Admiral Vernon</p><h3>Jam Night at The Vernon</h3></div></div>
-      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Harlow</p><p class="venue">Starr Sports</p><h3>Redonizm</h3></div></div>
-      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Harlow</p><p class="venue">The Herald Electro Acoustic Open Mic</p><h3>The Great Choon Robbery</h3></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="council">Barking & Dagenham</p><p class="town">Dagenham</p><p class="venue">The Admiral Vernon</p><h3>Jam Night at The Vernon</h3></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="council">Harlow</p><p class="town">Harlow</p><p class="venue">Starr Sports</p><h3>Redonizm</h3></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="council">Harlow</p><p class="town">Harlow</p><p class="venue">The Herald</p><h3>The Great Choon Robbery</h3></div></div>
 
       <!-- Thursday 02 October -->
-      <div class="gig"><div class="gig-date">Thu 02 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><p class="venue">The Crown Inn</p><h3>Jam Night at The Crown</h3></div></div>
+      <div class="gig"><div class="gig-date">Thu 02 Oct 2025</div><div class="gig-info"><p class="council">Havering</p><p class="town">Hornchurch</p><p class="venue">The Crown Inn</p><h3>Jam Night at The Crown</h3></div></div>
 
       <!-- Friday 03 October -->
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Thaxted</p><p class="venue">The Star</p><h3>33RPM</h3></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Cow and Telescope</p><h3>Beggar</h3></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Hertford</p><p class="venue">The Silver Fox</p><h3>Dr Realgood</h3></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">The Cricketers Inn</p><h3>Expose</h3></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="council">Uttlesford</p><p class="town">Thaxted</p><p class="venue">The Star</p><h3>33RPM</h3></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Cow and Telescope</p><h3>Beggar</h3></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="council">East Herts</p><p class="town">Hertford</p><p class="venue">The Silver Fox</p><h3>Dr Realgood</h3></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">The Cricketers Inn</p><h3>Expose</h3></div></div>
+
             <!-- Saturday 04 October -->
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Chelmsford</p><p class="venue">The United Brethren</p><h3>8 Bars of Piano</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><p class="venue">Cow and Telescope</p><h3>Afterlife Rock Covers Band UK</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Berkshire</p><p class="town">Windsor</p><p class="venue">The Acre Club</p><h3>AOB</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><p class="venue">The Matapan</p><h3>Blue Mantis</h3></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">South Ockendon</p><p class="venue">The Royal Oak</p><h3>Born Wild</h3></div></div>
-      <!-- (continue adding the rest of Sat 04 Oct non-Chinnerys gigs here, in County → Town → Venue format) -->
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="council">Chelmsford</p><p class="town">Chelmsford</p><p class="venue">The United Brethren</p><h3>8 Bars of Piano</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="council">Southend-on-Sea</p><p class="town">Southend</p><p class="venue">Cow and Telescope</p><h3>Afterlife Rock Covers Band UK</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="council">Windsor & Maidenhead</p><p class="town">Windsor</p><p class="venue">The Acre Club</p><h3>AOB</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="council">Barking & Dagenham</p><p class="town">Dagenham</p><p class="venue">The Matapan</p><h3>Blue Mantis</h3></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="council">Thurrock</p><p class="town">South Ockendon</p><p class="venue">The Royal Oak</p><h3>Born Wild</h3></div></div>
+      <!-- (continue adding the rest of 04 Oct gigs in the same format if needed) -->
 
     </div> <!-- end gig-listings -->
   </div> <!-- end hub-music -->
@@ -202,7 +203,7 @@
     <div class="hub-header">Comedy Spotlight</div>
     <div class="comedy-spotlight"></div>
     <div class="search-tiles">
-      <div class="tile">County</div>
+      <div class="tile">Council</div>
       <div class="tile">Town</div>
       <div class="tile">Performer</div>
       <div class="tile">Date</div>
@@ -216,7 +217,7 @@
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Entertainment Lights</div>
     <div class="search-tiles">
-      <div class="tile">County</div>
+      <div class="tile">Council</div>
       <div class="tile">Town</div>
       <div class="tile">Show</div>
       <div class="tile">Date</div>
@@ -282,22 +283,43 @@
       });
     }
 
+    // Council mapping
+    const councilMap = {
+      "Southend-on-Sea": ["Southend","Leigh-on-Sea","Westcliff","Shoebury"],
+      "Basildon": ["Basildon","Pitsea","Vange","Laindon","Wickford","Billericay"],
+      "Chelmsford": ["Chelmsford","Writtle"],
+      "Colchester": ["Colchester","Wivenhoe"],
+      "Thurrock": ["Grays","Tilbury","Stanford-le-Hope","South Ockendon"],
+      "Castle Point": ["Benfleet","Canvey Island","Hadleigh"],
+      "Rochford": ["Rochford","Hockley","Rayleigh","Hullbridge"],
+      "Braintree": ["Braintree","Coggeshall","Kelvedon"],
+      "Harlow": ["Harlow"],
+      "Havering": ["Rainham","Hornchurch","Gidea Park"],
+      "Barking & Dagenham": ["Dagenham","Ilford"],
+      "West Suffolk": ["Bury St Edmunds"],
+      "East Herts": ["Sawbridgeworth","Bishops Stortford","Ware"],
+      "Uttlesford": ["Felsted","Thaxted"],
+      "Cambridgeshire": ["St Ives"],
+      "Windsor & Maidenhead": ["Windsor"]
+    };
+
     // Filtering
     function filterGigs() {
-      const county=document.getElementById("filter-county").value.toLowerCase();
+      const council=document.getElementById("filter-council").value.toLowerCase();
       const town=document.getElementById("filter-town").value.toLowerCase();
       const venue=document.getElementById("filter-venue").value.toLowerCase();
       const band=document.getElementById("filter-band").value.toLowerCase();
       const date=document.getElementById("filter-date").value.toLowerCase();
 
       document.querySelectorAll(".gig").forEach(gig=>{
-        const gigCounty=(gig.querySelector(".county")?.textContent||"").toLowerCase();
+        const gigCouncil=(gig.querySelector(".council")?.textContent||"").toLowerCase();
         const gigTown=(gig.querySelector(".town")?.textContent||"").toLowerCase();
         const gigVenue=(gig.querySelector(".venue")?.textContent||"").toLowerCase();
         const gigBand=(gig.querySelector("h3")?.textContent||"").toLowerCase();
         const gigDate=(gig.querySelector(".gig-date")?.textContent||"").toLowerCase();
+
         let visible=true;
-        if(county && gigCounty!==county) visible=false;
+        if(council && gigCouncil!==council) visible=false;
         if(town && gigTown!==town) visible=false;
         if(venue && gigVenue!==venue) visible=false;
         if(band && !gigBand.includes(band)) visible=false;
@@ -308,81 +330,65 @@
 
     // Reset
     function resetFilters() {
-      ["filter-county","filter-town","filter-venue","filter-band","filter-date"].forEach(id=>document.getElementById(id).value="");
+      ["filter-council","filter-town","filter-venue","filter-band","filter-date"].forEach(id=>document.getElementById(id).value="");
       filterGigs();
-    }
-
-    // Auto-style cancelled gigs
-    function styleCancelledGigs() {
-      document.querySelectorAll(".gig").forEach(gig=>{
-        const info=gig.querySelector(".gig-info");
-        if(info && info.textContent.toLowerCase().includes("cancelled")){
-          gig.style.border="2px solid red";
-          gig.style.opacity="0.7";
-          info.style.color="red";
-          info.style.fontWeight="bold";
-        }
-      });
     }
 
     // Populate filters
     window.addEventListener("DOMContentLoaded",()=>{
-      const counties=new Set(), townsByCounty={}, venuesByTown={}, bands=new Set(), dates=new Set();
+      const councils=new Set(), venuesByTown={}, bands=new Set(), dates=new Set();
       document.querySelectorAll(".gig").forEach(gig=>{
-        const county=gig.querySelector(".county")?.textContent;
+        const council=gig.querySelector(".council")?.textContent;
         const town=gig.querySelector(".town")?.textContent;
         const venue=gig.querySelector(".venue")?.textContent;
         const band=gig.querySelector("h3")?.textContent;
         const date=gig.querySelector(".gig-date")?.textContent;
 
-        if(county){
-          counties.add(county);
-          if(!townsByCounty[county]) townsByCounty[county]=new Set();
-          if(town) townsByCounty[county].add(town);
-          if(!venuesByTown[county]) venuesByTown[county]={};
-          if(town){ if(!venuesByTown[county][town]) venuesByTown[county][town]=new Set(); if(venue) venuesByTown[county][town].add(venue); }
-        }
+        if(council) councils.add(council);
         if(band) bands.add(band);
         if(date) dates.add(date);
+
+        if(town){
+          if(!venuesByTown[town]) venuesByTown[town]=new Set();
+          if(venue) venuesByTown[town].add(venue);
+        }
       });
 
-      // Populate county
-      const countySel=document.getElementById("filter-county");
-      Array.from(counties).sort().forEach(c=>{let opt=document.createElement("option");opt.value=c;opt.textContent=c;countySel.appendChild(opt);});
+      // Populate council dropdown
+      const councilSel=document.getElementById("filter-council");
+      Object.keys(councilMap).sort().forEach(c=>{
+        const opt=document.createElement("option");
+        opt.value=c; opt.textContent=c; councilSel.appendChild(opt);
+      });
 
       // Store globally
-      window._townsByCounty=townsByCounty;
       window._venuesByTown=venuesByTown;
 
       const populate=(id,set)=>{const sel=document.getElementById(id); Array.from(set).sort().forEach(val=>{if(val){const opt=document.createElement("option");opt.value=val;opt.textContent=val;sel.appendChild(opt);}});};
       populate("filter-band",bands);
       populate("filter-date",dates);
-
-      styleCancelledGigs();
     });
 
-    // Update towns when county changes
+    // Update towns when council changes
     function updateTownDropdown() {
-      const county=document.getElementById("filter-county").value;
+      const council=document.getElementById("filter-council").value;
       const townSelect=document.getElementById("filter-town");
       townSelect.innerHTML="<option value=''>All Towns</option>";
       document.getElementById("filter-venue").innerHTML="<option value=''>All Venues</option>";
-      if(county && window._townsByCounty[county]){
-        Array.from(window._townsByCounty[county]).sort().forEach(t=>{
-          const opt=document.createElement("option");
-          opt.value=t; opt.textContent=t; townSelect.appendChild(opt);
+      if(council && councilMap[council]){
+        councilMap[council].forEach(t=>{
+          const opt=document.createElement("option");opt.value=t;opt.textContent=t;townSelect.appendChild(opt);
         });
       }
     }
 
     // Update venues when town changes
     function updateVenueDropdown() {
-      const county=document.getElementById("filter-county").value;
       const town=document.getElementById("filter-town").value;
       const venueSelect=document.getElementById("filter-venue");
       venueSelect.innerHTML="<option value=''>All Venues</option>";
-      if(county && town && window._venuesByTown[county] && window._venuesByTown[county][town]){
-        Array.from(window._venuesByTown[county][town]).sort().forEach(v=>{
+      if(town && window._venuesByTown[town]){
+        Array.from(window._venuesByTown[town]).sort().forEach(v=>{
           const opt=document.createElement("option");opt.value=v;opt.textContent=v;venueSelect.appendChild(opt);
         });
       }
@@ -393,7 +399,7 @@
       const title=document.getElementById("request-title").value.trim();
       const message=document.getElementById("request-message").value.trim();
       if(!title||!message){alert("Please enter both a title and a message.");return;}
-      const email="YOUREMAIL@domain.com"; // <-- replace with your address
+      const email="YOUREMAIL@domain.com"; // replace with your email
       const subject=encodeURIComponent(title); const body=encodeURIComponent(message);
       window.location.href=`mailto:${email}?subject=${subject}&body=${body}`;
     }
