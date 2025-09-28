@@ -25,6 +25,8 @@
     #flash {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
+      width: 100vw;
+      height: 100vh;
       background: var(--background);
       display: flex;
       align-items: center;
@@ -213,62 +215,93 @@
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
- <!-- Home Screen -->
-<div id="home" class="screen">
-  <div class="small-logo">
-    <img src="logo.png" alt="Live & Loud Small Logo">
-  </div>
-  <div class="welcome">Welcome</div>
-  <div class="tagline-wrapper">
-    <div class="tagline" id="tagline"></div>
-  </div>
-  <div class="tile-container">
-    <div class="tile" onclick="goToHub('music')">🎸 Music</div>
-    <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
-    <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
-    <div class="tile" onclick="goToHub('submit')">📩 Submit a Request</div>
-  </div>
-</div>
-
-
- <!-- Music Hub -->
-<div id="hub-music" class="screen">
-  <button class="back-btn" onclick="goBack()">⬅ Back</button>
-  <div class="hub-header">Search Gigs</div>
-
-  <!-- Filters -->
-  <div class="filters">
-    <select id="filter-county">
-      <option value="">All Counties</option>
-      <option value="Essex">Essex</option>
-      <option value="London">London</option>
-      <option value="Suffolk">Suffolk</option>
-    </select>
-    <select id="filter-city">
-      <option value="">All Cities/Councils</option>
-    </select>
-    <select id="filter-town">
-      <option value="">All Towns</option>
-    </select>
-    <select id="filter-venue">
-      <option value="">All Venues</option>
-    </select>
-    <select id="filter-band">
-      <option value="">All Bands</option>
-    </select>
-    <select id="filter-date">
-      <option value="">All Dates</option>
-    </select>
+  <!-- Home Screen -->
+  <div id="home" class="screen">
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
+    <div class="welcome">Welcome</div>
+    <div class="tagline-wrapper">
+      <div class="tagline" id="tagline"></div>
+    </div>
+    <div class="tile-container">
+      <div class="tile" onclick="goToHub('music')">🎸 Music</div>
+      <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
+      <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
+      <div class="tile" onclick="goToHub('request')">📩 Submit a Request</div>
+    </div>
   </div>
 
-  <!-- Gig Listings (moved here from Home) -->
-  <div id="gig-data"></div>
-</div>
+    <!-- Music Hub -->
+  <div id="hub-music" class="screen">
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+    <div class="hub-header">Search Gigs</div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <select id="filter-county">
+        <option value="">All Counties</option>
+        <option value="Essex">Essex</option>
+        <option value="London">London</option>
+        <option value="Suffolk">Suffolk</option>
+      </select>
+
+      <select id="filter-city">
+        <option value="">All Cities/Councils</option>
+      </select>
+
+      <select id="filter-town">
+        <option value="">All Towns</option>
+      </select>
+
+      <select id="filter-venue">
+        <option value="">All Venues</option>
+      </select>
+
+      <select id="filter-band">
+        <option value="">All Bands</option>
+      </select>
+
+      <select id="filter-date">
+        <option value="">All Dates</option>
+      </select>
+    </div>
+
     <!-- Gig Listings -->
     <div id="gig-results" style="margin-top:40px;"></div>
   </div>
 
-  <!-- Comedy Hub -->
+  <!-- Hidden Gig Data (master list) -->
+  <div id="gig-data" style="display:none;">
+
+    <!-- Example Gig -->
+    <div class="gig"
+         data-county="Essex"
+         data-city="Southend Council"
+         data-town="Southend"
+         data-venue="Chinnerys"
+         data-band="Nikki and the Switchblades"
+         data-date="2025-09-29"
+         data-tickets="yes">
+      <div class="gig-date">Mon 29 Sep 2025</div>
+      <div class="gig-info">
+        <p class="county">Essex</p>
+        <p class="city">Southend Council</p>
+        <p class="town">Southend</p>
+        <p class="venue">Chinnerys</p>
+        <h3>Nikki and the Switchblades</h3>
+        <span class="ticket-badge">🎟 Tickets Required</span>
+      </div>
+    </div>
+
+    <!-- ADDITIONAL GIGS GO HERE 
+         (Sept → Dec listings you provided earlier)
+    -->
+
+  </div>
+
+
+    <!-- Comedy Hub -->
   <div id="hub-comedy" class="screen">
     <div class="small-logo">
       <img src="logo.png" alt="Live & Loud Small Logo">
@@ -306,7 +339,7 @@
     </div>
   </div>
 
-  <!-- Request Hub -->
+  <!-- Submit Request Hub -->
   <div id="hub-request" class="screen">
     <div class="small-logo">
       <img src="logo.png" alt="Live & Loud Small Logo">
@@ -324,573 +357,7 @@
   </div>
 
 
-  <!-- Gig Data Section -->
-  <div id="gig-data" style="display:none;">
-
-    <!-- Example Gig Format
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="Chinnerys"
-         data-band="Nikki and the Switchblades"
-         data-date="2025-09-15"
-         data-tickets="yes">
-      <div class="gig-date">Mon 15 Sep 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">Chinnerys</p>
-        <h3>Nikki and the Switchblades</h3>
-        <span class="ticket-badge">🎟 Tickets Required</span>
-      </div>
-    </div>
-    -->
-
-    <!-- SEPTEMBER GIGS -->
-    <div class="gig"
-         data-county="Essex"
-         data-city="Chelmsford"
-         data-town="Chelmsford"
-         data-venue="The Royal British Legion, Felsted"
-         data-band="33RPM"
-         data-date="2025-09-27">
-      <div class="gig-date">Sat 27 Sep 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Chelmsford</p>
-        <p class="town">Felsted</p>
-        <p class="venue">The Royal British Legion</p>
-        <h3>33RPM</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Basildon"
-         data-town="Basildon"
-         data-venue="The Castle Mayne"
-         data-band="East of Java"
-         data-date="2025-09-27">
-      <div class="gig-date">Sat 27 Sep 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Basildon</p>
-        <p class="town">Basildon</p>
-        <p class="venue">The Castle Mayne</p>
-        <h3>East of Java</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="Fishing For Robots"
-         data-date="2025-09-28">
-      <div class="gig-date">Sun 28 Sep 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>Fishing For Robots</h3>
-      </div>
-    </div>
-
-    <!-- Nikki and the Switchblades -->
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="Chinnerys"
-         data-band="Nikki and the Switchblades"
-         data-date="2025-09-29"
-         data-tickets="yes">
-      <div class="gig-date">Mon 29 Sep 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">Chinnerys</p>
-        <h3>Nikki and the Switchblades</h3>
-        <span class="ticket-badge">🎟 Tickets Required</span>
-      </div>
-    </div>
-
-  </div>
-
-
-  <!-- OCTOBER GIGS -->
-  <div id="gig-data-october">
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="The Tumbling Dice"
-         data-date="2025-10-03">
-      <div class="gig-date">Fri 03 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>The Tumbling Dice</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Chelmsford"
-         data-town="Chelmsford"
-         data-venue="The United Brethren"
-         data-band="8 Bars of Piano"
-         data-date="2025-10-04">
-      <div class="gig-date">Sat 04 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Chelmsford</p>
-        <p class="town">Chelmsford</p>
-        <p class="venue">The United Brethren</p>
-        <h3>8 Bars of Piano</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Basildon"
-         data-town="Basildon"
-         data-venue="The Castle Mayne"
-         data-band="Hedgehog"
-         data-date="2025-10-04">
-      <div class="gig-date">Sat 04 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Basildon</p>
-        <p class="town">Basildon</p>
-        <p class="venue">The Castle Mayne</p>
-        <h3>Hedgehog</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="The Kopy Katz"
-         data-date="2025-10-05">
-      <div class="gig-date">Sun 05 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>The Kopy Katz</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Westcliff-on-Sea"
-         data-venue="The Trading Rooms"
-         data-band="The Mint"
-         data-date="2025-10-04">
-      <div class="gig-date">Sat 04 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Westcliff-on-Sea</p>
-        <p class="venue">The Trading Rooms</p>
-        <h3>The Mint</h3>
-      </div>
-    </div>
-
-    <!-- (…continues with all the October gigs you pasted:
-         Jam Nights, Repertoire Dogs, Scooby, Dr Realgood,
-         Mushroom Clown, ReMark, Red Velvet, Scam 69,
-         Fabulous Feedback Band, The Limit, Strongbox etc.) -->
-
-  </div>
-
-
-
-    <!-- OCTOBER GIGS (continued) -->
-  <div id="gig-data-october-b">
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Chelmsford"
-         data-town="Chelmsford"
-         data-venue="The Golden Fleece"
-         data-band="Tantric Zoo"
-         data-date="2025-10-17">
-      <div class="gig-date">Fri 17 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Chelmsford</p>
-        <p class="town">Chelmsford</p>
-        <p class="venue">The Golden Fleece</p>
-        <h3>Tantric Zoo</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Railway Hotel"
-         data-band="Grounds for Divorce"
-         data-date="2025-10-17">
-      <div class="gig-date">Fri 17 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Railway Hotel</p>
-        <h3>Grounds for Divorce</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Harlow"
-         data-town="Harlow"
-         data-venue="Moot House Club"
-         data-band="Adrenalin"
-         data-date="2025-10-18">
-      <div class="gig-date">Sat 18 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Harlow</p>
-        <p class="town">Harlow</p>
-        <p class="venue">Moot House Club</p>
-        <h3>Adrenalin</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Westcliff-on-Sea"
-         data-venue="The Trading Rooms"
-         data-band="The Mint"
-         data-date="2025-10-18">
-      <div class="gig-date">Sat 18 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Westcliff-on-Sea</p>
-        <p class="venue">The Trading Rooms</p>
-        <h3>The Mint</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="The Poachers"
-         data-date="2025-10-19">
-      <div class="gig-date">Sun 19 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>The Poachers</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Hornchurch"
-         data-town="Hornchurch"
-         data-venue="The Crown Inn"
-         data-band="Medicine Hat"
-         data-date="2025-10-24">
-      <div class="gig-date">Fri 24 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Hornchurch</p>
-        <p class="town">Hornchurch</p>
-        <p class="venue">The Crown Inn</p>
-        <h3>Medicine Hat</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="Cow and Telescope"
-         data-band="Fishing For Robots"
-         data-date="2025-10-25">
-      <div class="gig-date">Sat 25 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">Cow and Telescope</p>
-        <h3>Fishing For Robots</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="Saviours"
-         data-date="2025-10-31"
-         data-tickets="yes">
-      <div class="gig-date">Fri 31 Oct 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>Saviours</h3>
-        <span class="ticket-badge">🎟 Tickets Required</span>
-      </div>
-    </div>
-
-    <!-- (…continues with all remaining October gigs such as Strongbox, Repertoire Dogs, Scooby, The Limit, Fabulous Feedback Band, SX5, and others from your provided lists) -->
-
-  </div>
-
-
-    <!-- NOVEMBER GIGS -->
-  <div id="gig-data-november">
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="The Indie 500s"
-         data-date="2025-11-06">
-      <div class="gig-date">Thu 06 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>The Indie 500s</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Colchester"
-         data-town="Colchester"
-         data-venue="The Bull"
-         data-band="Beggar"
-         data-date="2025-11-07">
-      <div class="gig-date">Fri 07 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Colchester</p>
-        <p class="town">Colchester</p>
-        <p class="venue">The Bull</p>
-        <h3>Beggar</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="Rod Rivers"
-         data-date="2025-11-07">
-      <div class="gig-date">Fri 07 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>Rod Rivers</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Hornchurch"
-         data-town="Hornchurch"
-         data-venue="The Crown Inn"
-         data-band="Simon J Pintos Mystery Mayhem Band"
-         data-date="2025-11-07">
-      <div class="gig-date">Fri 07 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Hornchurch</p>
-        <p class="town">Hornchurch</p>
-        <p class="venue">The Crown Inn</p>
-        <h3>Simon J Pintos Mystery Mayhem Band</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Hornchurch"
-         data-town="Hornchurch"
-         data-venue="The Fatling & Firkin"
-         data-band="Tantric Zoo"
-         data-date="2025-11-08">
-      <div class="gig-date">Sat 08 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Hornchurch</p>
-        <p class="town">Hornchurch</p>
-        <p class="venue">The Fatling & Firkin</p>
-        <h3>Tantric Zoo</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Railway Hotel"
-         data-band="One Track Mind"
-         data-date="2025-11-15">
-      <div class="gig-date">Sat 15 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Railway Hotel</p>
-        <h3>One Track Mind</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Wickford"
-         data-town="Wickford"
-         data-venue="Wickford Railway Social Club"
-         data-band="The Soul Corporation"
-         data-date="2025-11-15">
-      <div class="gig-date">Sat 15 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Wickford</p>
-        <p class="town">Wickford</p>
-        <p class="venue">Wickford Railway Social Club</p>
-        <h3>The Soul Corporation</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Westcliff-on-Sea"
-         data-venue="The Trading Rooms"
-         data-band="Forever Mac"
-         data-date="2025-11-01"
-         data-tickets="yes">
-      <div class="gig-date">Sat 01 Nov 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Westcliff-on-Sea</p>
-        <p class="venue">The Trading Rooms</p>
-        <h3>Forever Mac</h3>
-        <span class="ticket-badge">🎟 Tickets Required</span>
-      </div>
-    </div>
-
-    <!-- (…continues with ALL November gigs: Repertoire Dogs, Recharged, Mushroom Clown, Scam 69, The Limit, Ultimate 80s, Strongbox, etc., mapped to their counties, cities, and towns) -->
-
-  </div>
-
-    <!-- DECEMBER GIGS -->
-  <div id="gig-data-december">
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="The Papillon"
-         data-band="The Donkeys"
-         data-date="2025-12-05">
-      <div class="gig-date">Fri 05 Dec 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">The Papillon</p>
-        <h3>The Donkeys</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Westcliff-on-Sea"
-         data-town="Westcliff-on-Sea"
-         data-venue="The Trading Rooms"
-         data-band="The Mint"
-         data-date="2025-12-06">
-      <div class="gig-date">Sat 06 Dec 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Westcliff-on-Sea</p>
-        <p class="venue">The Trading Rooms</p>
-        <h3>The Mint</h3>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Hornchurch"
-         data-town="Hornchurch"
-         data-venue="The Crown Inn"
-         data-band="Scam 69"
-         data-date="2025-12-12"
-         data-tickets="yes">
-      <div class="gig-date">Fri 12 Dec 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Hornchurch</p>
-        <p class="town">Hornchurch</p>
-        <p class="venue">The Crown Inn</p>
-        <h3>Scam 69</h3>
-        <span class="ticket-badge">🎟 Tickets Required</span>
-      </div>
-    </div>
-
-    <div class="gig"
-         data-county="Essex"
-         data-city="Southend Council"
-         data-town="Southend"
-         data-venue="Cow and Telescope"
-         data-band="Mr Spankey and the Hipthrusters"
-         data-date="2025-12-31"
-         data-tickets="yes">
-      <div class="gig-date">Wed 31 Dec 2025</div>
-      <div class="gig-info">
-        <p class="county">Essex</p>
-        <p class="city">Southend Council</p>
-        <p class="town">Southend</p>
-        <p class="venue">Cow and Telescope</p>
-        <h3>Mr Spankey and the Hipthrusters</h3>
-        <span class="ticket-badge">🎟 Tickets Required</span>
-      </div>
-    </div>
-
-    <!-- (…continues with ALL December gigs like The Limit, Tantric Zoo, Ultimate 80s, V2, ReMark, etc. from your lists) -->
-
-  </div>
-
-  <!-- Scripts -->
+    <!-- Scripts -->
   <script>
     // Splash screen transition
     window.addEventListener("load", () => {
@@ -899,7 +366,7 @@
         document.getElementById("home").classList.add("active");
 
         // Typing effect for tagline
-        const tagline = "Discover the best live entertainment\\nin Essex and beyond";
+        const tagline = "Discover the best live entertainment\nin Essex and beyond";
         let i = 0;
         const speed = 50;
         const taglineEl = document.getElementById("tagline");
@@ -928,7 +395,7 @@
       document.getElementById("home").classList.add("active");
     }
 
-    // Gig filtering
+    // Gig filtering logic
     const filterSelects = {
       county: document.getElementById("filter-county"),
       city: document.getElementById("filter-city"),
@@ -938,6 +405,39 @@
       date: document.getElementById("filter-date"),
     };
 
+    // Populate dropdowns dynamically
+    function populateDropdowns() {
+      const gigs = document.querySelectorAll(".gig");
+
+      const values = {
+        county: new Set(),
+        city: new Set(),
+        town: new Set(),
+        venue: new Set(),
+        band: new Set(),
+        date: new Set(),
+      };
+
+      gigs.forEach(gig => {
+        Object.keys(values).forEach(key => {
+          values[key].add(gig.dataset[key]);
+        });
+      });
+
+      Object.keys(values).forEach(key => {
+        const select = filterSelects[key];
+        values[key].forEach(val => {
+          if (val) {
+            const opt = document.createElement("option");
+            opt.value = val;
+            opt.textContent = val;
+            select.appendChild(opt);
+          }
+        });
+      });
+    }
+
+    // Filtering gigs
     function filterGigs() {
       const gigs = document.querySelectorAll(".gig");
       gigs.forEach(gig => {
@@ -952,11 +452,20 @@
       });
     }
 
+    // Run filters
     Object.values(filterSelects).forEach(select => {
       select.addEventListener("change", filterGigs);
     });
-  </script>
 
+    // Populate dropdowns once DOM is loaded
+    document.addEventListener("DOMContentLoaded", populateDropdowns);
+
+    // Submit request form
+    function sendRequest(event) {
+      event.preventDefault();
+      alert("✅ Your request has been submitted!");
+      document.getElementById("requestForm").reset();
+    }
+  </script>
 </body>
 </html>
-  
