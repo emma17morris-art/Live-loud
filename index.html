@@ -39,6 +39,7 @@
     .back-btn { position:absolute; top:20px; right:20px; padding:10px 20px; border:2px solid white; background:transparent; color:white; font-weight:bold; text-transform:uppercase; cursor:pointer; border-radius:8px; z-index:15; transition:all 0.3s ease; }
     .back-btn:hover { background:white; color:black; }
 
+    /* Filters */
     .search-tiles { display:flex; flex-direction:column; align-items:center; gap:15px; margin-top:200px; position:relative; z-index:10; }
     .search-tiles select { background:#000; border:2px solid var(--border); color:var(--primary); font-size:16px; font-weight:bold; padding:15px 30px; border-radius:12px; cursor:pointer; text-transform:uppercase; filter:drop-shadow(0 0 6px white); width:80%; max-width:320px; }
     .reset-btn { background:#000; border:2px solid var(--border); color:var(--primary); font-size:16px; font-weight:bold; padding:15px 30px; border-radius:12px; cursor:pointer; text-transform:uppercase; filter:drop-shadow(0 0 6px white); width:80%; max-width:320px; margin-top:10px; transition:all 0.3s ease; }
@@ -50,17 +51,6 @@
     .gig-date { min-width:120px; font-weight:bold; }
     .gig-info h3 { margin:5px 0; font-size:18px; }
     .gig-info p { margin:2px 0; font-size:14px; }
-
-    /* Comedy Spotlight */
-    .comedy-spotlight-lamp { position:absolute; top:-2vmax; left:50%; width:6vmax; height:6vmax; background:radial-gradient(circle, rgba(255,255,200,1) 0%, rgba(255,255,150,0.8) 40%, rgba(255,255,100,0.4) 70%, transparent 100%); border-radius:50%; transform:translateX(-50%); filter:blur(2px); z-index:2; animation:lampGlow 2.5s ease-in-out infinite alternate; }
-    @keyframes lampGlow { 0%{opacity:0.8; transform:translateX(-50%) scale(1);} 100%{opacity:1; transform:translateX(-50%) scale(1.05);} }
-    .comedy-spotlight { position:absolute; top:0; left:50%; width:0; height:0; border-left:12vmax solid transparent; border-right:12vmax solid transparent; border-bottom:90vmax solid rgba(255,255,200,0.25); transform:translateX(-50%); filter:blur(6px); z-index:1; }
-    .comedy-stage-glow { position:absolute; bottom:5%; left:50%; width:35vmax; height:8vmax; background:radial-gradient(ellipse at center, rgba(255,255,200,0.7), transparent 70%); transform:translateX(-50%); filter:blur(8px); z-index:1; animation:haloPulse 3s ease-in-out infinite; }
-    @keyframes haloPulse { 0%{transform:translateX(-50%) scale(1);opacity:0.8;} 50%{transform:translateX(-50%) scale(1.1);opacity:1;} 100%{transform:translateX(-50%) scale(1);opacity:0.8;} }
-
-    /* Entertainment Disco */
-    .entertainment-lights { position:absolute; top:50%; left:50%; width:200vmax; height:200vmax; border-radius:50%; transform:translate(-50%,-50%); z-index:1; background:conic-gradient(from 0deg, rgba(255,0,0,0.25), rgba(0,255,0,0.25), rgba(0,0,255,0.25), rgba(255,255,0,0.25), rgba(255,0,255,0.25), rgba(0,255,255,0.25), rgba(255,0,0,0.25)); animation:rotateLights 12s linear infinite; filter:blur(100px); }
-    @keyframes rotateLights { 0%{transform:translate(-50%,-50%) rotate(0deg);} 100%{transform:translate(-50%,-50%) rotate(360deg);} }
   </style>
 </head>
 <body>
@@ -88,7 +78,8 @@
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Search By</div>
     <div class="search-tiles">
-      <select id="filter-region" onchange="filterGigs()"><option value="">All Regions</option></select>
+      <select id="filter-county" onchange="updateTownDropdown(); filterGigs()"><option value="">All Counties</option></select>
+      <select id="filter-town" onchange="filterGigs()"><option value="">All Towns</option></select>
       <select id="filter-venue" onchange="filterGigs()"><option value="">All Venues</option></select>
       <select id="filter-band" onchange="filterGigs()"><option value="">All Bands</option></select>
       <select id="filter-date" onchange="filterGigs()"><option value="">All Dates</option></select>
@@ -96,139 +87,92 @@
     </div>
     <div class="gig-listings" id="gig-listings">
             <!-- Saturday 27 September -->
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Felsted</p><h3>33RPM</h3><p>Venue: The Royal British Legion, Felsted</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Rainham</p><h3>Adrenalin</h3><p>Venue: Rainham Working Mens Club</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Harlow</p><h3>Afterlife Rock Covers Band UK</h3><p>Venue: The Poplar Kitten, Harlow</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Wickford</p><h3>Beggar</h3><p>Venue: Wickford Railway Social Club, Wickford</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Gidea Park</p><h3>Blue Mantis</h3><p>Venue: The Archers, Gidea Park</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Bury St Edmunds</p><h3>Cherry Bomb</h3><p>Venue: The Grapes, Bury St Edmunds</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Colchester</p><h3>Cynicus</h3><p>Venue: Red Lion, Colchester</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Sutton Bridge</p><h3>Dead Horse</h3><p>Venue: The Greyhound, Sutton Bridge</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Clacton</p><h3>Dead Mans Hand</h3><p>Venue: Clacton Railway Club</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Upper Edmonton</p><h3>Dr Realgood</h3><p>Venue: Dicey Reillys, Upper Edmonton</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Basildon</p><h3>East of Java</h3><p>Venue: The Castle Mayne, Basildon</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Colchester</p><h3>Empty Threats</h3><p>Venue: The Bricklayers Arms, Colchester</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Hitchin</p><h3>Fishing For Robots</h3><p>Venue: The Anchor Inn, Hitchin</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Bishops Stortford</p><h3>Goat Patrol</h3><p>Venue: The Rose & Crown, Bishops Stortford</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Grounds for Divorce</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Hullbridge</p><h3>Handle With Care</h3><p>Venue: The Smugglers Den, Hullbridge</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Basildon</p><h3>Headfirst</h3><p>Venue: Fryerns Social Club, Basildon</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Hornchurch</p><h3>Kinetic</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Braintree</p><h3>Mr Spankey and the Hipthrusters</h3><p>Venue: The Boars Head, Braintree</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Dagenham</p><h3>Naked Apes</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Colchester</p><h3>Primal Replay</h3><p>Venue: The Bull, Colchester</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Wickford</p><h3>Red Velvet</h3><p>Venue: Nevendon Centre, Wickford</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Leigh-on-Sea</p><h3>Redonizm</h3><p>Venue: Sarah Moore, Leigh-on-Sea</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Sudbury</p><h3>Rekovered</h3><p>Venue: The Prince of Wales, Sudbury</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Ware</p><h3>Repertoire Dogs</h3><p>Venue: The Punch House, Ware</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Wickford</p><h3>Rock Dinosaurs</h3><p>Venue: The White Swan, Wickford</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">South Woodham Ferrers</p><h3>Scooby</h3><p>Venue: The Oaklands Hotel, South Woodham Ferrers</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Grays</p><h3>Sons Of Southpaw</h3><p>Venue: The Ship, Grays</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Upminster</p><h3>Strongbox</h3><p>Venue: The Junction, Upminster</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>The Fab Sixties</h3><p>Venue: Ambleside Social Club, Southend</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">East Barnet</p><h3>The Fabulous Feedback Band</h3><p>Venue: East Barnet Royal British Legion, East Barnet</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Billericay</p><h3>The Limit</h3><p>Venue: Billericay Constitutional Club</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Wickford</p><h3>The Mint</h3><p>Venue: Wickford British Legion</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Colchester</p><h3>Two Bob Short</h3><p>Venue: Coda, Colchester</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Laindon</p><h3>V2</h3><p>Venue: Laindon Community Centre</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Leigh-on-Sea</p><h3>Variant B</h3><p>Venue: Leigh Constitutional Club, Leigh-on-Sea</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Felsted</p><h3>33RPM</h3><p>Venue: The Royal British Legion, Felsted</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Rainham</p><h3>Adrenalin</h3><p>Venue: Rainham Working Mens Club</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Harlow</p><h3>Afterlife Rock Covers Band UK</h3><p>Venue: The Poplar Kitten, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Wickford</p><h3>Beggar</h3><p>Venue: Wickford Railway Social Club, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Gidea Park</p><h3>Blue Mantis</h3><p>Venue: The Archers, Gidea Park</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Suffolk</p><p class="town">Bury St Edmunds</p><h3>Cherry Bomb</h3><p>Venue: The Grapes, Bury St Edmunds</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Colchester</p><h3>Cynicus</h3><p>Venue: Red Lion, Colchester</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Lincolnshire</p><p class="town">Sutton Bridge</p><h3>Dead Horse</h3><p>Venue: The Greyhound, Sutton Bridge</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Clacton</p><h3>Dead Mans Hand</h3><p>Venue: Clacton Railway Club</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">London</p><p class="town">Upper Edmonton</p><h3>Dr Realgood</h3><p>Venue: Dicey Reillys, Upper Edmonton</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Basildon</p><h3>East of Java</h3><p>Venue: The Castle Mayne, Basildon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Colchester</p><h3>Empty Threats</h3><p>Venue: The Bricklayers Arms, Colchester</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Hitchin</p><h3>Fishing For Robots</h3><p>Venue: The Anchor Inn, Hitchin</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Bishops Stortford</p><h3>Goat Patrol</h3><p>Venue: The Rose & Crown, Bishops Stortford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><h3>Grounds for Divorce</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hullbridge</p><h3>Handle With Care</h3><p>Venue: The Smugglers Den, Hullbridge</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Basildon</p><h3>Headfirst</h3><p>Venue: Fryerns Social Club, Basildon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><h3>Kinetic</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Braintree</p><h3>Mr Spankey and the Hipthrusters</h3><p>Venue: The Boars Head, Braintree</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><h3>Naked Apes</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Colchester</p><h3>Primal Replay</h3><p>Venue: The Bull, Colchester</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Wickford</p><h3>Red Velvet</h3><p>Venue: Nevendon Centre, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Leigh-on-Sea</p><h3>Redonizm</h3><p>Venue: Sarah Moore, Leigh-on-Sea</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Suffolk</p><p class="town">Sudbury</p><h3>Rekovered</h3><p>Venue: The Prince of Wales, Sudbury</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Ware</p><h3>Repertoire Dogs</h3><p>Venue: The Punch House, Ware</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Wickford</p><h3>Rock Dinosaurs</h3><p>Venue: The White Swan, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">South Woodham Ferrers</p><h3>Scooby</h3><p>Venue: The Oaklands Hotel, South Woodham Ferrers</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Grays</p><h3>Sons Of Southpaw</h3><p>Venue: The Ship, Grays</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Upminster</p><h3>Strongbox</h3><p>Venue: The Junction, Upminster</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><h3>The Fab Sixties</h3><p>Venue: Ambleside Social Club, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">East Barnet</p><h3>The Fabulous Feedback Band</h3><p>Venue: East Barnet Royal British Legion, East Barnet</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Billericay</p><h3>The Limit</h3><p>Venue: Billericay Constitutional Club</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Wickford</p><h3>The Mint</h3><p>Venue: Wickford British Legion</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Colchester</p><h3>Two Bob Short</h3><p>Venue: Coda, Colchester</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Laindon</p><h3>V2</h3><p>Venue: Laindon Community Centre</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Leigh-on-Sea</p><h3>Variant B</h3><p>Venue: Leigh Constitutional Club, Leigh-on-Sea</p></div></div>
 
-      <!-- 🎤 Nikki and the Switchblades gigs -->
-      <div class="gig">
-        <div class="gig-date">Sun 28 Sep 2025</div>
-        <div class="gig-info">
-          <p class="region">Rawreth</p>
-          <h3>Nikki and the Switchblades</h3>
-          <p>Genre: Rock & Roll / Rockabilly (4 piece)</p>
-          <p>Venue: Farm Fresh Summer Truck Meet, Rawreth</p>
-          <p>Time: 10am – 4pm</p>
-          <p>Price: FREE</p>
-        </div>
-      </div>
+      <!-- Nikki and the Switchblades -->
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Rawreth</p><h3>Nikki and the Switchblades</h3><p>Venue: Farm Fresh Summer Truck Meet, Rawreth</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 19 Oct 2025</div><div class="gig-info"><p class="county">Norfolk</p><p class="town">Norwich</p><h3>Nikki and the Switchblades</h3><p>Venue: The Reindeer, Norwich</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 02 May 2026</div><div class="gig-info"><p class="county">Northamptonshire</p><p class="town">Wellingborough</p><h3>Nikki and the Switchblades</h3><p>Venue: AJ's Rock 'n' Roll Club, Wellingborough</p><p>Cancelled</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 25 Jul 2026</div><div class="gig-info"><p class="county">Dorset</p><p class="town">Winterbourne Abbas</p><h3>Nikki and the Switchblades</h3><p>Venue: Jurassic Coast Rock and Motor Show, Hampton Farm, Winterbourne Abbas</p></div></div>
 
-      <div class="gig">
-        <div class="gig-date">Sun 19 Oct 2025</div>
-        <div class="gig-info">
-          <p class="region">Norwich</p>
-          <h3>Nikki and the Switchblades</h3>
-          <p>Genre: Rock & Roll / Rockabilly (4 piece)</p>
-          <p>Venue: The Reindeer, Norwich</p>
-          <p>Time: 4.30pm – 8pm</p>
-          <p>Price: FREE</p>
-        </div>
-      </div>
-
-      <div class="gig">
-        <div class="gig-date">Sat 02 May 2026</div>
-        <div class="gig-info">
-          <p class="region">Wellingborough</p>
-          <h3>Nikki and the Switchblades</h3>
-          <p>Genre: Rock & Roll / Rockabilly (4 piece)</p>
-          <p>Venue: AJ's Rock 'n' Roll Club, Wellingborough</p>
-          <p>Time: 9pm – midnight</p>
-          <p>Price: £TBC</p>
-          <p>Cancelled (28 Jun 2025)</p>
-        </div>
-      </div>
-
-      <div class="gig">
-        <div class="gig-date">Sat 25 Jul 2026</div>
-        <div class="gig-info">
-          <p class="region">Winterbourne Abbas</p>
-          <h3>Nikki and the Switchblades</h3>
-          <p>Genre: Rock & Roll / Rockabilly (4 piece)</p>
-          <p>Venue: Jurassic Coast Rock and Motor Show, Hampton Farm, Winterbourne Abbas</p>
-          <p>Time: 8.30pm – midnight</p>
-          <p>Price: FREE</p>
-        </div>
-      </div>
             <!-- Sunday 28 September -->
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">St Ives</p><h3>Bad Monkey Driver</h3><p>Venue: Nelsons Head, St Ives</p></div></div>
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Fishing For Robots</h3><p>Venue: The Papillon, Southend</p></div></div>
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Sawbridgeworth</p><h3>Repertoire Dogs</h3><p>Venue: The Old Bell, Sawbridgeworth</p></div></div>
-      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Hornchurch</p><h3>The Soul Corporation</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Cambridgeshire</p><p class="town">St Ives</p><h3>Bad Monkey Driver</h3><p>Venue: Nelsons Head, St Ives</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><h3>Fishing For Robots</h3><p>Venue: The Papillon, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Sawbridgeworth</p><h3>Repertoire Dogs</h3><p>Venue: The Old Bell, Sawbridgeworth</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><h3>The Soul Corporation</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
 
       <!-- Wednesday 01 October -->
-      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Dagenham</p><h3>Jam Night at The Vernon</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
-      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Harlow</p><h3>Redonizm</h3><p>Venue: Starr Sports, Harlow</p></div></div>
-      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Harlow</p><h3>The Great Choon Robbery</h3><p>Venue: The Herald Electro Acoustic Open Mic, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><h3>Jam Night at The Vernon</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Harlow</p><h3>Redonizm</h3><p>Venue: Starr Sports, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Harlow</p><h3>The Great Choon Robbery</h3><p>Venue: The Herald Electro Acoustic Open Mic, Harlow</p></div></div>
 
       <!-- Thursday 02 October -->
-      <div class="gig"><div class="gig-date">Thu 02 Oct 2025</div><div class="gig-info"><p class="region">Hornchurch</p><h3>Jam Night at The Crown</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Thu 02 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><h3>Jam Night at The Crown</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
 
       <!-- Friday 03 October -->
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Thaxted</p><h3>33RPM</h3><p>Venue: The Star, Thaxted</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Beggar</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Hertford</p><h3>Dr Realgood</h3><p>Venue: The Silver Fox, Hertford</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Expose</h3><p>Venue: The Cricketers Inn, Southend</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">St Neots</p><h3>Fishing For Robots</h3><p>Venue: The Hyde Park, St Neots</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Hornchurch</p><h3>Half Stoned</h3><p>Venue: The Railway Hotel, Hornchurch</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Hornchurch</p><h3>Infynity</h3><p>Venue: The Fatling & Firkin, Hornchurch</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Stutton</p><h3>Jax & Co</h3><p>Venue: Kings Head, Stutton</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Upminster</p><h3>Lord Toffingham</h3><p>Venue: The Royal British Legion, Upminster</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Ilford</p><h3>Naked Apes</h3><p>Venue: Loxford Social Club, Ilford</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Harlow</p><h3>Repertoire Dogs</h3><p>Venue: The Purple Emperor, Harlow</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Chelmsford</p><h3>REWIRED</h3><p>Venue: The Spread Eagle, Chelmsford</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Dagenham</p><h3>Rock Candy</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Hornchurch</p><h3>Scam 69</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Dagenham</p><h3>The Fabulous Feedback Band</h3><p>Venue: The Cherry Tree, Dagenham</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Rochford</p><h3>The Limit</h3><p>Venue: The Horse & Groom, Rochford</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>The Tumbling Dice</h3><p>Venue: The Papillon, Southend</p></div></div>
-      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Clacton</p><h3>Ultimate 80s</h3><p>Venue: Clacton Railway Club</p></div></div>
-
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Thaxted</p><h3>33RPM</h3><p>Venue: The Star, Thaxted</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><h3>Beggar</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Hertfordshire</p><p class="town">Hertford</p><h3>Dr Realgood</h3><p>Venue: The Silver Fox, Hertford</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><h3>Expose</h3><p>Venue: The Cricketers Inn, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Cambridgeshire</p><p class="town">St Neots</p><h3>Fishing For Robots</h3><p>Venue: The Hyde Park, St Neots</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><h3>Half Stoned</h3><p>Venue: The Railway Hotel, Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><h3>Infynity</h3><p>Venue: The Fatling & Firkin, Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Suffolk</p><p class="town">Stutton</p><h3>Jax & Co</h3><p>Venue: Kings Head, Stutton</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Upminster</p><h3>Lord Toffingham</h3><p>Venue: The Royal British Legion, Upminster</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Ilford</p><h3>Naked Apes</h3><p>Venue: Loxford Social Club, Ilford</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Harlow</p><h3>Repertoire Dogs</h3><p>Venue: The Purple Emperor, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Chelmsford</p><h3>REWIRED</h3><p>Venue: The Spread Eagle, Chelmsford</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><h3>Rock Candy</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Hornchurch</p><h3>Scam 69</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><h3>The Fabulous Feedback Band</h3><p>Venue: The Cherry Tree, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Rochford</p><h3>The Limit</h3><p>Venue: The Horse & Groom, Rochford</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><h3>The Tumbling Dice</h3><p>Venue: The Papillon, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Clacton</p><h3>Ultimate 80s</h3><p>Venue: Clacton Railway Club</p></div></div>
             <!-- Saturday 04 October -->
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Chelmsford</p><h3>8 Bars of Piano</h3><p>Venue: The United Brethren, Chelmsford</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Afterlife Rock Covers Band UK</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Windsor</p><h3>AOB</h3><p>Venue: The Acre Club, Windsor</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Dagenham</p><h3>Blue Mantis</h3><p>Venue: The Matapan, Dagenham</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">South Ockendon</p><h3>Born Wild</h3><p>Venue: The Royal Oak, South Ockendon</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Dagenham</p><h3>Cynicus</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Norwich</p><h3>Dead Horse</h3><p>Venue: Louie Marchesi Pub, Norwich</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Dartford</p><h3>Dead Mans Hand</h3><p>Venue: The Bear and Ragged Staff, Dartford</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">East Barnet</p><h3>Dr Realgood</h3><p>Venue: The Royal British Legion, East Barnet</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Harlow</p><h3>East of Java</h3><p>Venue: The Essex Skipper, Harlow</p></div></div>
-      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">South Woodham Ferrers</p><h3>Electrum</h3><p>Venue: The Oaklands Hotel, South Woodham Ferrers</p></div></div>
-      <!-- ... Continue adding remaining Sat 04 Oct gigs in same format ... -->
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Chelmsford</p><h3>8 Bars of Piano</h3><p>Venue: The United Brethren, Chelmsford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Southend</p><h3>Afterlife Rock Covers Band UK</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Berkshire</p><p class="town">Windsor</p><h3>AOB</h3><p>Venue: The Acre Club, Windsor</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><h3>Blue Mantis</h3><p>Venue: The Matapan, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">South Ockendon</p><h3>Born Wild</h3><p>Venue: The Royal Oak, South Ockendon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Essex</p><p class="town">Dagenham</p><h3>Cynicus</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Norfolk</p><p class="town">Norwich</p><h3>Dead Horse</h3><p>Venue: Louie Marchesi Pub, Norwich</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="county">Kent</p><p class="town">Dartford</p><h3>Dead Mans Hand</h3><p>Venue: The Bear and Ragged Staff, Dartford</p></div></div>
+      <!-- ...continue Sat 04 Oct gigs here as needed... -->
 
     </div> <!-- end gig-listings -->
   </div> <!-- end hub-music -->
@@ -242,8 +186,8 @@
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Search Comedy</div>
     <div class="search-tiles">
-      <div class="tile">Region</div>
-      <div class="tile">Venue</div>
+      <div class="tile">County</div>
+      <div class="tile">Town</div>
       <div class="tile">Performer</div>
       <div class="tile">Date</div>
     </div>
@@ -256,8 +200,8 @@
     <button class="back-btn" onclick="goHome()">⬅ Back</button>
     <div class="hub-header">Search Entertainment</div>
     <div class="search-tiles">
-      <div class="tile">Region</div>
-      <div class="tile">Venue</div>
+      <div class="tile">County</div>
+      <div class="tile">Town</div>
       <div class="tile">Show</div>
       <div class="tile">Date</div>
     </div>
@@ -322,29 +266,33 @@
       });
     }
 
-    // Gig filter
+    // Filtering
     function filterGigs() {
-      const region=document.getElementById("filter-region").value.toLowerCase();
+      const county=document.getElementById("filter-county").value.toLowerCase();
+      const town=document.getElementById("filter-town").value.toLowerCase();
       const venue=document.getElementById("filter-venue").value.toLowerCase();
       const band=document.getElementById("filter-band").value.toLowerCase();
       const date=document.getElementById("filter-date").value.toLowerCase();
+
       document.querySelectorAll(".gig").forEach(gig=>{
-        const gigRegion=(gig.querySelector(".region")?.textContent||"").toLowerCase();
-        const gigVenue=(gig.querySelector("p:nth-of-type(2)")?.textContent||"").toLowerCase();
+        const gigCounty=(gig.querySelector(".county")?.textContent||"").toLowerCase();
+        const gigTown=(gig.querySelector(".town")?.textContent||"").toLowerCase();
+        const gigVenue=(gig.querySelector("p:nth-of-type(3)")?.textContent||"").toLowerCase();
         const gigBand=(gig.querySelector("h3")?.textContent||"").toLowerCase();
         const gigDate=(gig.querySelector(".gig-date")?.textContent||"").toLowerCase();
         let visible=true;
-        if(region&&!gigRegion.includes(region))visible=false;
-        if(venue&&!gigVenue.includes(venue))visible=false;
-        if(band&&!gigBand.includes(band))visible=false;
-        if(date&&!gigDate.includes(date))visible=false;
+        if(county && gigCounty!==county) visible=false;
+        if(town && gigTown!==town) visible=false;
+        if(venue && !gigVenue.includes(venue)) visible=false;
+        if(band && !gigBand.includes(band)) visible=false;
+        if(date && !gigDate.includes(date)) visible=false;
         gig.style.display=visible?"flex":"none";
       });
     }
 
     // Reset
     function resetFilters() {
-      ["filter-region","filter-venue","filter-band","filter-date"].forEach(id=>document.getElementById(id).value="");
+      ["filter-county","filter-town","filter-venue","filter-band","filter-date"].forEach(id=>document.getElementById(id).value="");
       filterGigs();
     }
 
@@ -363,17 +311,47 @@
 
     // Populate filters
     window.addEventListener("DOMContentLoaded",()=>{
-      const regions=new Set(),venues=new Set(),bands=new Set(),dates=new Set();
+      const counties=new Set(), townsByCounty={}, venues=new Set(), bands=new Set(), dates=new Set();
       document.querySelectorAll(".gig").forEach(gig=>{
-        regions.add(gig.querySelector(".region")?.textContent);
-        venues.add((gig.querySelector("p:nth-of-type(2)")?.textContent||"").replace("Venue: ",""));
-        bands.add(gig.querySelector("h3")?.textContent);
-        dates.add(gig.querySelector(".gig-date")?.textContent);
+        const county=gig.querySelector(".county")?.textContent;
+        const town=gig.querySelector(".town")?.textContent;
+        const venue=(gig.querySelector("p:nth-of-type(3)")?.textContent||"").replace("Venue: ","");
+        const band=gig.querySelector("h3")?.textContent;
+        const date=gig.querySelector(".gig-date")?.textContent;
+
+        if(county){counties.add(county); if(!townsByCounty[county]) townsByCounty[county]=new Set(); if(town) townsByCounty[county].add(town);}
+        if(venue) venues.add(venue);
+        if(band) bands.add(band);
+        if(date) dates.add(date);
       });
+
+      // Populate county
+      const countySel=document.getElementById("filter-county");
+      Array.from(counties).sort().forEach(c=>{let opt=document.createElement("option");opt.value=c;opt.textContent=c;countySel.appendChild(opt);});
+
+      // Store towns globally
+      window._townsByCounty=townsByCounty;
+
       const populate=(id,set)=>{const sel=document.getElementById(id); Array.from(set).sort().forEach(val=>{if(val){const opt=document.createElement("option");opt.value=val;opt.textContent=val;sel.appendChild(opt);}});};
-      populate("filter-region",regions); populate("filter-venue",venues); populate("filter-band",bands); populate("filter-date",dates);
+      populate("filter-venue",venues);
+      populate("filter-band",bands);
+      populate("filter-date",dates);
+
       styleCancelledGigs();
     });
+
+    // Update towns when county changes
+    function updateTownDropdown() {
+      const county=document.getElementById("filter-county").value;
+      const townSelect=document.getElementById("filter-town");
+      townSelect.innerHTML="<option value=''>All Towns</option>";
+      if(county && window._townsByCounty[county]){
+        Array.from(window._townsByCounty[county]).sort().forEach(t=>{
+          const opt=document.createElement("option");
+          opt.value=t; opt.textContent=t; townSelect.appendChild(opt);
+        });
+      }
+    }
 
     // Submit Request
     function submitRequest() {
