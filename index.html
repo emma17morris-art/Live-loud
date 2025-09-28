@@ -213,63 +213,57 @@
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
-  <!-- Home Screen -->
-  <div id="home" class="screen">
-    <div class="small-logo">
-      <img src="logo.png" alt="Live & Loud Small Logo">
-    </div>
-    <div class="welcome">Welcome</div>
-    <div class="tagline-wrapper">
-      <div class="tagline" id="tagline"></div>
-    </div>
-    <div class="tile-container">
-      <div class="tile" onclick="goToHub('music')">🎸 Music</div>
-      <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
-      <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
-      <div class="tile" onclick="goToHub('request')">📩 Submit a Request</div>
-    </div>
+ <!-- Home Screen -->
+<div id="home" class="screen">
+  <div class="small-logo">
+    <img src="logo.png" alt="Live & Loud Small Logo">
+  </div>
+  <div class="welcome">Welcome</div>
+  <div class="tagline-wrapper">
+    <div class="tagline" id="tagline"></div>
+  </div>
+  <div class="tile-container">
+    <div class="tile" onclick="goToHub('music')">🎸 Music</div>
+    <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
+    <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
+    <div class="tile" onclick="goToHub('submit')">📩 Submit a Request</div>
+  </div>
+</div>
+
+
+ <!-- Music Hub -->
+<div id="hub-music" class="screen">
+  <button class="back-btn" onclick="goBack()">⬅ Back</button>
+  <div class="hub-header">Search Gigs</div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <select id="filter-county">
+      <option value="">All Counties</option>
+      <option value="Essex">Essex</option>
+      <option value="London">London</option>
+      <option value="Suffolk">Suffolk</option>
+    </select>
+    <select id="filter-city">
+      <option value="">All Cities/Councils</option>
+    </select>
+    <select id="filter-town">
+      <option value="">All Towns</option>
+    </select>
+    <select id="filter-venue">
+      <option value="">All Venues</option>
+    </select>
+    <select id="filter-band">
+      <option value="">All Bands</option>
+    </select>
+    <select id="filter-date">
+      <option value="">All Dates</option>
+    </select>
   </div>
 
-    <!-- Music Hub -->
-  <div id="hub-music" class="screen">
-    <div class="small-logo">
-      <img src="logo.png" alt="Live & Loud Small Logo">
-    </div>
-    <button class="back-btn" onclick="goBack()">⬅ Back</button>
-    <div class="hub-header">Search Music By</div>
-
-    <!-- Filter Dropdowns -->
-    <div class="tile-container">
-      <select id="filter-county" class="tile" onchange="populateCities(); filterGigs();">
-        <option value="">Select County</option>
-        <option value="Essex">Essex</option>
-        <option value="London">London</option>
-        <option value="Suffolk">Suffolk</option>
-        <option value="Norfolk">Norfolk</option>
-        <option value="Cambridgeshire">Cambridgeshire</option>
-        <option value="Hertfordshire">Hertfordshire</option>
-        <!-- more counties can be added -->
-      </select>
-
-      <select id="filter-city" class="tile" onchange="populateTowns(); filterGigs();">
-        <option value="">Select City / Council</option>
-      </select>
-
-      <select id="filter-town" class="tile" onchange="populateVenues(); filterGigs();">
-        <option value="">Select Town</option>
-      </select>
-
-      <select id="filter-venue" class="tile" onchange="filterGigs();">
-        <option value="">Select Venue</option>
-      </select>
-
-      <select id="filter-band" class="tile" onchange="filterGigs();">
-        <option value="">Select Band</option>
-      </select>
-
-      <input type="date" id="filter-date" class="tile" onchange="filterGigs();" />
-    </div>
-
+  <!-- Gig Listings (moved here from Home) -->
+  <div id="gig-data"></div>
+</div>
     <!-- Gig Listings -->
     <div id="gig-results" style="margin-top:40px;"></div>
   </div>
