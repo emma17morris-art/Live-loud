@@ -204,6 +204,38 @@
       font-weight: bold;
       margin-top: 8px;
     }
+
+    /* Music Hub Filters */
+    .filters {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin: 30px auto;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .filters select {
+      background: #000;
+      border: 2px solid var(--border);
+      color: var(--primary);
+      font-size: 16px;
+      font-weight: bold;
+      padding: 15px 20px;
+      border-radius: 12px;
+      cursor: pointer;
+      text-align: center;
+      text-transform: uppercase;
+      filter: drop-shadow(0 0 6px white);
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .filters select:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 0 15px rgba(255,255,255,0.8);
+      filter: drop-shadow(0 0 10px white);
+    }
   </style>
 </head>
 <body>
@@ -213,45 +245,62 @@
     <img src="logo.png" alt="Live & Loud Logo">
   </div>
 
- <!-- Home Screen -->
-<div id="home" class="screen">
-  <div class="small-logo">
-    <img src="logo.png" alt="Live & Loud Small Logo">
-  </div>
-  <div class="welcome">Welcome</div>
-  <div class="tagline-wrapper">
-    <div class="tagline" id="tagline"></div>
-  </div>
-  <div class="tile-container">
-    <div class="tile" onclick="goToHub('music')">🎸 Music</div>
-    <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
-    <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
-    <div class="tile" onclick="goToHub('request')">📩 Submit a Request</div>
-  </div>
-</div>
-
- <!-- Music Hub -->
-<div id="hub-music" class="screen">
-  <button class="back-btn" onclick="goBack()">⬅ Back</button>
-  <div class="hub-header">Search Gigs</div>
-
-  <!-- Filters -->
-  <div class="filters">
-    <select id="filter-county"><option value="">All Counties</option></select>
-    <select id="filter-city"><option value="">All Cities/Councils</option></select>
-    <select id="filter-town"><option value="">All Towns</option></select>
-    <select id="filter-venue"><option value="">All Venues</option></select>
-    <select id="filter-band"><option value="">All Bands</option></select>
-    <select id="filter-date"><option value="">All Dates</option></select>
+  <!-- Home Screen -->
+  <div id="home" class="screen">
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
+    <div class="welcome">Welcome</div>
+    <div class="tagline-wrapper">
+      <div class="tagline" id="tagline"></div>
+    </div>
+    <div class="tile-container">
+      <div class="tile" onclick="goToHub('music')">🎸 Music</div>
+      <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
+      <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
+      <div class="tile" onclick="goToHub('request')">📩 Submit a Request</div>
+    </div>
   </div>
 
-  <!-- Gig Listings -->
-  <div id="gig-data"></div>
-</div>
+  <!-- Music Hub -->
+  <div id="hub-music" class="screen">
+    <button class="back-btn" onclick="goBack()">⬅ Back</button>
+    <div class="hub-header">Search Gigs</div>
+
+    <!-- Filters -->
+    <div class="filters">
+      <select id="filter-county">
+        <option value="">All Counties</option>
+        <option value="Essex">Essex</option>
+        <option value="London">London</option>
+        <option value="Suffolk">Suffolk</option>
+      </select>
+      <select id="filter-city">
+        <option value="">All Cities/Councils</option>
+      </select>
+      <select id="filter-town">
+        <option value="">All Towns</option>
+      </select>
+      <select id="filter-venue">
+        <option value="">All Venues</option>
+      </select>
+      <select id="filter-band">
+        <option value="">All Bands</option>
+      </select>
+      <select id="filter-date">
+        <option value="">All Dates</option>
+      </select>
+    </div>
+
+    <!-- Gig Listings -->
+    <div id="gig-results"></div>
+  </div>
 
   <!-- Comedy Hub -->
   <div id="hub-comedy" class="screen">
-    <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
     <button class="back-btn" onclick="goBack()">⬅ Back</button>
     <div class="hub-header">Comedy Spotlight</div>
     <div class="tile-container">
@@ -264,10 +313,11 @@
 
   <!-- Entertainment Hub -->
   <div id="hub-entertainment" class="screen">
-    <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
     <button class="back-btn" onclick="goBack()">⬅ Back</button>
     <div class="hub-header">Entertainment Hub</div>
-    <div class="lights"></div>
     <div class="tile-container">
       <div class="tile">By Region</div>
       <div class="tile">By Venue</div>
@@ -278,9 +328,12 @@
 
   <!-- Request Hub -->
   <div id="hub-request" class="screen">
-    <div class="small-logo"><img src="logo.png" alt="Live & Loud Small Logo"></div>
+    <div class="small-logo">
+      <img src="logo.png" alt="Live & Loud Small Logo">
+    </div>
     <button class="back-btn" onclick="goBack()">⬅ Back</button>
     <div class="hub-header">Submit a Request</div>
+
     <form id="requestForm" class="tile-container" onsubmit="sendRequest(event)">
       <input type="text" id="req-name" class="tile" placeholder="Your Name" required />
       <input type="email" id="req-email" class="tile" placeholder="Your Email" required />
@@ -290,7 +343,6 @@
     </form>
   </div>
 
-  <!-- Scripts -->
   <script>
     // Splash screen transition
     window.addEventListener("load", () => {
@@ -299,7 +351,7 @@
         document.getElementById("home").classList.add("active");
 
         // Typing effect for tagline
-        const tagline = "Discover the best live entertainment\\nin Essex and beyond";
+        const tagline = "Discover the best live entertainment\nin Essex and beyond";
         let i = 0;
         const speed = 50;
         const taglineEl = document.getElementById("tagline");
@@ -322,72 +374,13 @@
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       document.getElementById("hub-" + type).classList.add("active");
     }
+
     function goBack() {
       document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
       document.getElementById("home").classList.add("active");
     }
 
-    // Load gigs dynamically
-    async function loadGigs() {
-      const res = await fetch("https://YOUR_GITHUB_USERNAME.github.io/YOUR_REPO/gigs.json");
-      const gigs = await res.json();
-
-      const container = document.getElementById("gig-data");
-      container.innerHTML = "";
-
-      // Populate filter options dynamically
-      const counties = new Set(), cities = new Set(), towns = new Set(), venues = new Set(), bands = new Set(), dates = new Set();
-
-      gigs.forEach(gig => {
-        counties.add(gig.county);
-        cities.add(gig.city);
-        towns.add(gig.town);
-        venues.add(gig.venue);
-        bands.add(gig.band);
-        dates.add(gig.date);
-
-        const gigEl = document.createElement("div");
-        gigEl.className = "gig";
-        gigEl.dataset.county = gig.county;
-        gigEl.dataset.city = gig.city;
-        gigEl.dataset.town = gig.town;
-        gigEl.dataset.venue = gig.venue;
-        gigEl.dataset.band = gig.band;
-        gigEl.dataset.date = gig.date;
-
-        gigEl.innerHTML = `
-          <div class="gig-date">${new Date(gig.date).toDateString()}</div>
-          <div class="gig-info">
-            <p class="county">${gig.county}</p>
-            <p class="city">${gig.city}</p>
-            <p class="town">${gig.town}</p>
-            <p class="venue">${gig.venue}</p>
-            <h3>${gig.band}</h3>
-            ${gig.tickets ? '<span class="ticket-badge">🎟 Tickets Required</span>' : ""}
-          </div>
-        `;
-        container.appendChild(gigEl);
-      });
-
-      function fillSelect(id, items) {
-        const select = document.getElementById(id);
-        items.forEach(item => {
-          const opt = document.createElement("option");
-          opt.value = item;
-          opt.textContent = item;
-          select.appendChild(opt);
-        });
-      }
-
-      fillSelect("filter-county", counties);
-      fillSelect("filter-city", cities);
-      fillSelect("filter-town", towns);
-      fillSelect("filter-venue", venues);
-      fillSelect("filter-band", bands);
-      fillSelect("filter-date", Array.from(dates).sort());
-    }
-
-    // Gig filtering
+    // Gig filtering (placeholder logic – hook to JSON later)
     const filterSelects = {
       county: document.getElementById("filter-county"),
       city: document.getElementById("filter-city"),
@@ -414,9 +407,6 @@
     Object.values(filterSelects).forEach(select => {
       select.addEventListener("change", filterGigs);
     });
-
-    window.addEventListener("load", loadGigs);
   </script>
-
 </body>
 </html>
