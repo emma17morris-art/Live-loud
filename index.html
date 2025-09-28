@@ -5,408 +5,266 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Live & Loud - Essex Live Entertainment</title>
   <style>
-    :root {
-      --primary: #ffffff;
-      --background: #000000;
-      --border: #ffffff;
-      --ticket-bg: #FFD700;
-      --ticket-color: #000;
-    }
+    :root { --primary:#ffffff; --background:#000000; --border:#ffffff; }
+    body { margin:0; background:var(--background); color:var(--primary); font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif; overflow-x:hidden; }
 
-    body {
-      margin: 0;
-      background: var(--background);
-      color: var(--primary);
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-      overflow-x: hidden;
-    }
-
-    /* Flash Page */
-    #flash {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: var(--background);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 2000;
-    }
-
-    #flash img {
-      max-width: 700px;
-      width: 90%;
-      height: auto;
-      filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0%, 100% { filter: drop-shadow(0 0 15px white) drop-shadow(0 0 40px white); }
-      50% { filter: drop-shadow(0 0 25px white) drop-shadow(0 0 70px white); }
-    }
+    /* Splash */
+    #flash { position:fixed; top:0;left:0;right:0;bottom:0; background:var(--background); display:flex; align-items:center; justify-content:center; z-index:2000; }
+    #flash img { max-width:500px; width:85%; filter:drop-shadow(0 0 15px white) drop-shadow(0 0 40px white); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{filter:drop-shadow(0 0 15px white) drop-shadow(0 0 40px white);} 50%{filter:drop-shadow(0 0 25px white) drop-shadow(0 0 70px white);} }
 
     /* Screens */
-    .screen {
-      display: none;
-      min-height: 100vh;
-      background: var(--background);
-      padding: 20px;
-      box-sizing: border-box;
-      position: relative;
-      overflow: hidden;
-    }
+    .screen { display:none; min-height:100vh; background:var(--background); padding:20px; box-sizing:border-box; position:relative; overflow:hidden; }
+    .screen.active { display:block; }
+    .small-logo { position:absolute; top:20px; left:20px; z-index:10; }
+    .small-logo img { max-width:100px; filter:drop-shadow(0 0 6px white) drop-shadow(0 0 15px white); }
 
-    .screen.active {
-      display: block;
-    }
+    /* Home */
+    .welcome { text-align:center; margin-top:100px; font-size:40px; font-weight:bold; text-shadow:0 0 8px white,0 0 20px white; }
+    .tagline-wrapper { display:flex; justify-content:center; margin-top:15px; }
+    .tagline { font-size:18px; font-weight:500; line-height:1.4; opacity:0.85; text-shadow:0 0 6px white,0 0 12px rgba(255,255,255,0.6); border-right:2px solid white; white-space:pre-wrap; overflow:hidden; text-align:center; max-width:90%; }
+    .tile-container { display:flex; flex-direction:column; align-items:center; gap:20px; margin-top:50px; }
+    .tile { background:#000; border:2px solid var(--border); color:var(--primary); font-size:18px; font-weight:bold; padding:20px 40px; border-radius:12px; cursor:pointer; transition:all 0.3s ease; text-align:center; text-transform:uppercase; filter:drop-shadow(0 0 6px white); width:80%; max-width:320px; }
+    .tile:hover { transform:translateY(-5px) scale(1.05); box-shadow:0 0 20px rgba(255,255,255,0.9); }
 
-    /* Small logo */
-    .small-logo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      z-index: 10;
-    }
+    /* Spotlights */
+    .searchlight { position:absolute; width:8vmax; height:140vmax; background:radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.4) 30%, transparent 70%); mix-blend-mode:screen; pointer-events:none; z-index:1; filter:blur(1px); opacity:0.95; }
+    .bl { bottom:0; left:0; transform-origin:bottom left; }
+    .br { bottom:0; right:0; transform-origin:bottom right; }
+    .tl { top:0; left:0; transform-origin:top left; }
+    .tr { top:0; right:0; transform-origin:top right; }
 
-    .small-logo img {
-      max-width: 100px;
-      filter: drop-shadow(0 0 6px white) drop-shadow(0 0 15px white);
-    }
+    /* Hub Header + Back */
+    .hub-header { text-align:center; font-size:24px; font-weight:bold; margin-top:80px; text-shadow:0 0 6px white,0 0 12px white; z-index:10; position:relative; }
+    .back-btn { position:absolute; top:20px; right:20px; padding:10px 20px; border:2px solid white; background:transparent; color:white; font-weight:bold; text-transform:uppercase; cursor:pointer; border-radius:8px; z-index:15; transition:all 0.3s ease; }
+    .back-btn:hover { background:white; color:black; }
 
-    /* Back button */
-    .back-btn {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #111;
-      color: #fff;
-      border: 2px solid white;
-      padding: 10px 20px;
-      border-radius: 12px;
-      cursor: pointer;
-      z-index: 20;
-      text-transform: uppercase;
-      font-weight: bold;
-    }
+    .search-tiles { display:flex; flex-direction:column; align-items:center; gap:15px; margin-top:200px; position:relative; z-index:10; }
+    .search-tiles select { background:#000; border:2px solid var(--border); color:var(--primary); font-size:16px; font-weight:bold; padding:15px 30px; border-radius:12px; cursor:pointer; text-transform:uppercase; filter:drop-shadow(0 0 6px white); width:80%; max-width:320px; }
+    .reset-btn { background:#000; border:2px solid var(--border); color:var(--primary); font-size:16px; font-weight:bold; padding:15px 30px; border-radius:12px; cursor:pointer; text-transform:uppercase; filter:drop-shadow(0 0 6px white); width:80%; max-width:320px; margin-top:10px; transition:all 0.3s ease; }
+    .reset-btn:hover { transform:translateY(-3px) scale(1.03); box-shadow:0 0 20px rgba(255,255,255,0.9); }
 
-    .back-btn:hover {
-      background: white;
-      color: black;
-    }
+    /* Gigs */
+    .gig-listings { margin-top:40px; }
+    .gig { display:flex; gap:15px; margin-bottom:20px; background:rgba(255,255,255,0.05); padding:10px 15px; border-radius:8px; }
+    .gig-date { min-width:120px; font-weight:bold; }
+    .gig-info h3 { margin:5px 0; font-size:18px; }
+    .gig-info p { margin:2px 0; font-size:14px; }
 
-    /* Welcome */
-    .welcome {
-      text-align: center;
-      margin-top: 100px;
-      font-size: 40px;
-      font-weight: bold;
-      text-shadow: 0 0 8px white, 0 0 20px white;
-    }
+    /* Comedy Spotlight */
+    .comedy-spotlight-lamp { position:absolute; top:-2vmax; left:50%; width:6vmax; height:6vmax; background:radial-gradient(circle, rgba(255,255,200,1) 0%, rgba(255,255,150,0.8) 40%, rgba(255,255,100,0.4) 70%, transparent 100%); border-radius:50%; transform:translateX(-50%); filter:blur(2px); z-index:2; animation:lampGlow 2.5s ease-in-out infinite alternate; }
+    @keyframes lampGlow { 0%{opacity:0.8; transform:translateX(-50%) scale(1);} 100%{opacity:1; transform:translateX(-50%) scale(1.05);} }
+    .comedy-spotlight { position:absolute; top:0; left:50%; width:0; height:0; border-left:12vmax solid transparent; border-right:12vmax solid transparent; border-bottom:90vmax solid rgba(255,255,200,0.25); transform:translateX(-50%); filter:blur(6px); z-index:1; }
+    .comedy-stage-glow { position:absolute; bottom:5%; left:50%; width:35vmax; height:8vmax; background:radial-gradient(ellipse at center, rgba(255,255,200,0.7), transparent 70%); transform:translateX(-50%); filter:blur(8px); z-index:1; animation:haloPulse 3s ease-in-out infinite; }
+    @keyframes haloPulse { 0%{transform:translateX(-50%) scale(1);opacity:0.8;} 50%{transform:translateX(-50%) scale(1.1);opacity:1;} 100%{transform:translateX(-50%) scale(1);opacity:0.8;} }
 
-    /* Tagline */
-    .tagline-wrapper {
-      display: flex;
-      justify-content: center;
-      margin-top: 15px;
-    }
-
-    .tagline {
-      font-size: 18px;
-      font-weight: 500;
-      line-height: 1.4;
-      opacity: 0.85;
-      text-shadow: 0 0 6px white, 0 0 12px rgba(255,255,255,0.6);
-      border-right: 2px solid white;
-      white-space: pre-wrap;
-      overflow: hidden;
-      text-align: center;
-      max-width: 90%;
-    }
-
-    /* Main tiles */
-    .tile-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-      margin-top: 50px;
-    }
-
-    .tile {
-      background: #000;
-      border: 2px solid var(--border);
-      color: var(--primary);
-      font-size: 18px;
-      font-weight: bold;
-      padding: 20px 40px;
-      border-radius: 12px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-align: center;
-      text-transform: uppercase;
-      filter: drop-shadow(0 0 6px white);
-      width: 80%;
-      max-width: 320px;
-      z-index: 10;
-    }
-
-    .tile:hover {
-      transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 0 20px rgba(255,255,255,0.9);
-      filter: drop-shadow(0 0 12px white);
-    }
-
-    /* Hub headers */
-    .hub-header {
-      text-align: center;
-      font-size: 24px;
-      font-weight: bold;
-      margin-top: 80px;
-      text-shadow: 0 0 6px white, 0 0 12px white;
-      z-index: 10;
-      position: relative;
-    }
-
-    /* Gig Listings */
-    .gig {
-      background: #111;
-      border: 2px solid white;
-      border-radius: 12px;
-      padding: 15px;
-      margin: 10px 0;
-      filter: drop-shadow(0 0 6px white);
-    }
-
-    .gig-date {
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 5px;
-    }
-
-    .gig-info p {
-      margin: 2px 0;
-      font-size: 14px;
-    }
-
-    .gig-info h3 {
-      margin: 5px 0;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    .ticket-badge {
-      display: inline-block;
-      background: var(--ticket-bg);
-      color: var(--ticket-color);
-      padding: 5px 10px;
-      border-radius: 20px;
-      font-size: 14px;
-      font-weight: bold;
-      margin-top: 8px;
-    }
-
-    /* Music Hub Filters */
-    .filters {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-      margin: 30px auto;
-      width: 90%;
-      max-width: 400px;
-    }
-
-    .filters select {
-      background: #000;
-      border: 2px solid var(--border);
-      color: var(--primary);
-      font-size: 16px;
-      font-weight: bold;
-      padding: 15px 20px;
-      border-radius: 12px;
-      cursor: pointer;
-      text-align: center;
-      text-transform: uppercase;
-      filter: drop-shadow(0 0 6px white);
-      transition: all 0.3s ease;
-      width: 100%;
-    }
-
-    .filters select:hover {
-      transform: translateY(-2px) scale(1.02);
-      box-shadow: 0 0 15px rgba(255,255,255,0.8);
-      filter: drop-shadow(0 0 10px white);
-    }
+    /* Entertainment Disco */
+    .entertainment-lights { position:absolute; top:50%; left:50%; width:200vmax; height:200vmax; border-radius:50%; transform:translate(-50%,-50%); z-index:1; background:conic-gradient(from 0deg, rgba(255,0,0,0.25), rgba(0,255,0,0.25), rgba(0,0,255,0.25), rgba(255,255,0,0.25), rgba(255,0,255,0.25), rgba(0,255,255,0.25), rgba(255,0,0,0.25)); animation:rotateLights 12s linear infinite; filter:blur(100px); }
+    @keyframes rotateLights { 0%{transform:translate(-50%,-50%) rotate(0deg);} 100%{transform:translate(-50%,-50%) rotate(360deg);} }
   </style>
 </head>
 <body>
 
-  <!-- Flash Screen -->
-  <div id="flash">
-    <img src="logo.png" alt="Live & Loud Logo">
-  </div>
+  <!-- Splash -->
+  <div id="flash"><img src="logo.png" alt="Live & Loud Logo"></div>
 
-  <!-- Home Screen -->
+  <!-- Home -->
   <div id="home" class="screen">
-    <div class="small-logo">
-      <img src="logo.png" alt="Live & Loud Small Logo">
-    </div>
+    <div class="small-logo"><img src="logo.png" alt="Logo"></div>
     <div class="welcome">Welcome</div>
-    <div class="tagline-wrapper">
-      <div class="tagline" id="tagline"></div>
-    </div>
+    <div class="tagline-wrapper"><div class="tagline" id="tagline"></div></div>
     <div class="tile-container">
       <div class="tile" onclick="goToHub('music')">🎸 Music</div>
       <div class="tile" onclick="goToHub('comedy')">🎭 Comedy</div>
       <div class="tile" onclick="goToHub('entertainment')">🎶 Entertainment</div>
-      <div class="tile" onclick="goToHub('request')">📩 Submit a Request</div>
     </div>
   </div>
 
   <!-- Music Hub -->
   <div id="hub-music" class="screen">
-    <button class="back-btn" onclick="goBack()">⬅ Back</button>
-    <div class="hub-header">Search Gigs</div>
-
-    <!-- Filters -->
-    <div class="filters">
-      <select id="filter-county">
-        <option value="">All Counties</option>
-        <option value="Essex">Essex</option>
-        <option value="London">London</option>
-        <option value="Suffolk">Suffolk</option>
-      </select>
-      <select id="filter-city">
-        <option value="">All Cities/Councils</option>
-      </select>
-      <select id="filter-town">
-        <option value="">All Towns</option>
-      </select>
-      <select id="filter-venue">
-        <option value="">All Venues</option>
-      </select>
-      <select id="filter-band">
-        <option value="">All Bands</option>
-      </select>
-      <select id="filter-date">
-        <option value="">All Dates</option>
-      </select>
+    <div id="spotlights"></div>
+    <div class="small-logo"><img src="logo.png" alt="Logo"></div>
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+    <div class="hub-header">Search By</div>
+    <div class="search-tiles">
+      <select id="filter-region" onchange="filterGigs()"><option value="">All Regions</option></select>
+      <select id="filter-venue" onchange="filterGigs()"><option value="">All Venues</option></select>
+      <select id="filter-band" onchange="filterGigs()"><option value="">All Bands</option></select>
+      <select id="filter-date" onchange="filterGigs()"><option value="">All Dates</option></select>
+      <button onclick="resetFilters()" class="reset-btn">Reset Filters</button>
     </div>
+    <div class="gig-listings" id="gig-listings">
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>33RPM</h3><p>Venue: The Royal British Legion, Felsted</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Adrenalin</h3><p>Venue: Rainham Working Mens Club</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Afterlife Rock Covers Band UK</h3><p>Venue: The Poplar Kitten, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Beggar</h3><p>Venue: Wickford Railway Social Club, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Blue Mantis</h3><p>Venue: The Archers, Gidea Park</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Suffolk</p><h3>Cherry Bomb</h3><p>Venue: The Grapes, Bury St Edmunds</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Cynicus</h3><p>Venue: Red Lion</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Lincolnshire</p><h3>Dead Horse</h3><p>Venue: The Greyhound, Sutton Bridge</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Dead Mans Hand</h3><p>Venue: Clacton Railway Club</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">London</p><h3>Dr Realgood</h3><p>Venue: Dicey Reillys, Upper Edmonton</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>East of Java</h3><p>Venue: The Castle Mayne, Basildon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Empty Threats</h3><p>Venue: The Bricklayers Arms, Colchester</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Herts</p><h3>Fishing For Robots</h3><p>Venue: The Anchor Inn, Hitchin</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Herts</p><h3>Goat Patrol</h3><p>Venue: The Rose & Crown, Bishops Stortford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Grounds for Divorce</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Handle With Care</h3><p>Venue: The Smugglers Den, Hullbridge</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Headfirst</h3><p>Venue: Fryerns Social Club, Basildon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Kinetic</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Mr Spankey and the Hipthrusters</h3><p>Venue: The Boars Head, Braintree</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">London</p><h3>Naked Apes</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Primal Replay</h3><p>Venue: The Bull, Colchester</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Red Velvet</h3><p>Venue: Nevendon Centre, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Redonizm</h3><p>Venue: Sarah Moore, Leigh-on-Sea</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Suffolk</p><h3>Rekovered</h3><p>Venue: The Prince of Wales, Sudbury</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Herts</p><h3>Repertoire Dogs</h3><p>Venue: The Punch House, Ware</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Rock Dinosaurs</h3><p>Venue: The White Swan, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Scooby</h3><p>Venue: The Oaklands Hotel, South Woodham Ferrers</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Sons Of Southpaw</h3><p>Venue: The Ship, Grays</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Strongbox</h3><p>Venue: The Junction, Upminster</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>The Fab Sixties</h3><p>Venue: Ambleside Social Club, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">London</p><h3>The Fabulous Feedback Band</h3><p>Venue: East Barnet Royal British Legion, East Barnet</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Limit</h3><p>Venue: Billericay Constitutional Club</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Mint</h3><p>Venue: Wickford British Legion</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Two Bob Short</h3><p>Venue: Coda, Colchester</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>V2</h3><p>Venue: Laindon Community Centre</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 27 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Variant B</h3><p>Venue: Leigh Constitutional Club, Leigh-on-Sea</p></div></div>
 
-    <!-- Gig Listings -->
-    <div id="gig-results"></div>
-  </div>
+
+
+
+            <!-- Sunday 28 September -->
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Cambridgeshire</p><h3>Bad Monkey Driver</h3><p>Venue: Nelsons Head, St Ives</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Fishing For Robots</h3><p>Venue: The Papillon, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Herts</p><h3>Repertoire Dogs</h3><p>Venue: The Old Bell, Sawbridgeworth</p></div></div>
+      <div class="gig"><div class="gig-date">Sun 28 Sep 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Soul Corporation</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+
+      <!-- Wednesday 01 October -->
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Jam Night at The Vernon</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Redonizm</h3><p>Venue: Starr Sports</p></div></div>
+      <div class="gig"><div class="gig-date">Wed 01 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Great Choon Robbery</h3><p>Venue: The Herald Electro Acoustic Open Mic, Harlow</p></div></div>
+
+      <!-- Thursday 02 October -->
+      <div class="gig"><div class="gig-date">Thu 02 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Jam Night at The Crown</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+
+      <!-- Friday 03 October -->
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>33RPM</h3><p>Venue: The Star, Thaxted</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Beggar</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Herts</p><h3>Dr Realgood</h3><p>Venue: The Silver Fox, Hertford</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Expose</h3><p>Venue: The Cricketers Inn, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Cambs</p><h3>Fishing For Robots</h3><p>Venue: The Hyde Park, St Neots</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Half Stoned</h3><p>Venue: The Railway Hotel, Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Infynity</h3><p>Venue: The Fatling & Firkin, Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Suffolk</p><h3>Jax & Co</h3><p>Venue: Kings Head, Stutton</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Lord Toffingham</h3><p>Venue: The Royal British Legion, Upminster</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Naked Apes</h3><p>Venue: Loxford Social Club, Ilford</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Repertoire Dogs</h3><p>Venue: The Purple Emperor, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>REWIRED</h3><p>Venue: The Spread Eagle</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Rock Candy</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Scam 69</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>The Fabulous Feedback Band</h3><p>Venue: The Cherry Tree, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Limit</h3><p>Venue: The Horse & Groom, Rochford</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>The Tumbling Dice</h3><p>Venue: The Papillon, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Fri 03 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Ultimate 80s</h3><p>Venue: Clacton Railway Club</p></div></div>
+
+
+            <!-- Saturday 04 October -->
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>8 Bars of Piano</h3><p>Venue: The United Brethren, Chelmsford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Afterlife Rock Covers Band UK</h3><p>Venue: Cow and Telescope, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Berkshire</p><h3>AOB</h3><p>Venue: The Acre Club, Windsor</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Blue Mantis</h3><p>Venue: The Matapan, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Born Wild</h3><p>Venue: The Royal Oak, South Ockendon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Cynicus</h3><p>Venue: The Admiral Vernon, Dagenham</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Norfolk</p><h3>Dead Horse</h3><p>Venue: Louie Marchesi pub, Norwich</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Kent</p><h3>Dead Mans Hand</h3><p>Venue: The Bear and Ragged Staff, Dartford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Dr Realgood</h3><p>Venue: East Barnet Royal British Legion</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>East of Java</h3><p>Venue: The Essex Skipper, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Electrum</h3><p>Venue: The Oaklands Hotel, South Woodham Ferrers</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Expose</h3><p>Venue: Nevendon Centre, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Fast On The Draw</h3><p>Venue: The Brewers Arms, Brightlingsea</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Fictus</h3><p>Venue: The Queens Head, Burnham On Crouch</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Grounds for Divorce</h3><p>Venue: The Duke, Wickford</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Half Stoned</h3><p>Venue: The New Jolly Friar, Basildon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Headfirst</h3><p>Venue: The Woolpack, Coggeshall</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Hedgehog</h3><p>Venue: The Castle Mayne, Basildon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>Lord Toffingham</h3><p>Venue: Shoebury Conservative Club, Shoeburyness</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Mr Spankey and the Hipthrusters</h3><p>Venue: Kelvedon Labour Club, Kelvedon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Nu Project</h3><p>Venue: The Poplar Kitten, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>One Track Mind</h3><p>Venue: The Exchange, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>ReMark</h3><p>Venue: The Half Moon, Rayleigh</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Repertoire Dogs</h3><p>Venue: Moot House Club, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>REWIRED</h3><p>Venue: New Eltham Social Club</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Rock Dinosaurs</h3><p>Venue: The Hollybush, Loughton</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Scam 69</h3><p>Venue: The Small Copper, Harlow</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Suffolk</p><h3>Scarper</h3><p>Venue: Newton Rd Conservative club, Ipswich</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Scooby</h3><p>Venue: The Welcome Club, Stanford Le Hope</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Sons Of Southpaw</h3><p>Venue: The Horse and Groom, Wivenhoe</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>Strongbox</h3><p>Venue: The Winged Horse, Basildon</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Southend</p><h3>SX5</h3><p>Venue: The Cricketers Inn, Southend</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Fabulous Feedback Band</h3><p>Venue: The Crown Inn, Roneo Corner Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Indie 500s</h3><p>Venue: Glaston-B Festival, Brentwood Centre</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Limit</h3><p>Venue: Fox & Hound, Ramsden Heath</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Essex</p><h3>The Mint</h3><p>Venue: The Trading Rooms, Westcliff</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">London</p><h3>Two Bob Short</h3><p>Venue: The Fatling & Firkin, Hornchurch</p></div></div>
+      <div class="gig"><div class="gig-date">Sat 04 Oct 2025</div><div class="gig-info"><p class="region">Suffolk</p><h3>Ultimate 80s</h3><p>Venue: The White Horse, Sudbury</p></div></div>
+    </div> <!-- end gig-listings -->
+  </div> <!-- end hub-music -->
 
   <!-- Comedy Hub -->
   <div id="hub-comedy" class="screen">
-    <div class="small-logo">
-      <img src="logo.png" alt="Live & Loud Small Logo">
-    </div>
-    <button class="back-btn" onclick="goBack()">⬅ Back</button>
-    <div class="hub-header">Comedy Spotlight</div>
-    <div class="tile-container">
-      <div class="tile">By Region</div>
-      <div class="tile">By Venue</div>
-      <div class="tile">By Act</div>
-      <div class="tile">By Date</div>
+    <div class="comedy-spotlight-lamp"></div>
+    <div class="comedy-spotlight"></div>
+    <div class="comedy-stage-glow"></div>
+    <div class="small-logo"><img src="logo.png" alt="Logo"></div>
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+    <div class="hub-header">Comedy Shows</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Performer</div>
+      <div class="tile">Date</div>
     </div>
   </div>
 
   <!-- Entertainment Hub -->
   <div id="hub-entertainment" class="screen">
-    <div class="small-logo">
-      <img src="logo.png" alt="Live & Loud Small Logo">
-    </div>
-    <button class="back-btn" onclick="goBack()">⬅ Back</button>
-    <div class="hub-header">Entertainment Hub</div>
-    <div class="tile-container">
-      <div class="tile">By Region</div>
-      <div class="tile">By Venue</div>
-      <div class="tile">By Show</div>
-      <div class="tile">By Date</div>
+    <div class="entertainment-lights"></div>
+    <div class="small-logo"><img src="logo.png" alt="Logo"></div>
+    <button class="back-btn" onclick="goHome()">⬅ Back</button>
+    <div class="hub-header">Entertainment Events</div>
+    <div class="search-tiles">
+      <div class="tile">Region</div>
+      <div class="tile">Venue</div>
+      <div class="tile">Show</div>
+      <div class="tile">Date</div>
     </div>
   </div>
 
-  <!-- Request Hub -->
-  <div id="hub-request" class="screen">
-    <div class="small-logo">
-      <img src="logo.png" alt="Live & Loud Small Logo">
-    </div>
-    <button class="back-btn" onclick="goBack()">⬅ Back</button>
-    <div class="hub-header">Submit a Request</div>
-
-    <form id="requestForm" class="tile-container" onsubmit="sendRequest(event)">
-      <input type="text" id="req-name" class="tile" placeholder="Your Name" required />
-      <input type="email" id="req-email" class="tile" placeholder="Your Email" required />
-      <input type="text" id="req-subject" class="tile" placeholder="Subject" required />
-      <textarea id="req-message" class="tile" placeholder="Your Message" rows="5" required></textarea>
-      <button type="submit" class="tile">📩 Submit</button>
-    </form>
-  </div>
-
+  <!-- Scripts -->
   <script>
-    // Splash screen transition
-    window.addEventListener("load", () => {
-      setTimeout(() => {
-        document.getElementById("flash").style.display = "none";
-        document.getElementById("home").classList.add("active");
+    // Spotlights for Music
+    function createSpotlights(){const c=document.getElementById("spotlights");c.innerHTML="";const corners=[{class:"bl",x:"0%",y:"100%",origin:"bottom left"},{class:"br",x:"100%",y:"100%",origin:"bottom right"},{class:"tl",x:"0%",y:"0%",origin:"top left"},{class:"tr",x:"100%",y:"0%",origin:"top right"}];corners.forEach((corner,ci)=>{for(let i=0;i<6;i++){const l=document.createElement("div");l.classList.add("searchlight",corner.class);l.style.left=corner.x;l.style.top=corner.y;l.style.transformOrigin=corner.origin;const a1=Math.floor(Math.random()*120)-60;const a2=Math.floor(Math.random()*120)-60;const d=Math.floor(Math.random()*3)+2;const anim=`sweep${ci}-${i}`;l.style.animation=`${anim} ${d}s ease-in-out infinite alternate`;document.styleSheets[0].insertRule(`@keyframes ${anim}{from{transform:rotate(${a1}deg);}to{transform:rotate(${a2}deg);}}`,document.styleSheets[0].cssRules.length);c.appendChild(l);}});}
 
-        // Typing effect for tagline
-        const tagline = "Discover the best live entertainment\nin Essex and beyond";
-        let i = 0;
-        const speed = 50;
-        const taglineEl = document.getElementById("tagline");
-
-        function typeWriter() {
-          if (i < tagline.length) {
-            taglineEl.textContent += tagline.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-          } else {
-            taglineEl.style.borderRight = "none";
-          }
-        }
-        setTimeout(typeWriter, 500);
-      }, 3000);
-    });
+    // Splash
+    window.addEventListener("load",()=>{setTimeout(()=>{document.getElementById("flash").style.display="none";document.getElementById("home").classList.add("active");const tagline="Discover the best live entertainment\nin Essex and beyond";let i=0;const speed=50;const el=document.getElementById("tagline");function tw(){if(i<tagline.length){el.textContent+=tagline.charAt(i);i++;setTimeout(tw,speed);}else{el.style.borderRight="none";}}setTimeout(tw,500);},3000);setTimeout(populateFilters,3100);});
 
     // Navigation
-    function goToHub(type) {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.getElementById("hub-" + type).classList.add("active");
-    }
+    function goToHub(type){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById("hub-"+type).classList.add("active");if(type==="music")createSpotlights();}
+    function goHome(){document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));document.getElementById("home").classList.add("active");}
 
-    function goBack() {
-      document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
-      document.getElementById("home").classList.add("active");
-    }
+    // Populate filters
+    function populateFilters(){const gigs=document.querySelectorAll(".gig");const regions=new Set(),venues=new Set(),bands=new Set(),dates=new Set();gigs.forEach(g=>{regions.add(g.querySelector(".region").textContent.trim());venues.add(g.querySelector(".gig-info p:last-child").textContent.replace("Venue: ","").trim());bands.add(g.querySelector("h3").textContent.trim());dates.add(g.querySelector(".gig-date").textContent.trim());});addOptions("filter-region",regions);addOptions("filter-venue",venues);addOptions("filter-band",bands);addOptions("filter-date",dates);}
+    function addOptions(id,items){const sel=document.getElementById(id);[...items].sort().forEach(it=>{const o=document.createElement("option");o.value=it;o.textContent=it;sel.appendChild(o);});}
 
-    // Gig filtering (placeholder logic – hook to JSON later)
-    const filterSelects = {
-      county: document.getElementById("filter-county"),
-      city: document.getElementById("filter-city"),
-      town: document.getElementById("filter-town"),
-      venue: document.getElementById("filter-venue"),
-      band: document.getElementById("filter-band"),
-      date: document.getElementById("filter-date"),
-    };
+    // Filtering
+    function filterGigs(){const r=document.getElementById("filter-region").value.toLowerCase();const v=document.getElementById("filter-venue").value.toLowerCase();const b=document.getElementById("filter-band").value.toLowerCase();const d=document.getElementById("filter-date").value.toLowerCase();document.querySelectorAll(".gig").forEach(g=>{const gr=g.querySelector(".region").textContent.trim().toLowerCase();const gv=g.querySelector(".gig-info p:last-child").textContent.replace("Venue: ","").trim().toLowerCase();const gb=g.querySelector("h3").textContent.trim().toLowerCase();const gd=g.querySelector(".gig-date").textContent.trim().toLowerCase();let vis=true;if(r&&!gr.includes(r))vis=false;if(v&&!gv.includes(v))vis=false;if(b&&!gb.includes(b))vis=false;if(d&&!gd.includes(d))vis=false;g.style.display=vis?"flex":"none";});}
 
-    function filterGigs() {
-      const gigs = document.querySelectorAll(".gig");
-      gigs.forEach(gig => {
-        let visible = true;
-        Object.keys(filterSelects).forEach(key => {
-          const val = filterSelects[key].value;
-          if (val && gig.dataset[key] !== val) {
-            visible = false;
-          }
-        });
-        gig.style.display = visible ? "block" : "none";
-      });
-    }
-
-    Object.values(filterSelects).forEach(select => {
-      select.addEventListener("change", filterGigs);
-    });
+    // Reset
+    function resetFilters(){document.getElementById("filter-region").value="";document.getElementById("filter-venue").value="";document.getElementById("filter-band").value="";document.getElementById("filter-date").value="";filterGigs();}
   </script>
 </body>
 </html>
+
+
+      
